@@ -18,7 +18,7 @@ RSpec.feature "Post content", type: :feature do
     # redirected to post page as logged in user
 
     visit("/posts")
-    click_link "New post"
+    click_link "What's on your mind?"
     fill_in "Message", with: "Meow!"
     # attach_file "Image", "/winking-cat.jpg"
     click_button "Submit"
@@ -32,11 +32,11 @@ RSpec.feature "Post content", type: :feature do
   end
 
   scenario "posts appear with the newest post first" do
-    click_link "New post"
+    click_link "What's on your mind?"
     fill_in "Message", with: "I'm posting this first"
     click_button "Submit"
 
-    click_link "New post"
+    click_link "What's on your mind?"
     fill_in "Message", with: "I'm posting this second"
     click_button "Submit"
 
