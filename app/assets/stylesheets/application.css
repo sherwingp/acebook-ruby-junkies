@@ -22,6 +22,8 @@ body {
   background-attachment: fixed;
 }
 
+/* posts */
+
 #post-section {
   background-color: #d0f4de;
   display: flex;
@@ -45,5 +47,18 @@ body {
 }
 #post-container {
   background-color: #99F4F4;
-  border-radius: 15px;
+}
+
+#user-name {
+  font-size: 95%;
+  font-weight: 450;
+}
+
+#created-at {
+  font-size: 70%;
+}
+
+#post-details {
+  background-color: rgb(213, 221, 228);
+  border-radius: 50px;
 }
