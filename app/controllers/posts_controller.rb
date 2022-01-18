@@ -3,7 +3,6 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
-    @username = "Bill"
   end
 
   def create
