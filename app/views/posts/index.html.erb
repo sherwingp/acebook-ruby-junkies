@@ -1,5 +1,12 @@
 <% @posts.each do |post| %>
+  <p>User:</p>
   <p><%= post.message %></p>
+  <% if post.image.attached? %>
+  <p> <%= image_tag post.image%>
+  </p>
+
+  <% end %>
+  <p>Posted on:<%= post.created_at %></p>
 <% end %>
 
 <%= link_to new_post_path do %>

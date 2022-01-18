@@ -1,6 +1,9 @@
+
+
 class PostsController < ApplicationController
   def new
     @post = Post.new
+    @username = "Bill"
   end
 
   def create
@@ -15,6 +18,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:message)
+    # unless Rails.env.test?
+    #   path = post_params[:image].tempfile.path
+    #   ImageProcessing::MiniMagick.source(path)
+    #     .resize_to_limit(400, 400)
+    #     .call(destination: path)
+    # end
+    params.require(:post).permit(:message,:image)
   end
 end
