@@ -1,18 +1,30 @@
-<div class="container">
-  <div id="new-post">
-    <div id="avatar"></div>
-    <%= link_to new_post_path do %>
-      What's on your mind?
-    <% end %>
-  </div>
-    <% @posts.each do |post| %>
-      <div class="section">
-        <div id="avatar"></div>
-        <p>Kitty TheCat</p>
-        <p><%= post.created_at %></p>
-        <p><%= post.message %></p>
-        <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %>
+<div class="container is-fluid">
+  <div class="columns">
+    <div class="column"></div>
+      <div id="new-post" class="column is-half"">
+
+        <div class="section" id="post-section">
+          <div id="avatar" class="p-5"></div>
+            <div id="post-link" class="container is-fluid"
+              <%= link_to new_post_path do %>
+                <p id="text-link" class="mt-3 ml-2"> What's on your mind? </p>
+              <% end %>
+            </div>
+        </div>
+
+        <% @posts.each do |post| %>
+        <div class="container p-6" id="post-container">
+            <div class="section" style="background-color: white">
+              <div id="avatar"></div>
+              <p>Kitty TheCat</p>
+              <p><%= post.created_at %></p>
+              <p><%= post.message %></p>
+              <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %>
+            </div>
+        </div>   
+          <% end %>
+
       </div>
-    <% end %>
+    <div class="column"></div>
   </div>
 </div>
