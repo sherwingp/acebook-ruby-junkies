@@ -20,7 +20,8 @@ RSpec.feature "Post content", type: :feature do
     visit("/posts")
     click_link "What's on your mind?"
     fill_in "Message", with: "Meow!"
-    # attach_file "Image", "/winking-cat.jpg"
+    attach_file 'image', Rails.root.join('spec/features/winking-cat.jpg')
+    # attach_file "attach", "winking-cat.jpg"
     click_button "Submit"
   end
 
@@ -28,7 +29,8 @@ RSpec.feature "Post content", type: :feature do
     expect(page).to have_content("Meow!")
     expect(page).to have_content(Date.today)
     expect(page).to have_content("Kitty TheCat")
-    expect(page).to have_xpath("//img[contains(@src,'winking-cat.jpg')]")
+    # expect(page).to have_css('#preview[src]')
+    expect(page).to have_xpath("//img[contains(@src,'/spec/features/winking-cat.jpg')]")
   end
 
   scenario "posts appear with the newest post first" do
