@@ -1,5 +1,5 @@
 <% @posts.each do |post| %>
-  <p>User:</p>
+  <p>User: <%= User.find(post.user_id).username %></p>
   <p><%= post.message %></p>
   <% if post.image.attached? %>
   <p> <%= image_tag post.image%>
