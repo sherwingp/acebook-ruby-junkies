@@ -7,5 +7,7 @@ RSpec.feature "Timeline", type: :feature do
     fill_in "Message", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
+    #Database has username as name
+    expect(page).to have_content("name")
   end
 end
