@@ -14,7 +14,7 @@
 
         <% @posts.each do |post| %>
         <div class="container p-6" id="post-container">
-            <div class="section" style="background-color: white">
+          <div class="container post-card p-5">
             <div class="container is-flex" id="post-details">
               <div id="avatar" class="p-5"></div>
               <div class="container is-fluid">
@@ -22,11 +22,16 @@
                 <p id="created-at"><%= post.created_at %></p>
               </div>
             </div>
-              <p><%= post.message %></p>
+            <div class="message-and-photo p-5">
+              <p class="mb-2"><%= post.message %></p>
               <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %>
             </div>
+          </div>
+          <div class="comments-section p-5">
+            <p>Comments go here :D</p>
+          </div>
         </div>   
-          <% end %>
+        <% end %>
 
       </div>
     <div class="column"></div>

@@ -7,14 +7,20 @@
     <%# <%= stylesheet_link_tag    'posts', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script src="https://kit.fontawesome.com/ea92a85679.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <%= image_tag("RubyJunkiesLogo.png", :alt => "Gem Junkies Logo", :width => "28", :height => "28") %>
-        <p>GemJunkies</p>
+        <div class="p-1">
+          <%= image_tag("RubyJunkiesLogo.png", :alt => "Gem Junkies Logo", :width => "28", :height => "28") %>
+        </div>
+        <p id="gem-junkies-brand">GemJunkies</p>
       </div>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -27,25 +33,28 @@
       <div class="navbar-start">
         <div class="navbar-item">
           <%= link_to posts_path do %>
-            Add Home Icon
+            <i class="fas fa-home"></i>
           <% end %>
         </div>
 
         <div class="navbar-item">
           <%= link_to new_post_path do %>
-            +
+            <i class="fas fa-plus"></i>
           <% end %>
         </div>
       </div>
 
       <div class="navbar-end">
+      <div class="navbar-item">
+        <%# <%= link_to TODO: user's profile page do %>
+          <%= image_tag("RubyJunkiesAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+          <p>Need code for user's name</p> 
+        <%# <% end %>    
+      </div>
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
+            <a class="button" id="logout-btn">
+              Log Out
             </a>
           </div>
         </div>

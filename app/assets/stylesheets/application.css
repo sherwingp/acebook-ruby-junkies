@@ -22,7 +22,39 @@ body {
   background-attachment: fixed;
 }
 
+.navbar {
+  background-color: #FBCBF0;
+}
+
+.fa-plus, .fa-home {
+  color: white;
+  font-size: 110%;
+}
+
+.fa-plus:hover, .fa-home:hover {
+  color: #99F4F4;
+  font-size: 110%;
+}
+
+#logout-btn {
+  background-color: white;
+  color: #1de7e7;
+  font-weight: bold;
+}
+
+#logout-btn:hover {
+  background-color: white;
+  color: #7beba6;
+  font-weight: bold;
+}
+
+#gem-junkies-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 110%;
+}
+
 /* posts */
+/* TODO: move into separate css file */
 
 #post-section {
   background-color: #d0f4de;
@@ -60,5 +92,28 @@ body {
 
 #post-details {
   background-color: rgb(213, 221, 228);
-  border-radius: 50px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.message-and-photo {
+  background-color: rgb(226, 235, 243);
+  text-align: center;
+  font-size: 85%;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.comments-section {
+  background-color: rgb(213, 221, 228);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  text-align: center;
+  font-size: 85%;
+}
+
+.post-card {
+  background-color: white;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }
