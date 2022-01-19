@@ -1,4 +1,18 @@
+<h2><strong> Post </strong></h2>
 <p><%= @post.message %></p>
+
+<h2><strong> Comments</strong></h2>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>
+    <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+    </strong>
+    </p>
+
+  <p>
+    <%= comment.body %>
+  </p>
+<% end %>
 
 <h2>Add a comment:</h2>
 <%= form_with model: [ @post, @post.comments.build ] do |form| %>

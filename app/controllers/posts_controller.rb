@@ -6,7 +6,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    if params[:id] != "new"
+      @post = Post.find(params[:id])
+    end
   end
 
   def new
