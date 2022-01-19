@@ -8,9 +8,12 @@
   <% if post.image.attached? %>
   <p> <%= image_tag post.image%>
   </p>
-
-  <% end %>
+ <% end %>
   <p>Posted on:<%= post.created_at %></p>
+  <%= button_to 'Like', post_likes_path(post), method: :post %>
+
+<% end %>
+
 <div class="container is-fluid">
   <div class="columns">
     <div class="column"></div>
@@ -52,6 +55,4 @@
 </div>
 <%= link_to new_post_path do %>
   New post
-<% end %>
-
 <% end %>
