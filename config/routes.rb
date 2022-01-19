@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       root 'posts#index', as: :authenticated_root
     end
 
+    get "/", to: "homepage#index"
+    
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
