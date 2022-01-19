@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @user = User.find(1)
+    @user = User.find(current_user.id)
     # @post = Post.create(post_params)
     @post = @user.posts.create(post_params)
     redirect_to posts_url
