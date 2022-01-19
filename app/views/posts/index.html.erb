@@ -3,7 +3,7 @@
 <% end %>
 
 <% @posts.each do |post| %>
-  <p>User: <%= User.find(post.user_id).username %></p>
+  <p>User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %></p>
   <p><%= post.message %></p>
   <% if post.image.attached? %>
   <p> <%= image_tag post.image%>
@@ -54,3 +54,4 @@
   New post
 <% end %>
 
+<% end %>
