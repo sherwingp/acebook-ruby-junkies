@@ -6,23 +6,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 
-<div class="columns">
-  <div class="column"></div>
-  <div class="column" id='middle-column'>
-    <div class="container is-fluid">
-      <%= form_for @post do |form| %>
-        <%= form.label :message %>
-        <%= form.text_area :message, placeholder: "What's on your mind?" %>
-      <div class="form-group">
+<div class="container is-fluid">
+  <div class="columns">
+    <div class="column"></div>
 
-      <%= form.label :image %>
-      <%= form.file_field :image, class: "form-control" %>
+    <div class="column create-post" id='middle-column'>
+      <div class="container is-fluid">
+        <%= form_for @post do |form| %>
+          <%= form.label :message %>
+          <%= form.text_area :message, placeholder: "What's on your mind?" %>
+        <div class="form-group">
+
+        <%= form.label :image %>
+        <%= form.file_field :image, class: "form-control" %>
+        </div>
+
+
+          <%= form.submit "Post" %>
+        <% end %>
       </div>
-
-
-        <%= form.submit "Post" %>
-      <% end %>
     </div>
+    <div class="column"></div>
   </div>
-  <div class="column"></div>
 </div>
