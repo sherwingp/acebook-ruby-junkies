@@ -1,6 +1,14 @@
 
 
 class PostsController < ApplicationController
+  def index
+    @posts = Post.all.order('created_at DESC')
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def new
     @post = Post.new
   end
@@ -10,10 +18,6 @@ class PostsController < ApplicationController
     # @post = Post.create(post_params)
     @post = @user.posts.create(post_params)
     redirect_to posts_url
-  end
-
-  def index
-    @posts = Post.all.order('created_at DESC')
   end
 
   private
