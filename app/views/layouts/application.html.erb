@@ -7,14 +7,15 @@
     <%# <%= stylesheet_link_tag    'posts', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "application", async: true %>
     <script src="https://kit.fontawesome.com/ea92a85679.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
 
-  <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
         <div class="p-1">
@@ -22,7 +23,6 @@
         </div>
         <p id="gem-junkies-brand">GemJunkies</p>
       </div>
-
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -45,16 +45,16 @@
       </div>
 
       <div class="navbar-end">
-      <div class="navbar-item">
-        <%# <%= link_to TODO: user's profile page do %>
-          <%= image_tag("RubyJunkiesAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
-          <p>Need code for user's name</p> 
-        <%# <% end %>    
-      </div>
+        <div class="navbar-item">
+          <%# <%= link_to TODO: user's profile page do %>
+            <%= image_tag("RubyJunkiesAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+            <p class='ml-1'>Need code for user's name</p> 
+          <%# <% end %>    
+        </div>
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button" id="logout-btn">
-              Log Out
+            <a class="button is-rounded is-primary is-outlined" id="logout-btn">
+              <strong>Log Out</strong>
             </a>
           </div>
         </div>

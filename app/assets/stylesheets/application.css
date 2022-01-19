@@ -38,14 +38,14 @@ body {
 
 #logout-btn {
   background-color: white;
-  color: #1de7e7;
-  font-weight: bold;
+  /* color: #1de7e7;*/
+  /* font-weight: bold;  */
 }
-
 #logout-btn:hover {
-  background-color: white;
-  color: #7beba6;
-  font-weight: bold;
+  /* background-color: white; */
+  color: #f3a9e2;
+  /* color: #7beba6; */
+  /* font-weight: bold; */
 }
 
 #gem-junkies-brand {
@@ -59,6 +59,10 @@ body {
 #post-section {
   background-color: #d0f4de;
   display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 3.3rem;
+  margin-top: 1.2rem;
 }
 #new-post {
   background-color: white;
