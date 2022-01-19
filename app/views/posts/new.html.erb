@@ -1,5 +1,7 @@
-<%# <a id='back_create_post' href='/posts'> Back</a> %>
-<%# back link not needed %>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
 <div class="container is-fluid">
   <%= form_for @post do |form| %>
     <%= form.label :message %>
