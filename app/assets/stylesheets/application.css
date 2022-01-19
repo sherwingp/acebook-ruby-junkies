@@ -13,3 +13,106 @@
  *= require_tree .
  *= require_self
  */
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+body {
+  background-image: url('GemJunkiesPostPageV2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.navbar {
+  background-color: #FBCBF0;
+}
+
+.fa-plus, .fa-home {
+  color: white;
+  font-size: 110%;
+}
+
+.fa-plus:hover, .fa-home:hover {
+  color: #99F4F4;
+  font-size: 110%;
+}
+
+#logout-btn {
+  background-color: white;
+}
+#logout-btn:hover {
+  color: #f3a9e2;
+}
+
+#gem-junkies-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 110%;
+}
+
+/* posts */
+/* TODO: move into separate css file */
+
+#post-section {
+  background-color: #d0f4de;
+  display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 3.3rem;
+  margin-top: 1.2rem;
+}
+#new-post {
+  background-color: white;
+  padding: 0;
+}
+#post-link {
+  background-color: white;
+  height: 3rem;
+  border-radius: 15px;
+  display: flex;
+}
+#avatar {
+  background-image: url('RubyJunkiesAvatar.png');
+  background-size: cover;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+}
+#post-container {
+  background-color: #99F4F4;
+}
+
+#user-name {
+  font-size: 95%;
+  font-weight: 450;
+}
+
+#created-at {
+  font-size: 70%;
+}
+
+#post-details {
+  background-color: rgb(213, 221, 228);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.message-and-photo {
+  background-color: rgb(226, 235, 243);
+  text-align: center;
+  font-size: 85%;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.comments-section {
+  background-color: rgb(213, 221, 228);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  text-align: center;
+  font-size: 85%;
+}
+
+.post-card {
+  background-color: white;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
