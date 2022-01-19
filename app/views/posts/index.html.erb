@@ -1,16 +1,12 @@
-<%= link_to new_post_path do %>
-  What's on your mind?
-<% end %>
+<%# <% @posts.each do |post| %>
+  <%# User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %>
+  <%# <%= post.message %>
+  <%# <% if post.image.attached? %>
+  <%# <%= image_tag post.image%>
 
-<% @posts.each do |post| %>
-  <p>User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %></p>
-  <p><%= post.message %></p>
-  <% if post.image.attached? %>
-  <p> <%= image_tag post.image%>
-  </p>
+  <%# <% end %>
+ <%# <%= post.created_at %>
 
-  <% end %>
-  <p>Posted on:<%= post.created_at %></p>
 <div class="container is-fluid">
   <div class="columns">
     <div class="column"></div>
@@ -31,13 +27,17 @@
             <div class="container is-flex" id="post-details">
               <div id="avatar" class="p-5"></div>
               <div class="container is-fluid">
-                <p id="user-name">Kitty TheCat</p>
+                <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
                 <p id="created-at"><%= post.created_at %></p>
               </div>
             </div>
             <div class="message-and-photo p-5">
               <p class="mb-2"><%= post.message %></p>
-              <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %>
+              <% if post.image.attached? %>
+              <%= image_tag post.image%>
+              <% end %>
+              <%# image test %>
+              <%# <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %> 
             </div>
           </div>
           <div class="comments-section p-5">
@@ -50,8 +50,8 @@
     <div class="column"></div>
   </div>
 </div>
-<%= link_to new_post_path do %>
-  New post
-<% end %>
+<%# <%= link_to new_post_path do %>
+  <%# New post %>
+<%# <% end %>
 
-<% end %>
+<%# <% end %>

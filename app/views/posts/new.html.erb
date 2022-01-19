@@ -1,14 +1,16 @@
-<a id='back_create_post' href='/posts'> Back</a>
+<%# <a id='back_create_post' href='/posts'> Back</a> %>
+<%# back link not needed %>
+<div class="container is-fluid">
+  <%= form_for @post do |form| %>
+    <%= form.label :message %>
+    <%= form.text_area :message, placeholder: "What's on your mind?" %>
+  <div class="form-group">
 
-<%= form_for @post do |form| %>
-  <%= form.label :message %>
-  <%= form.text_area :message, placeholder: "What's on your mind?" %>
-<div class="form-group">
+  <%= form.label :image %>
+  <%= form.file_field :image, class: "form-control" %>
+  </div>
 
-<%= form.label :image %>
-<%= form.file_field :image, class: "form-control" %>
+
+    <%= form.submit "Post" %>
+  <% end %>
 </div>
-
-
-  <%= form.submit "Post" %>
-<% end %>
