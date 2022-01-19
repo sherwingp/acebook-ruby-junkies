@@ -3,7 +3,6 @@
   <%# <%= post.message %>
   <%# <% if post.image.attached? %>
   <%# <%= image_tag post.image%>
-
   <%# <% end %>
  <%# <%= post.created_at %>
 
@@ -41,7 +40,16 @@
             </div>
           </div>
           <div class="comments-section p-5">
-            <p>Comments go here :D</p>
+            <h2>Add a comment:</h2>
+            <%= form_with model: [ post, post.comments.build ] do |form| %>
+              <p>
+                <%= form.label :body %><br>
+                <%= form.text_area :body %>
+              </p>
+              <p>
+                <%= form.submit %>
+              </p>
+            <% end %>
           </div>
         </div>   
         <% end %>
