@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "Signing in", type: :feature do
-  scenario "User can sign in" do
-
+RSpec.feature "Signing in and out", type: :feature do
+  scenario "User can sign in and sign out" do
+		
 		visit "/users/sign_up"
 		fill_in "user[name]", with: "John"
 		fill_in "user[surname]", with: "Doe"
@@ -11,13 +11,13 @@ RSpec.feature "Signing in", type: :feature do
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
 		
-    click_button "Sign Out"
+    click_link("Sign Out")
 
     fill_in "user[email]", with: "test@test.com"
 		fill_in "user[password]", with: "123456"
     click_button "Log in"
 		
 		expect(page).to have_content("Signed in as: John")
-		expect(page).to have_content('Welcome! You have signed up successfully.')
+		expect(page).to have_content('Signed in successfully.')
   end
 end
