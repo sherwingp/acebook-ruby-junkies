@@ -18,7 +18,7 @@
 <% end %>
 
 <h2>Add a comment:</h2>
-<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
   <p>
     <%= form.hidden_field :user_id, value: current_user.id %>  
   </p>
