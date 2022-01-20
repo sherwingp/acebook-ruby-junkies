@@ -30,7 +30,6 @@ body {
 .fa-plus, .fa-home {
   color: rgb(102, 102, 102);
   font-size: 110%;
-
 }
 
 .fa-plus:hover, .fa-home:hover {
@@ -110,10 +109,27 @@ body {
 
 .comments-section {
   background-color: rgb(213, 221, 228);
+  border-top: 3px solid white;
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
-  text-align: center;
+  text-align: left;
   font-size: 85%;
+}
+
+.individual-comment {
+  background-color: white;
+  border-radius: 50px;
+}
+
+.likes-section {
+  background-color: white;
+  border-top: 2px solid #99F4F4;
+  border-bottom: 2px solid #99F4F4;
+  justify-content: right;
+}
+
+.likes-count { 
+  justify-content: left;
 }
 
 .post-card {
