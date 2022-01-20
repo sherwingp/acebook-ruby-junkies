@@ -1,2 +1,40 @@
+
+<h2><strong> Post </strong></h2>
+<p><%= @post.message %></p>
+
+<h2><strong> Comments</strong></h2>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>
+    <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+    </strong>
+    </p>
+
+  <p>
+    <%= comment.body %>
+  </p>
+  <% if comment.image.attached? %>
+              <%= image_tag comment.image%>
+          <% end %>
+<% end %>
+
+<h2>Add a comment:</h2>
+  <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.hidden_field :user_id, value: current_user.id %>  
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <%= form.label :image %>
+  <%= form.file_field :image, class: "form-control" %>
+  </div>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
 <%= @post.message %>
 <%= @post.likes.count %>
+
