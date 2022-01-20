@@ -1,11 +1,10 @@
 
-<%# <% @posts.each do |post| %>
-  <%# User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %>
-  <%# <%= post.message %>
-  <%# <% if post.image.attached? %>
-  <%# <%= image_tag post.image%>
-  <%# <% end %>
- <%# <%= post.created_at %>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
+
+
 
 <div class="container is-fluid">
   <div class="columns">
@@ -51,6 +50,27 @@
                   <%# <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %> 
                 </div>
               </div>
+              </div>
+            <div class="message-and-photo p-5">
+              <p class="mb-2"><%= post.message %></p>
+              <% if post.image.attached? %>
+              <%= image_tag post.image%>
+              <% end %>
+            </div>
+          </div>
+          <div class="comments-section p-5">
+            <p>Comments go here :D</p>
+            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+            <% if pre_like %>
+              <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete %>
+            <% else %>
+              <%= button_to 'Like', post_likes_path(post), method: :post %>
+            <% end %>
+            <p>
+              <%= post.likes.count %> <%= post.likes.count == 1 ? 'Like' : 'Likes' %>
+            </p>
+          </div>
+        </div>   
               <div class="comments-section p-5">
               <h2><strong> Comments</strong></h2>
                 <% post.comments.each do |comment| %>
@@ -84,15 +104,13 @@
                 <% end %>
               </div>
            </div>   
+
         <% end %>
       <% end %>
 
       </div>
-        <div class="column"></div>
-      </div>
-    </div>
-<%# <%= link_to new_post_path do %>
-  <%# New post %>
-<%# <% end %>
 
-<%# <% end %>
+    <div class="column"></div>
+  </div>
+</div>
+
