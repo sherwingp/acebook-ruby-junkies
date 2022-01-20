@@ -12,12 +12,12 @@ RSpec.feature "Signing in and out", type: :feature do
     click_button "Sign up"
 		
     click_link("Sign Out")
+		visit "/users/sign_in"
 
     fill_in "user[email]", with: "test@test.com"
 		fill_in "user[password]", with: "123456"
     click_button "Log in"
 		
-		expect(page).to have_content("Signed in as: John")
-		expect(page).to have_content('Signed in successfully.')
+		expect(page).to have_content("GemJunkies Signed in successfully. John Sign Out")
   end
 end
