@@ -1,10 +1,7 @@
-
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
-
-
 
 <div class="container is-fluid">
   <div class="columns">
@@ -13,15 +10,13 @@
 
         <div class="container p-4" id="post-section">
           <div id="avatar" class="p-5"></div>
-            <div id="post-link" class="container is-fluid">
-              <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
-              <p>
-                <%= form.text_area :message, placeholder: "What's on your mind?" %>
-              </p>
+          <div id="post-link" class="container is-flex">
+            <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
+              <%= form.text_area :message, placeholder: "What's on your mind?", :class => "text-area-homepage" %>
+              <div class="container is-flex">
                 <%= form.file_field :image, class: "form-control" %>
-              <p>
-                <%= form.submit "Post" %>
-              </p>
+                <%= form.submit "Post", class: "mt-4 mb-4" %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -76,27 +71,21 @@
                     <% end %>
                   </div>
                 <% end %>
-                <%= form_with(model: [ post, post.comments.build ], local: true) do |form| %>
-                  <p>
+                <div id="post-link" class="container is-flex comments-form">
+                  <%= form_with(model: [ post, post.comments.build ], local: true) do |form| %>
                     <%= form.hidden_field :user_id, value: current_user.id %>  
-                  </p>
-                  <p>
-                    <%= form.text_area :body %>
-                  </p>
+                    <%= form.text_area :body, :class => "text-area-homepage" %>
+                    <div class="container is-flex">
                     <%= form.file_field :image, class: "form-control" %>
-                  <p>
-                    <%= form.submit "Comment" %>
-                  </p>
-                <% end %>
+                    <%= form.submit "Comment", class: "mt-4 mb-4" %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
            </div>   
-
+          <% end %>
         <% end %>
-      <% end %>
-
       </div>
-    </div>
     <div class="column"></div>
   </div>
 </div>
-
