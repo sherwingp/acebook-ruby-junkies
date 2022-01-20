@@ -28,8 +28,9 @@ body {
 }
 
 .fa-plus, .fa-home {
-  color: rgb(252, 247, 247);
-  font-size: 130%;
+  color: rgb(102, 102, 102);
+  font-size: 110%;
+
 }
 
 .fa-plus:hover, .fa-home:hover {
@@ -73,7 +74,7 @@ body {
   height: 150px;
 }
 #avatar {
-  background-image: url('RubyJunkiesAvatar.png');
+  background-image: url('GemJunkiesDefaultAvatar.png');
   background-size: cover;
   width: 3rem;
   height: 3rem;
