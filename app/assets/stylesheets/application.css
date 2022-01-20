@@ -78,6 +78,7 @@ body {
 }
 #post-container {
   background-color: #99F4F4;
+  border-bottom: 2px solid #62ecec;
 }
 
 #user-name {

@@ -1,7 +1,3 @@
-<%= link_to new_post_path do %>
-  What's on your mind?
-<% end %>
-
 <% @posts.each do |post| %>
   <p>User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %></p>
   <%= content_tag :div, id: dom_id(post) do %>
@@ -41,18 +37,20 @@
         </div>
 
         <% @posts.each do |post| %>
-        <div class="container p-6" id="post-container">
-          <div class="container post-card p-5">
+        <div class="container p-5" id="post-container">
+          <div class="container post-card p-4">
             <div class="container is-flex" id="post-details">
               <div id="avatar" class="p-5"></div>
               <div class="container is-fluid">
-                <p id="user-name">Kitty TheCat</p>
+                <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
                 <p id="created-at"><%= post.created_at %></p>
               </div>
             </div>
             <div class="message-and-photo p-5">
               <p class="mb-2"><%= post.message %></p>
-              <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %>
+              <% if post.image.attached? %>
+              <%= image_tag post.image%>
+              <% end %>
             </div>
           </div>
           <div class="comments-section p-5">
@@ -65,6 +63,3 @@
     <div class="column"></div>
   </div>
 </div>
-<%= link_to new_post_path do %>
-  New post
-<% end %>
