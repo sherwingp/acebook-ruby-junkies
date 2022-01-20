@@ -19,15 +19,12 @@
             <h2> <strong>Add a Post:</strong> </h2>
                 <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
                   <p>
-                    <%= form.label :message %><br>
-                    <%= form.text_area :message %>
+                    <%= form.text_area :message, placeholder: "What's on your mind?" %>
                   </p>
                     <%= form.label :image %>
                     <%= form.file_field :image, class: "form-control" %>
                   <p>
                     <%= form.submit %>
-
-                    <submit above>
                   </p>
                 <% end %>
 
@@ -48,7 +45,7 @@
                 <div class="message-and-photo p-5">
                   <p class="mb-2"><%= post.message %></p>
                   <% if post.image.attached? %>
-                  <%= image_tag post.image%>
+                  <%= image_tag post.image, class: "post-image"%>
                   <% end %>
                   <%# image test %>
                   <%# <%= image_tag("winking-cat.jpg", :alt => "image of my cat") %> 
@@ -67,7 +64,7 @@
                     <%= comment.body %>
                   </p>
                   <% if comment.image.attached? %>
-                    <%= image_tag comment.image%>
+                    <%= image_tag comment.image, class: "comment-image"%>
                   <% end %>
                 <% end %>
                 <h2> <strong>Add a comment:</strong> </h2>

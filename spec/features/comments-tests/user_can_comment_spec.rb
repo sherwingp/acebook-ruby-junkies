@@ -10,8 +10,7 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
     visit "/posts"
-    click_link "What's on your mind?"
-    fill_in "Message", with: "Hello, world!"
+    fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
     visit '/posts'
@@ -30,8 +29,7 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
     visit "/posts"
-    click_link "What's on your mind?"
-    fill_in "Message", with: "Hello, world!"
+    fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
     visit '/posts'
@@ -50,18 +48,15 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
     visit "/posts"
-    click_link "What's on your mind?"
-    fill_in "Message", with: "Hello, world!"
+    fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     attach_file('comment[image]',
-      File.join(Rails.root, '/spec/image1.jpeg'), :visible => false)
+      File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
     click_button "Create Comment"
-    #  TODO: make line 63 pass, to make test more specific
-    # expect(page).to have_xpath("//img[contains(@src, '/spec/image1.jpeg')]")
-    page.should have_css('img')
+    expect(page).to have_css("img[src*='/feature_test_image1.jpeg']")
   end
 
 # Since we don't want them to view this page, not sure if needed?

@@ -29,8 +29,7 @@ RSpec.feature "Post content", type: :feature do
     expect(page).to have_content("Meow!")
     expect(page).to have_content(Date.today)
     expect(page).to have_content("Kitty TheCat")
-    # expect(page).to have_css('#preview[src]')
-    expect(page).to have_xpath("//img[contains(@src,'/spec/features/winking-cat.jpg')]")
+    expect(page).to have_css("img[src*='/winking-cat.jpg']")
   end
 
   scenario "posts appear with the newest post first" do
