@@ -150,6 +150,10 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-activemodel-mocks (1.1.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -220,6 +224,7 @@ DEPENDENCIES
   pg
   puma (~> 3.12.6)
   rails (~> 6.1)
+  rspec-activemodel-mocks (~> 1.1)
   rspec-rails (~> 4.0)
   sass-rails (~> 6.0)
   selenium-webdriver
