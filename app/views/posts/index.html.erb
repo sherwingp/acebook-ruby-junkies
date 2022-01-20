@@ -1,3 +1,4 @@
+
 <%# <% @posts.each do |post| %>
   <%# User: <%= User.find(post.user_id).name + User.find(post.user_id).surname %>
   <%# <%= post.message %>
@@ -14,9 +15,22 @@
         <div class="container p-4" id="post-section">
           <div id="avatar" class="p-5"></div>
             <div id="post-link" class="container is-fluid">
-              <%= link_to new_post_path do %>
-                <p id="text-link" class="mt-3 ml-2"> What's on your mind? </p>
-              <% end %>
+            
+            <h2> <strong>Add a Post:</strong> </h2>
+                <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
+                  <p>
+                    <%= form.label :message %><br>
+                    <%= form.text_area :message %>
+                  </p>
+                    <%= form.label :image %>
+                    <%= form.file_field :image, class: "form-control" %>
+                  <p>
+                    <%= form.submit %>
+
+                    <submit above>
+                  </p>
+                <% end %>
+
             </div>
         </div>
 

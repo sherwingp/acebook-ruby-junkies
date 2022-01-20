@@ -58,6 +58,7 @@ body {
   position: sticky;
   top: 3.3rem;
   margin-top: 1.2rem;
+  height: 200px;
 }
 #new-post {
   background-color: white;
@@ -68,6 +69,7 @@ body {
   height: 3rem;
   border-radius: 15px;
   display: flex;
+  height: 150px;
 }
 #avatar {
   background-image: url('RubyJunkiesAvatar.png');
