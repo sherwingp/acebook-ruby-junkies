@@ -2,13 +2,13 @@ class CommentsController < ApplicationController
 
   before_action :set_user
   before_action :set_post
+  include ActionView::RecordIdentifier
 
   def create
     @comment = @post.comments.create(comment_params)
     if @comment.save
-      # TODO: redirect to the post you just commented on
-      # redirect_to posts_path(@post, anchor: dom_id(@post))
-      redirect_to posts_path
+
+      redirect_to posts_path(@post, anchor: dom_id(@post))
     else
       flash.now[:danger] = "error"
     end
