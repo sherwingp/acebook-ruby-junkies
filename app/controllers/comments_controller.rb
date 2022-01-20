@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     end
   end
 
+
   private
 
     def set_post
@@ -23,6 +24,6 @@ class CommentsController < ApplicationController
    end
 
    def comment_params
-     params[:comment].permit(:body, :user_id)
+     params[:comment].permit(:body, :image, :user_id)
    end
 end

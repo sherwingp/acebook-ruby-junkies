@@ -51,6 +51,9 @@
                 <p>
                   <%= comment.body %>
                 </p>
+                <% if comment.image.attached? %>
+              <%= image_tag comment.image%>
+              <% end %>
               <% end %>
             <h2> <strong>Add a comment:</strong> </h2>
             <%= form_with model: [ post, post.comments.build ] do |form| %>
@@ -61,6 +64,9 @@
                 <%= form.label :body %><br>
                 <%= form.text_area :body %>
               </p>
+              <%= form.label :image %>
+              <%= form.file_field :image, class: "form-control" %>
+              </div>
               <p>
                 <%= form.submit %>
               </p>

@@ -12,6 +12,9 @@
   <p>
     <%= comment.body %>
   </p>
+  <% if comment.image.attached? %>
+              <%= image_tag comment.image%>
+          <% end %>
 <% end %>
 
 <h2>Add a comment:</h2>
@@ -23,6 +26,9 @@
     <%= form.label :body %><br>
     <%= form.text_area :body %>
   </p>
+  <%= form.label :image %>
+  <%= form.file_field :image, class: "form-control" %>
+  </div>
   <p>
     <%= form.submit %>
   </p>
