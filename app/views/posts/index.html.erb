@@ -38,7 +38,7 @@
                   <div id="avatar" class="p-5"></div>
                   <div class="container is-fluid">
                     <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
-                    <p id="created-at"><%= post.created_at %></p>
+                    <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
                   </div>
                 </div>
                 <div class="message-and-photo p-5">
