@@ -15,8 +15,8 @@ RSpec.feature "Timeline", type: :feature do
     visit "/posts/new"
     fill_in "Message", with: "Hello, world!"
     attach_file('post[image]',
-                File.join(Rails.root, '/spec/image1.jpeg'), :visible => false)
+                File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
     click_button "Post"
-    page.should have_css('img')
+    expect(page).to have_css("img[src*='/feature_test_image1.jpeg']")
   end
 end

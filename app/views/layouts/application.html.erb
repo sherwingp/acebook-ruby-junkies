@@ -15,43 +15,45 @@
   </head>
 
   <body class="has-navbar-fixed-top">
+    <% if user_signed_in?%>
     <nav class="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <div class="navbar-item">
-        <div class="p-1">
-          <%= image_tag("RubyJunkiesLogo.png", :alt => "Gem Junkies Logo", :width => "28", :height => "28") %>
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <div class="p-1">
+            <%= image_tag("RubyJunkiesLogo.png", :alt => "Gem Junkies Logo", :width => "28", :height => "28") %>
+          </div>
+          <p id="gem-junkies-brand">GemJunkies</p>
         </div>
-        <p id="gem-junkies-brand">GemJunkies</p>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <div class="navbar-item">
-          <%= link_to posts_path do %>
-            <i class="fas fa-home"></i>
-          <% end %>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <%= link_to posts_path do %>
+              <i class="fas fa-home"></i>
+            <% end %>
+          </div>
+
+          <div class="navbar-item">
+            <%= link_to new_post_path do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </div>
+
+          <div class="navbar-item">
+            <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+          </div>
         </div>
 
-        <div class="navbar-item">
-          <%= link_to new_post_path do %>
-            <i class="fas fa-plus"></i>
-          <% end %>
-        </div>
-
-        <div class="navbar-item">
-          <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
-          <% end %>
-        </div>
-      </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
@@ -65,13 +67,13 @@
           <div class="buttons">
             <div class="button is-rounded is-primary is-outlined is-small" id="logout-btn">
             <strong><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></strong>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
-  <body>
+    </nav>
+    <% end %>
     <%= yield %>
   </body>
 </html>

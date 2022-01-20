@@ -7,10 +7,22 @@ Rails.application.routes.draw do
     end
 
     unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'homepage#index', as: :unauthenticated_root
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # root "posts#index"
 
-  resources :posts
+
+    get "/posts", to: "posts#index"
+  
+  resources :posts do
+    resources :comments
+  end
+
+  resources :posts do
+    resources :likes
+  end
+
+
 end

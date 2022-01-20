@@ -20,6 +20,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
 .navbar {
@@ -29,6 +30,7 @@ body {
 .fa-plus, .fa-home {
   color: rgb(102, 102, 102);
   font-size: 110%;
+
 }
 
 .fa-plus:hover, .fa-home:hover {
@@ -58,6 +60,7 @@ body {
   position: sticky;
   top: 3.3rem;
   margin-top: 1.2rem;
+  height: 200px;
 }
 #new-post {
   background-color: white;
@@ -68,6 +71,7 @@ body {
   height: 3rem;
   border-radius: 15px;
   display: flex;
+  height: 150px;
 }
 #avatar {
   background-image: url('GemJunkiesDefaultAvatar.png');
@@ -116,4 +120,78 @@ body {
   background-color: white;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+}
+
+/* sign-in */
+
+#middle-column {
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+h2 {
+  font-family: 'Lobster', cursive;
+}
+.field {
+  background-color: #62ecec;
+  border-radius: 15px;
+}
+
+/* sign-up */
+
+.sign-up-middle{
+  background-color: #fff;
+}
+
+.centered{
+  text-align: center;
+}
+
+/* create posts */
+
+.create-post {
+  margin-top: 8em; 
+}
+#form-container {
+  padding: 2em;
+  text-align: center;
+}
+#text-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+  padding: 1em;
+  text-align: center;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  text-align: center;
+}
+.form-control::-webkit-file-upload-button{
+  /* display: none; */
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  width: 7.5em;
+  height: 2.4em;
+  margin: 1.2em;
+  font-weight: 500;
+}
+#post-btn-container {
+  display: flex;
+  justify-content: center;
+}
+.message-img-labels {
+  font-weight: bold;
+}
+.text-area {
+  width: 80%;
+  height: 5em;
+  border-radius: 10px;
+  padding: 0.6em;
 }
