@@ -1,12 +1,14 @@
 class CommentsController < ApplicationController
 
+  include ActionView::RecordIdentifier
+
   before_action :set_user
   before_action :set_post
 
   def create
     @comment = @post.comments.create(comment_params)
     if @comment.save
-      redirect_to @post
+      redirect_to posts_path(@post, anchor: dom_id(@post))
     else
       flash.now[:danger] = "error"
     end
@@ -14,7 +16,6 @@ class CommentsController < ApplicationController
 
 
   private
-
     def set_post
       @post = Post.find(params[:post_id])
     end
