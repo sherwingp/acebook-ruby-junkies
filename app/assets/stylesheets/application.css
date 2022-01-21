@@ -72,14 +72,6 @@ body {
   padding: 0.75rem 0.5rem 0 0.5rem;
 }
 
-#avatar {
-  background-image: url('GemJunkiesDefaultAvatar.png');
-  background-size: cover;
-  width: 3rem;
-  height: 3rem;
-  margin-right: 0.6rem;
-}
-
 #post-container {
   background-color: #99F4F4;
   border-bottom: 2px solid #62ecec;
