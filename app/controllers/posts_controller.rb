@@ -1,4 +1,4 @@
-
+# frozen_string_literal: true
 
 class PostsController < ApplicationController
   def index
@@ -6,9 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if params[:id] != "new"
-      @post = Post.find(params[:id])
-    end
+    @post = Post.find(params[:id]) if params[:id] != 'new'
   end
 
   def new
@@ -22,13 +20,9 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
-
- 
-
-#   def show
-#     @post = Post.find(params[:id])
-#   end
-
+  #   def show
+  #     @post = Post.find(params[:id])
+  #   end
 
   private
 
@@ -39,6 +33,6 @@ class PostsController < ApplicationController
     #     .resize_to_limit(400, 400)
     #     .call(destination: path)
     # end
-    params.require(:post).permit(:message,:image)
+    params.require(:post).permit(:message, :image)
   end
 end

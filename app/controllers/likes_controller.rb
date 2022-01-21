@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :find_post
   before_action :find_like, only: [:destroy]
@@ -10,10 +12,10 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    if !(liked?)
-      flash[:notice] = "Cannot unlike"
-    else
+    if liked?
       @like.destroy
+    else
+      flash[:notice] = 'Cannot unlike'
     end
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end
@@ -21,7 +23,7 @@ class LikesController < ApplicationController
   private
 
   def liked?
-    Like.where(user_id: current_user.id, post_id: params[:post_id]).exists?
+    Like.exists?(user_id: current_user.id, post_id: params[:post_id])
   end
 
   def find_post
@@ -30,5 +32,5 @@ class LikesController < ApplicationController
 
   def find_like
     @like = @post.likes.find(params[:id])
- end
+  end
 end
