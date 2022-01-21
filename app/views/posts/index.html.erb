@@ -11,7 +11,8 @@
         <div class="container is-flex p-4" id="post-section">
           <div id="post-link" class="container is-flex is-align-items-center">
             <div class="is-flex is-align-items-center" id="top-text-area-container">
-              <div id="avatar" class="p-5"></div>
+              <%# <div id="avatar" class="p-5"></div> %>
+                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
               <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
               <%= form.text_area :message, placeholder: "What's on your mind?", :class => "text-area-homepage mt-2 top-text-area" %>
             </div>
@@ -28,7 +29,8 @@
             <div class="container p-5" id="post-container">
               <div class="container post-card pt-4 pb-1 pl-4 pr-4">
                 <div class="container is-flex" id="post-details">
-                  <div id="avatar" class="p-5"></div>
+                  <%# <div id="avatar" class="p-5"></div> %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
                   <div class="container">
                     <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
                     <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
