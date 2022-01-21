@@ -3,5 +3,8 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.9.3"
+  },
+  "engines": {
+    "yarn": ">= 0.25.2"
   }
 }
