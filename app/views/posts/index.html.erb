@@ -86,9 +86,9 @@
                     <div class="container is-flex  likes-section">
                       <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
                       <% if pre_like %>
-                        <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+                        <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-unlike-btn" %>
                       <% else %>
-                        <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+                        <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-like-btn" %>
                       <% end %>
                     </div>
                   </div>

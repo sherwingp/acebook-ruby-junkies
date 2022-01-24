@@ -1,9 +1,9 @@
 class LikesController < ApplicationController
   before_action :find_post
-  before_action :find_comment
   include ActionView::RecordIdentifier
 
   def create
+    find_comment if params.key?("comment_id")
     if params.key?("comment_id")
       @comment.likes << Like.new(user_id: current_user.id) unless liked?(@comment)
     else
@@ -13,6 +13,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
+    find_comment if params.key?("comment_id")
     params.key?("comment_id") ? @likeable = @comment : @likeable = @post
     @like = find_like(@likeable)
     if !(liked?(@likeable))

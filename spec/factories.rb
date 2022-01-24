@@ -1,4 +1,3 @@
-
 FactoryBot.define do
   sequence :email do |n|
     "test#{n}@example.com"
@@ -13,16 +12,20 @@ FactoryBot.define do
     
     # if needed
     # is_active true
-    end
+  end
 
-    factory :post do
-      association :user
-      message { 'test message' }
-      # using dynamic attributes over static attributes in FactoryBot
-  
-      # if needed
-      # is_active true
-    end
+  factory :post do
+    association :user
+    message { 'test message' }
+    # using dynamic attributes over static attributes in FactoryBot
 
+    # if needed
+    # is_active true
+  end
+
+  factory :comment do
+    association :user, :post
+    body { 'test comment' }
+  end
 
 end
