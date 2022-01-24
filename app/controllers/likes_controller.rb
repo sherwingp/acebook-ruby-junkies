@@ -22,8 +22,6 @@ class LikesController < ApplicationController
       flash[:notice] = "Cannot unlike"
     else
       @like.destroy
-    else
-      flash[:notice] = 'Cannot unlike'
     end
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end

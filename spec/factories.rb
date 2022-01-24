@@ -29,8 +29,4 @@ FactoryBot.define do
     association :user, :post
     body { 'test comment' }
   end
-
-    # if needed
-    # is_active true
-  end
 end
