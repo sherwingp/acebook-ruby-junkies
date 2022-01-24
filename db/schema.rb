@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_150506) do
+ActiveRecord::Schema.define(version: 2022_01_24_123629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2022_01_21_150506) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "likeable_type", null: false
-    t.bigint "likeable_id", null: false
+    t.string "likeable_type"
+    t.bigint "likeable_id"
     t.index ["likeable_type", "likeable_id"], name: "index_comments_on_likeable"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -61,7 +61,9 @@ ActiveRecord::Schema.define(version: 2022_01_21_150506) do
     t.string "likeable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -69,8 +71,8 @@ ActiveRecord::Schema.define(version: 2022_01_21_150506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.string "likeable_type", null: false
-    t.bigint "likeable_id", null: false
+    t.string "likeable_type"
+    t.bigint "likeable_id"
     t.index ["likeable_type", "likeable_id"], name: "index_posts_on_likeable"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -93,5 +95,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_150506) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
 end

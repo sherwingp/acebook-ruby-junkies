@@ -4,8 +4,7 @@ class LikesController < ApplicationController
   include ActionView::RecordIdentifier
 
   def create
-    @post = Post.find(params[:post_id])
-    @post.likes.create(user_id: current_user.id) unless liked?
+    @post.likes << Like.new(user_id: current_user.id) unless liked?
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end
 
@@ -20,14 +19,14 @@ class LikesController < ApplicationController
 
   private
 
-  def liked?
-    Like.where(user_id: current_user.id, post_id: params[:post_id]).exists?
-  end
-
   def find_post
     @post = Post.find(params[:post_id])
   end
 
+  def liked?
+    @post.likes.any? { |post| post.user_id == current_user.id }
+  end
+  
   def find_like
     @like = @post.likes.find(params[:id])
  end

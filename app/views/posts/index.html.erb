@@ -39,10 +39,10 @@
                   <% if post.image.attached? %>
                     <%= image_tag post.image, class: "post-image"%>
                   <% end %>
-                  <% if post.likes.count != 0 %>
+                  <% if post.likes.length != 0 %>
                     <div class="container is-flex likes-count">
                       <p>
-                        <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.count %></strong>
+                        <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.length %></strong>
                       </p>
                     </div>
                   <% end %>
