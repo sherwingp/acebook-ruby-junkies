@@ -9,8 +9,12 @@
 <div class="container is-fluid">
   <div class="columns">
     <div class="column"></div>
-
     <div class="column create-post is-half" id='middle-column'>
+      <div>
+         <% if @post.image.attached? %>
+            <%= image_tag @post.image, class: "post-image"%>
+          <% end %>
+      </div>
       <div class="container is-fluid" id='form-container'>
         <%= form_for @post, method: :put do |form| %>
         <%= form.label :message, :class => 'message-img-labels' %>
