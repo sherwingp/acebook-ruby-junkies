@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe Like, type: :model do
   end
 
   it('reject an invalid like') do
-    like = Like.create()
+    like = Like.create
     expect(like.valid?).to be_falsey
   end
 end

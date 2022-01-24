@@ -1,5 +1,6 @@
-class CommentsController < ApplicationController
+# frozen_string_literal: true
 
+class CommentsController < ApplicationController
   before_action :set_user
   before_action :set_post
   include ActionView::RecordIdentifier
@@ -10,22 +11,21 @@ class CommentsController < ApplicationController
 
       redirect_to posts_path(@post, anchor: dom_id(@post))
     else
-      flash.now[:danger] = "error"
+      flash.now[:danger] = 'error'
     end
   end
 
-
   private
 
-    def set_post
-      @post = Post.find(params[:post_id])
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
 
-   def set_user
-      @user = User.find(current_user.id)
-   end
+  def set_user
+    @user = User.find(current_user.id)
+  end
 
-   def comment_params
-     params[:comment].permit(:body, :image, :user_id)
-   end
+  def comment_params
+    params[:comment].permit(:body, :image, :user_id)
+  end
 end
