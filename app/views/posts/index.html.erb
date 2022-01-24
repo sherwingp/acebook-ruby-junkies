@@ -73,9 +73,9 @@
                     <% if comment.image.attached? %>
                       <%= image_tag comment.image, class: "comment-image"%>
                     <% end %>
-                    <div>
-                      <%= button_to "Edit comment", edit_post_comment_path(post, comment), method: 'get'%>
-                       <%= button_to "Delete comment", post_comment_path(post, comment), method: 'delete'%>
+                    <div id="comment-btns">
+                      <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
+                      <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
                     </div>
                   </div>
                   <% end %>
