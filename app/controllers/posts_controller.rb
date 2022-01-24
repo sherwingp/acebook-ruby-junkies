@@ -1,5 +1,3 @@
-
-
 class PostsController < ApplicationController
   def index
     @posts = Post.all.order('created_at DESC')
@@ -32,7 +30,11 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
- 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
+  end
 
 #   def show
 #     @post = Post.find(params[:id])

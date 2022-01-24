@@ -56,6 +56,7 @@
                 <% else %>
                   <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
                 <% end %>
+                <%= button_to 'Delete', post_path(post), method: :delete %>
               </div>
               <%# each comment displayed  %>
               <div class="comments-section p-3">
