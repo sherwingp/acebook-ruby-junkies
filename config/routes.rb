@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get '/posts', to: 'posts#index'
 
+  get '/profiles', to: 'profiles#index'
+
   resources :posts do
     resources :comments
   end
