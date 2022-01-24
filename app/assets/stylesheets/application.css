@@ -52,17 +52,15 @@ body {
 /* posts */
 /* TODO: move into separate css file */
 
+#new-post {
+  background-color: white;
+  padding: 0;
+}
 #post-section {
   background-color: #d0f4de;
   position: -webkit-sticky;
   position: sticky;
   top: 3.3rem;
-  margin-top: 1.2rem;
-}
-
-#new-post {
-  background-color: white;
-  padding: 0;
 }
 #post-link {
   background-color: rgb(213, 221, 228);
