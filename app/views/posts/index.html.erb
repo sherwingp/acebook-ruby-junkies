@@ -73,6 +73,10 @@
                     <% if comment.image.attached? %>
                       <%= image_tag comment.image, class: "comment-image"%>
                     <% end %>
+                    <div>
+                      <%= button_to "Edit comment", edit_post_comment_path(post, comment), method: 'get'%>
+                       <%= button_to "Delete comment", post_comment_path(post, comment), method: 'delete'%>
+                    </div>
                   </div>
                   <% end %>
                   <%# comment form %>
