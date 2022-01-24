@@ -22,6 +22,12 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  # edit_post_path	GET	/posts/:id/edit(.:format)	posts#edit
+  # PUT	/posts/:id(.:format) posts#update
 
  
 
