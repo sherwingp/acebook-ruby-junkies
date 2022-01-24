@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
 
   # resources :users do
-  #   rescources :profiles
+  #   resources :profiles
   # end
 
   resources :posts do

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
+  before_action :check_for_existing_profile, only: [:new, :create]
 
   def index
     @profile = Profile.all
@@ -12,6 +13,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id]) if params[:id] != 'new'
+    # redirect_to posts_url
   end
 
   def create
@@ -29,4 +31,11 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(:about, :avatar)
   end
 
+  def check_for_existing_profile
+    @user = User.find(current_user.id)
+    p Profile.find(current_user.id)
+    if Profile.find(current_user.id)
+      # redirect_to posts_url, notice: 'Profile already exists'
+    end
+  end
 end

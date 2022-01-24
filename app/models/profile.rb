@@ -3,6 +3,6 @@
 class Profile < ApplicationRecord
   belongs_to :user
   validates :about, presence: true, length: { minimum: 1 }
-  has_one_attached :image, dependent: :destroy, service: :local
+  has_one_attached :avatar, dependent: :destroy, service: :local
 
 end
