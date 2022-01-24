@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
 
+  def index
+    @profile = Profile.all
+  end
+
   def new
-    @profile = Profile.new
+    @profile= Profile.new
   end
 
   def show
@@ -10,13 +16,15 @@ class ProfilesController < ApplicationController
 
   def create
     @user = User.find(current_user.id)
-    @profile = @user.profile.create(post_params)
+    @profile = @user.profiles.create(profile_params)
+    @profile.save
+    redirect_to profiles_url
   end
 
   private
 
-  def post_params
-    params.require(:profile).permit(:about)
+  def profile_params
+    params.require(:profile).permit(:about, :avatar)
   end
 
 end

@@ -3,3 +3,28 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
 <h2><strong> User </strong></h2>
+
+<div class="container is-fluid">
+  <div class="columns">
+    <div class="column"></div>
+
+    <div class="column create-post is-half" id='middle-column'>
+      <div class="container is-fluid" id='form-container'>
+        <%= form_for @profile do |form| %>
+        <%= form.label :about, :class => 'message-img-labels' %>
+        <div id="text-field" class="field">
+          <div><%= form.text_area :about, placeholder: "About", :class => "text-area" %></div>
+        </div>
+
+        <%= form.label :avatar, :class => 'message-img-labels' %>
+        <div class="form-group field">
+          <div class="p-0"><%= form.file_field :avatar, :class => "form-control" %></div>
+          </div>
+          <div id="post-btn-container">
+          <%= form.submit "Create Profile", :class => "button is-rounded is-link" %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
+</div>
