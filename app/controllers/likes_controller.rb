@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :find_post
   include ActionView::RecordIdentifier
@@ -20,6 +22,8 @@ class LikesController < ApplicationController
       flash[:notice] = "Cannot unlike"
     else
       @like.destroy
+    else
+      flash[:notice] = 'Cannot unlike'
     end
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end

@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   sequence :email do |n|
     "test#{n}@example.com"
   end
-  
+
   factory :user do
     email { generate :email }
     password { 'f4k3p455w0rd' }
     name { 'name' }
     surname { 'surname' }
     # using dynamic attributes over static attributes in FactoryBot
-    
+
     # if needed
     # is_active true
   end
@@ -28,4 +30,7 @@ FactoryBot.define do
     body { 'test comment' }
   end
 
+    # if needed
+    # is_active true
+  end
 end
