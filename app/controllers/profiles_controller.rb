@@ -17,8 +17,10 @@ class ProfilesController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @profile = @user.profiles.create(profile_params)
-    @profile.save
-    redirect_to profiles_url
+    if @profile.save
+      redirect_to profiles_url
+    else
+    end
   end
 
   private

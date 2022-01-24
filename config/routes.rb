@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
   get '/profiles/:id', to: 'profiles#show'
 
-  post '/profiles', to: 'profiles#index'
+  post '/profiles', to: 'profiles#create'
+
 
   # resources :users do
   #   rescources :profiles
