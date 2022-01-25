@@ -3,13 +3,13 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
 
-<%# <%= if !Profile.where(user_id: current_user.id).empty? %> 
 <%# <script type="text/javascript">
-  $(document).ready(function() {
-    if (window.location.href."/profile/:id") {
-      window.location.href="/posts" 
-    }
-  });
+  window.addEventListener('beforeunload', function (e) {
+  // Cancel the event
+  e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  // Chrome requires returnValue to be set
+  e.returnValue = 'Please create a profile';
+});
 </script> %>
 
 <h2><strong> User </strong></h2>
