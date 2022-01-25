@@ -27,12 +27,12 @@ body {
   background-color: #FBCBF0;
 }
 
-.fa-plus, .fa-home {
+.fa-plus, .fa-home, .fa-users {
   color: rgb(102, 102, 102);
   font-size: 115%;
 }
 
-.fa-plus:hover, .fa-home:hover {
+.fa-plus:hover, .fa-home:hover, .fa-users:hover {
   color: #99F4F4;
   font-size: 110%;
 }

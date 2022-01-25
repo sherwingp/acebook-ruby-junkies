@@ -46,8 +46,13 @@
           </div>
 
           <div class="navbar-item">
-            <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
+            <%= link_to users_profiles_path do %>
+              <i class="fas fa-users"></i>
+            <% end %>
           </div>
+          <%# <div class="navbar-item"> %>
+            <%# <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
+          <%# </div> %>
        <% end %>
         </div>
 
@@ -58,8 +63,8 @@
           <% if user_signed_in? && (current_user.profiles.exists?) %>
             <%= link_to user_profile_path(current_user.id) do %>
               <% current_user.profiles.each do |profile| %>
-              <% if profile.avatar.attached? %>
               <div class="is-flex">
+                  <% if profile.avatar.attached? %>
                 <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
                   <% else %>
                 <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>

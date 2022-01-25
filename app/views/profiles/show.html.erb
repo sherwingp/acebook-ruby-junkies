@@ -5,14 +5,16 @@
 <div class="columns p-3">
   <div class="column p-2 is-flex is-flex-direction-column is-align-items-center" style="background-color:white;width:18rem;border-radius:20px">
   <div class="container is-fluid is-flex is-justify-content-right">
-  <%= link_to "Edit Profile", users_profiles_path, class: "button is-link is-small is-rounded mt-4" %>
+  <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
   </div>
     <% @user.profiles.each do |profile| %><br>
-        <% if profile.avatar.attached? %>
       <figure class="image" id="profile-avatar">
+        <% if profile.avatar.attached? %>
         <%= image_tag profile.avatar, class: "image is-rounded" %>
-      </figure>
+        <% else %>
+        <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
         <% end %>
+      </figure>
     <p style="font-size:3rem"><strong><%= current_user.name %></strong></p>
     <div class="container is-flex">
     <p><%= profile.about %></p>
