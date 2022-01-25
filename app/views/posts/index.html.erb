@@ -58,7 +58,9 @@
                   <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
                 <% end %>
                 <% if current_user && current_user.id == post.user_id %>
-                <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+                 <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+              
+                <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
                 <% end %>
               </div>
               <% end %>
@@ -79,8 +81,8 @@
                     <% end %>
                     <% if current_user && current_user.id == comment.user_id %>
                       <div id="comment-btns">
-                        <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
-                        <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
+                        <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
+                        <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
                       </div>
                     <% end %>
                   </div>
