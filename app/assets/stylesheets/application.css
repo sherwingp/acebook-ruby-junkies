@@ -261,7 +261,7 @@ h2 {
   color: blue;
 }
 
-#show-like{
+.show-like{
   max-height: 100px;
   overflow-y: scroll;
 }

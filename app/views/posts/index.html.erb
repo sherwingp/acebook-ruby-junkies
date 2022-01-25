@@ -48,7 +48,7 @@
                         <strong><%= post.likes.count %></strong>
                       </p>
                     </div>
-                     <div id="show-like-<%= post.id %>" hidden>
+                     <div class='show-like' id="show-like-<%= post.id %>" hidden>
                          <ul class='show-like-ul'>
                         <% post.likes.each do |like| %>
                           <li> <small> <%= "#{User.find(like.user_id).name} #{User.find(like.user_id).surname}" %> </small>  </li>
