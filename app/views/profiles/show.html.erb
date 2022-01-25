@@ -2,6 +2,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
-<h2><strong> <%= @profile.id %> </strong></h2>
-<p><%= @profile.about %></p>
-<div><%= @profile.avatar %></div>
+<div class="container p-2" style="background-color:white;width:18rem;border-radius:20px">
+  <p><strong><%= current_user.name %></strong></p>
+  <% @user.profiles.each do |profile| %><br>
+      <% if profile.avatar.attached? %>
+    <figure class="image">
+      <%= image_tag profile.avatar, class: "image is-rounded" %>
+    </figure>
+      <% end %>
+  <p><%= profile.about %></p>
+  <% end %>
+<%# temporary button? - can be later deleted if not needed %>
+  <div class="m-2 is-flex is-justify-content-center">
+  <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
+  </div>
+</div>

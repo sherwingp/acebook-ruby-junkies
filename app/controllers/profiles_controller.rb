@@ -4,25 +4,22 @@ class ProfilesController < ApplicationController
   before_action :check_for_existing_profile, only: [:new, :create]
 
   def index
-    @profile = Profile.all
+    @profiles = Profile.all
+  end
+
+  def show
+    @user = User.find(current_user.id)
+    @profile = @user.profiles if params[:id] != 'new'
   end
 
   def new
     @profile= Profile.new
   end
 
-  def show
-    @profile = Profile.find(params[:id]) if params[:id] != 'new'
-    # redirect_to posts_url
-  end
-
   def create
     @user = User.find(current_user.id)
     @profile = @user.profiles.create(profile_params)
-    if @profile.save
-      redirect_to profiles_url
-    else
-    end
+    redirect_to user_profile_path
   end
 
   private
@@ -33,9 +30,11 @@ class ProfilesController < ApplicationController
 
   def check_for_existing_profile
     @user = User.find(current_user.id)
-    p Profile.find(current_user.id)
-    if Profile.find(current_user.id)
-      # redirect_to posts_url, notice: 'Profile already exists'
+    @profile = Profile.where(:user_id => current_user.id)
+    if @profile.exists?
+      redirect_to posts_url, notice: "Logged in successfully"
     end
+    rescue ActiveRecord::RecordNotFound => e
+      return "Not Found"
   end
 end

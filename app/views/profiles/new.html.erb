@@ -19,7 +19,7 @@
 
     <div class="column create-post is-half" id='middle-column'>
       <div class="container is-fluid" id='form-container'>
-        <%= form_for @profile do |form| %>
+        <%= form_for @profile, url: new_user_profile_url(current_user.id) do |form| %>
         <%= form.label :about, :class => 'message-img-labels' %>
         <div id="text-field" class="field">
           <div><%= form.text_area :about, placeholder: "About", :class => "text-area" %></div>

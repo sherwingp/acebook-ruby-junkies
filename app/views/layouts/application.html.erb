@@ -49,10 +49,20 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <%# <%= link_to TODO: user's profile page do %>
-          <% if user_signed_in?%>
-          <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
-          <p class='ml-1'><%= current_user.name%></p>
-          <%# <% end %><% end %>
+          <%# <% if user_signed_in? %>
+            <%= link_to user_profile_path(current_user.id) do %>
+              <% current_user.profiles.each do |profile| %>
+              <% if profile.avatar.attached? %>
+              <div class="is-flex">
+                <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
+                  <% else %>
+                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+                  <% end %>
+                <% end %>
+                <p class='ml-1'><%= current_user.name%></p>
+              </div>
+            <% end %>
+          <%# <% end %>
         </div>
         <div class="navbar-item">
           <div class="buttons">

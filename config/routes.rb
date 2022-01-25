@@ -21,16 +21,12 @@ Rails.application.routes.draw do
 
   get '/posts', to: 'posts#index'
 
-  get '/profiles', to: 'profiles#index'
+  get '/users/profiles', to: 'profiles#index'
+  post '/users/:user_id/profile/new', to: 'profiles#create'
 
-  get '/profiles/:id', to: 'profiles#show'
-
-  post '/profiles', to: 'profiles#create'
-
-
-  # resources :users do
-  #   resources :profiles
-  # end
+  resources :users do
+    resource :profile
+  end
 
   resources :posts do
     resources :comments
