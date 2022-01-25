@@ -4,8 +4,6 @@ class FriendRequestsController < ApplicationController
   def index
     @incoming = FriendRequest.where(friend: current_user)
     @outgoing = current_user.friend_requests
-    p @incoming
-    p @outgoing
   end
 
   def create
@@ -19,6 +17,11 @@ class FriendRequestsController < ApplicationController
     end
   end
   
+  def destroy
+    @friend_request.destroy
+    head :no_content
+  end
+
   private
 
   def set_friend_request
