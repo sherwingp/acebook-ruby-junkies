@@ -10,6 +10,12 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find(current_user.id)
     @profile = @user.profiles if params[:id] != 'new'
+    @posts = Post.where(:user_id => current_user.id)
+    @post_ids= []
+    @posts.each do |post| @post_ids << post.id end
+    @comments = Comment.where(:user_id => current_user.id)
+    @comments.each do |comment| @post_ids << comment.post_id end
+    @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number }))
   end
 
   def new

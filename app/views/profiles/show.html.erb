@@ -25,12 +25,6 @@
 </div>
   <div class="column" style="background-color:pink">
   POSTS
-  <%= @posts = Post.where(:user_id => current_user.id) %>
-  <%= @post_ids= [] %>
-  <%= @posts.each do |post| @post_ids << post.id end%>
-  <%= @comments = Comment.where(:user_id => current_user.id) %>
-  <%= @comments.each do |comment| @post_ids << comment.post_id end%>
-  <%= @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number })) %> 
 
   <% @posts_to_use.each do |post| %>
     <%= content_tag :div, id: dom_id(post) do %>
