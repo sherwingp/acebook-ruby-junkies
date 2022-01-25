@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_one_attached :image, dependent: :destroy, service: :local
   belongs_to :user
 
-  validates :message, presence: true, length: { minimum: 1 }
+  validates :message, presence: true, if: -> { image.blank? }
 
   has_many :likes, dependent: :destroy
 end
