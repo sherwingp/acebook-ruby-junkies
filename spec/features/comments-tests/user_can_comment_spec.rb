@@ -9,13 +9,13 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password]", with: "123456"
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
-    visit "/posts"
+    visit "/posts/new"
     fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
-    click_button "Create Comment"
+    click_button "Comment"
     visit '/posts'
     expect(page).to have_content("A comment!")
   end
@@ -28,13 +28,13 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password]", with: "123456"
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
-    visit "/posts"
+    visit "/posts/new"
     fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
-    click_button "Create Comment"
+    click_button "Comment"
     visit '/posts'
     expect(page).to have_content("John Doe A comment!")
   end
@@ -47,7 +47,7 @@ RSpec.feature "Commenting", type: :feature do
 		fill_in "user[password]", with: "123456"
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
-    visit "/posts"
+    visit "/posts/new"
     fill_in "post[message]", with: "Hello, world!"
     click_button "Post"
     expect(page).to have_content("Hello, world!")
@@ -55,7 +55,7 @@ RSpec.feature "Commenting", type: :feature do
     fill_in "comment[body]", with: "A comment!"
     attach_file('comment[image]',
       File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
-    click_button "Create Comment"
+    click_button "Comment"
     expect(page).to have_css("img[src*='/feature_test_image1.jpeg']")
   end
 
