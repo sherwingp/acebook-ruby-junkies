@@ -25,5 +25,80 @@
 </div>
   <div class="column" style="background-color:pink">
   POSTS
+  <%= @posts = Post.where(:user_id => current_user.id) %>
+  <%= @post_ids= [] %>
+  <%= @posts.each do |post| @post_ids << post.id end%>
+  <%= @comments = Comment.where(:user_id => current_user.id) %>
+  <%= @comments.each do |comment| @post_ids << comment.post_id end%>
+  <%= @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number })) %> 
+
+  <% @posts_to_use.each do |post| %>
+    <%= content_tag :div, id: dom_id(post) do %>
+      <div class="container p-5" id="post-container">
+        <div class="container post-card pt-4 pb-1 pl-4 pr-4">
+          <div class="container is-flex" id="post-details">
+            <%# <div id="avatar" class="p-5"></div> %>
+              <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
+            <div class="container">
+              <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
+              <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
+            </div>
+          </div>
+          <div class="message-and-photo p-5">
+            <p class="mb-2 display-message"><%= post.message %></p>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, class: "post-image"%>
+            <% end %>
+            <% if post.likes.count != 0 %>
+              <div class="container is-flex likes-count">
+                <p>
+                  <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.count %></strong>
+                </p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%# likes %>
+        <div class="container is-flex  likes-section">
+          <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+            <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+          <% else %>
+            <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+          <% end %>
+        </div>
+        <%# each comment displayed  %>
+        <div class="comments-section p-3">
+          <% post.comments.each do |comment| %>
+            <div class="container individual-comment mb-3 p-2">
+              <p class="ml-4">
+                <strong>
+                  <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+                </strong>
+              </p>
+              <p class="ml-4">
+                <%= comment.body %>
+              </p>
+              <% if comment.image.attached? %>
+                <%= image_tag comment.image, class: "comment-image"%>
+              <% end %>
+            </div>
+            <% end %>
+            <%# comment form %>
+            <div class="container is-flex comments-form pt-3">
+              <%= form_with(model: [ post, post.comments.build ], local: true) do |form| %>
+                <%= form.hidden_field :user_id, value: current_user.id %>  
+                <%= form.text_area :body, :placeholder => "Comment here ...", :class => "text-area-homepage" %>
+                <div class="container is-flex is-justify-content-space-around">
+                  <%= form.file_field :image, class: "form-control" %>
+                  <%= form.submit "Comment", class: "mt-4 mb-4 mr-1 button is-rounded is-small comment-btn" %>
+                </div>
+              <% end %>
+            </div>
+        </div>
+     </div>   
+    <% end %>
+  <% end %>
+</div>
   </div>
 </div>
