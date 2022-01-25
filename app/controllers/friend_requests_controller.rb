@@ -4,6 +4,8 @@ class FriendRequestsController < ApplicationController
   def index
     @incoming = FriendRequest.where(friend: current_user)
     @outgoing = current_user.friend_requests
+    p @incoming
+    p @outgoing
   end
 
   def create
