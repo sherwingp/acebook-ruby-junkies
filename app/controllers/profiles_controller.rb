@@ -15,14 +15,18 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(current_user.id)
 
     if @profile.update(profile_params)
-      redirect_to user_profile_path
+      redirect_to user_profile_path(profile.user_id)
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def show
-    @user = User.find(current_user.id)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = User.find(current_user.id)
+    end
     @profile = @user.profiles if params[:id] != 'new'
     @posts = Post.where(:user_id => current_user.id)
     @post_ids= []

@@ -7,17 +7,18 @@
   <div class="container is-fluid is-flex is-justify-content-right">
   <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
   </div>
-    <% @user.profiles.each do |profile| %><br>
+  <% @profile = Profile.find(params[:user_id]) %>
+    <% if 0 == 0 %><br>
       <figure class="image" id="profile-avatar">
-        <% if profile.avatar.attached? %>
-        <%= image_tag profile.avatar, class: "image is-rounded" %>
+        <% if @profile.avatar.attached? %>
+        <%= image_tag @profile.avatar, class: "image is-rounded" %>
         <% else %>
         <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
         <% end %>
       </figure>
-    <p style="font-size:3rem"><strong><%= current_user.name %></strong></p>
+    <p style="font-size:3rem"><strong><%= @profile.id %></strong></p>
     <div class="container is-flex">
-    <p><%= profile.about %></p>
+    <p><%= @profile.about %></p
     <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX <% @posts_to_use.each do |post| %>
       <% if post.image.attached? && (post.user_id == @user.id)%>
               <%= image_tag post.image, class: "post-image"%>
@@ -45,7 +46,7 @@
 </div>
   <div class="column" style="background-color:pink">
   POSTS
-
+  
   <% @posts_to_use.each do |post| %>
     <%= content_tag :div, id: dom_id(post) do %>
       <div class="container p-5" id="post-container">
