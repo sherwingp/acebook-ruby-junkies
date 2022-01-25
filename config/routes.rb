@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/users/profiles', to: 'profiles#index'
   post '/users/:user_id/profile/new', to: 'profiles#create'
 
+
   resources :users do
     resource :profile
   end

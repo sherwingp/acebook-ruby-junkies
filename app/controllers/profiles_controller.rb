@@ -7,6 +7,20 @@ class ProfilesController < ApplicationController
     @profiles = Profile.all
   end
 
+  def edit
+    @profile = Profile.find(current_user.id)
+  end
+
+  def update
+    @profile = Profile.find(current_user.id)
+
+    if @profile.update(profile_params)
+      redirect_to user_profile_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def show
     @user = User.find(current_user.id)
     @profile = @user.profiles if params[:id] != 'new'

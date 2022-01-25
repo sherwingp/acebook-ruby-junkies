@@ -1,0 +1,39 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
+
+<%# <script type="text/javascript">
+  window.addEventListener('beforeunload', function (e) {
+  // Cancel the event
+  e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+  // Chrome requires returnValue to be set
+  e.returnValue = 'Please update your profile';
+});
+</script> %>
+
+<h2><strong> User </strong></h2>
+<div class="container is-fluid">
+  <div class="columns">
+    <div class="column"></div>
+
+    <div class="column create-post is-half" id='middle-column'>
+      <div class="container is-fluid" id='form-container'>
+        <%= form_for @profile, url: user_profile_url(current_user.id) do |form| %>
+        <%= form.label :about, :class => 'message-img-labels' %>
+        <div id="text-field" class="field">
+          <div><%= form.text_area :about, placeholder: "About", :class => "text-area" %></div>
+        </div>
+
+        <%= form.label :avatar, :class => 'message-img-labels' %>
+        <div class="form-group field">
+          <div class="p-0"><%= form.file_field :avatar, :class => "form-control" %></div>
+          </div>
+          <div id="post-btn-container">
+          <%= form.submit "Edit Profile", :class => "button is-rounded is-link" %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
+</div>
