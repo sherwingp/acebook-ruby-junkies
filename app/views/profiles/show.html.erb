@@ -18,8 +18,17 @@
     <p style="font-size:3rem"><strong><%= current_user.name %></strong></p>
     <div class="container is-flex">
     <p><%= profile.about %></p>
-    <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX</div>
-    </div>
+    <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX <% @posts_to_use.each do |post| %>
+      <% if post.image.attached? && (post.user_id == @user.id)%>
+              <%= image_tag post.image, class: "post-image"%>
+      <% end %>
+      <% post.comments.each do |comment| %>
+        <% if comment.image.attached? && (comment.user_id == @user.id) %>
+        <%= image_tag comment.image, class: "comment-image"%>
+      <% end %>
+      <%end %>
+      <%end %>
+    </div></div>
     <div style="background-color:pink;border:1px solid black">FRIENDS <% @user.friends.each do |friend| %>
       <p> <% @user = User.find(friend.friend_user) %>
       <% @user.profiles.each do |profile| %>
