@@ -1,3 +1,10 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#profile-avatar {
+  max-width: 300px;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 2rem;
+}

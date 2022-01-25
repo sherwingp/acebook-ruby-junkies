@@ -2,18 +2,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
-<div class="container p-2" style="background-color:white;width:18rem;border-radius:20px">
-  <p><strong><%= current_user.name %></strong></p>
-  <% @user.profiles.each do |profile| %><br>
-      <% if profile.avatar.attached? %>
-    <figure class="image">
-      <%= image_tag profile.avatar, class: "image is-rounded" %>
-    </figure>
-      <% end %>
-  <p><%= profile.about %></p>
-  <% end %>
-<%# temporary button? - can be later deleted if not needed %>
-  <div class="m-2 is-flex is-justify-content-center">
-  <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
+<div class="columns p-3">
+  <div class="column p-2 is-flex is-flex-direction-column is-align-items-center" style="background-color:white;width:18rem;border-radius:20px">
+  <div class="container is-fluid is-flex is-justify-content-right">
+  <%= link_to "Edit Profile", users_profiles_path, class: "button is-link is-small is-rounded mt-4" %>
+  </div>
+    <% @user.profiles.each do |profile| %><br>
+        <% if profile.avatar.attached? %>
+      <figure class="image" id="profile-avatar">
+        <%= image_tag profile.avatar, class: "image is-rounded" %>
+      </figure>
+        <% end %>
+    <p style="font-size:3rem"><strong><%= current_user.name %></strong></p>
+    <div class="container is-flex">
+    <p><%= profile.about %></p>
+    <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX</div>
+    </div>
+    <div style="background-color:pink;border:1px solid black">FRIENDS BOX</div>
+    <% end %>
+</div>
+  <div class="column" style="background-color:pink">
+  POSTS
   </div>
 </div>
