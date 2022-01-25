@@ -12,12 +12,11 @@
 });
 </script> %>
 
-<h2><strong> User </strong></h2>
 <div class="container is-fluid">
   <div class="columns">
     <div class="column"></div>
-
     <div class="column create-post is-half" id='middle-column'>
+      <h2><strong>Edit Profile</strong></h2>
       <div class="container is-fluid" id='form-container'>
         <%= form_for @profile, url: user_profile_url(current_user.id) do |form| %>
         <%= form.label :about, :class => 'message-img-labels' %>

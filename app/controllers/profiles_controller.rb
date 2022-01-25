@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(params[:user_id])
     @profile = @user.profiles if params[:id] != 'new'
     @posts = Post.where(:user_id => current_user.id)
     @post_ids= []
