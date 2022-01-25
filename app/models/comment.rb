@@ -5,5 +5,5 @@ class Comment < ApplicationRecord
   belongs_to :user
   has_one_attached :image, dependent: :destroy, service: :local
 
-  validates :body, presence: true, if: -> { |c| c.image.blank? }
+  validates :body, presence: true, if: -> { image.blank? }
 end
