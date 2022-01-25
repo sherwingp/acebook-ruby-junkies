@@ -20,7 +20,18 @@
     <p><%= profile.about %></p>
     <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX</div>
     </div>
-    <div style="background-color:pink;border:1px solid black">FRIENDS BOX</div>
+    <div style="background-color:pink;border:1px solid black">FRIENDS <% @user.friends.each do |friend| %>
+      <p> <% @user = User.find(friend.friend_user) %>
+      <% @user.profiles.each do |profile| %>
+      <% if profile.avatar.attached? %>
+      <figure class="image m-1"><%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %></figure>
+      <% else %>
+      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+      <%end %>
+      <% end %>
+      <%= @user.name + " " + @user.surname %> </p>
+      <% end %>
+      </div>
     <% end %>
 </div>
   <div class="column" style="background-color:pink">

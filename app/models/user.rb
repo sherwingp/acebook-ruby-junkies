@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :comments
 
+  has_many :friends
+
   has_many :likes, dependent: :destroy
 
   # Include default devise modules. Others available are:
