@@ -1,0 +1,8 @@
+<h1>Friends</h1>
+<div>
+  <% @friends.each do |friend| %>
+    <ul>
+      <li><%= friend.name %> <%= friend.surname %></li>
+    </ul>
+  <% end %>
+</div>
