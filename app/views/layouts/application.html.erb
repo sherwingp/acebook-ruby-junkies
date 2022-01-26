@@ -31,6 +31,7 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
+      <% if (current_user.profiles.exists?)%>
           <div class="navbar-item">
             <%= link_to posts_path do %>
               <i class="fas fa-home"></i>
@@ -42,22 +43,44 @@
               <i class="fas fa-plus"></i>
             <% end %>
           </div>
+
+          <div class="navbar-item">
+            <%= link_to users_profiles_path do %>
+              <i class="fas fa-users"></i>
+            <% end %>
+          </div>
+          <%# <div class="navbar-item"> %>
+            <%# <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
+          <%# </div> %>
+       <% end %>
         </div>
 
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <%#= link_to TODO: user's profile page do %>
-          <% if user_signed_in?%>
-          <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
-          <p class='ml-1'><%= current_user.name%></p>
+          <%# <%= link_to TODO: user's profile page do %>
+          <% if user_signed_in? && (current_user.profiles.exists?) %>
+            <%= link_to user_profile_path(current_user.id) do %>
+              <% current_user.profiles.each do |profile| %>
+              <div class="is-flex">
+                  <% if profile.avatar.attached? %>
+                <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
+                  <% else %>
+                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+                  <% end %>
+                <% end %>
+                <p class='ml-1'><%= current_user.name%></p>
+              </div>
+            <% end %>
           <% end %>
         </div>
+        
         <div class="navbar-item">
+        <% if (current_user.profiles.exists?)%>
           <div class="buttons">
             <div class="button is-rounded is-primary is-outlined is-small" id="logout-btn">
             <strong><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></strong>
-
+        <% end %>
             </div>
           </div>
         </div>

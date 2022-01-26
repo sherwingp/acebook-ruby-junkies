@@ -1,0 +1,57 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#profile-avatar {
+  max-width: 300px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius:20px;
+}
+.photo-box {
+  border: 1px dashed black;
+  display: flex;
+  padding: 0.5rem;
+  background-color: rgb(78, 226, 236);
+  min-width: 180px;
+  border-radius:20px;
+}
+.post-img, .comment-img {
+  width: 9rem;
+  height: 6rem;
+  object-fit: cover;
+}
+#profile-name {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+#about {
+  max-width: 250px;
+  min-width: 180px;
+  width: 100%;
+  font-style: italic;
+  background-color: rgb(78, 226, 236);
+  border-radius:20px;
+}
+#friend-box {
+  max-width: 595px;
+  width: 100%;
+  background-color: rgb(78, 226, 236);
+  border-radius:20px;
+}
+.friend-container {
+  width: 6rem;
+  height: 5rem;
+}
+.wrapper {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@media (max-width: 750px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

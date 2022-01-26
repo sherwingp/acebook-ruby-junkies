@@ -8,11 +8,11 @@
     <div class="column"></div>
       <div id="new-post" class="column is-half">
         <%# create a new post %>
-        <div class="container is-flex p-4" id="post-section">
+        <div class="container is-flex p-4 mb-3" id="post-section">
           <div id="post-link" class="container is-flex is-align-items-center">
             <div class="is-flex is-align-items-center" id="top-text-area-container">
-              <%# <div id="avatar" class="p-5"></div> %>
-                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
+                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                <p class="ml-2"></p>
               <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
               <%= form.text_area :message, placeholder: "What's on your mind?", :class => "text-area-homepage mt-2 top-text-area" %>
             </div>
@@ -122,6 +122,7 @@
                         <% end %>
                       </div>
                     </div>
+
                   </div>
                   <% end %>
                   <%# comment form %>

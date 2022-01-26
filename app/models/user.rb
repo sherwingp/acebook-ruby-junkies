@@ -3,7 +3,11 @@
 class User < ApplicationRecord
   has_many :posts
 
+  has_many :profiles
+
   has_many :comments
+
+  has_many :friends
 
   has_many :likes, dependent: :destroy
 

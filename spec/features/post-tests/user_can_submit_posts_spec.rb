@@ -3,6 +3,7 @@
 require 'rails_helper'
 require_relative "../../helpers/sign_up_helper_spec.rb"
 
+
 RSpec.feature "Timeline", type: :feature do
   scenario "Can submit posts and view them" do
     sign_up
@@ -21,6 +22,7 @@ RSpec.feature "Timeline", type: :feature do
     attach_file('post[image]',
                 File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
     click_button "Post"
+
     expect(page).to have_css("img[src*='/feature_test_image1.jpeg']")
   end
 end

@@ -3,6 +3,11 @@ class FriendsController < ApplicationController
 
   def index
     @friends = current_user.friends
+    @friends_all = Friend.all
+  end
+
+  def show
+    @friend = Friend.find(params[:id]) if params[:id] != 'new'
   end
 
   def destroy

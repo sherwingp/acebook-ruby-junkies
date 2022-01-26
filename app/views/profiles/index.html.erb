@@ -1,0 +1,19 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
+<div class="container p-2" style="background-color:white;width:18rem">
+<p><strong> User Profiles: </strong></p>
+<% @profiles.each do |profile| %>
+  <div class="is-flex m-4">
+  <%= link_to user_profile_path(profile.user_id) do %>
+    <% if profile.avatar.attached? %>
+      <figure class="image m-1"><%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %></figure>
+    <% else %>
+      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", class: "image is-32x32 is-rounded") %>
+    <% end %>
+    <%= User.find(profile.user_id).name + " " + User.find(profile.user_id).surname %>
+  <% end %>
+  </div>
+<% end %>
+</div>
