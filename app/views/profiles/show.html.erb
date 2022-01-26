@@ -2,63 +2,78 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
-<div class="columns p-3">
-  <div class="column p-2 is-flex is-flex-direction-column is-align-items-center" style="background-color:white;width:18rem;border-radius:20px">
-  <div class="container is-fluid is-flex is-justify-content-right">
-  <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
-  </div>
-  <% @profile = Profile.find(params[:user_id]) %>
-    <% if 0 == 0 %><br>
-      <figure class="image" id="profile-avatar">
-        <% if @profile.avatar.attached? %>
-        <%= image_tag @profile.avatar, class: "image is-rounded" %>
-        <% else %>
-        <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
-        <% end %>
-      </figure>
-    <p style="font-size:3rem"><strong><%= @profile.id %></strong></p>
-    <div class="container is-flex">
-    <p><%= @profile.about %></p
-    <div class="container" style="background-color:grey;border:1px solid black">PHOTO BOX <% @posts_to_use.each do |post| %>
-      <% if post.image.attached? && (post.user_id == @user.id)%>
-              <%= image_tag post.image, class: "post-image"%>
-      <% end %>
-      <% post.comments.each do |comment| %>
-        <% if comment.image.attached? && (comment.user_id == @user.id) %>
-        <%= image_tag comment.image, class: "comment-image"%>
-      <% end %>
-      <%end %>
-      <%end %>
-    </div></div>
-    <div style="background-color:pink;border:1px solid black">FRIENDS <% @user.friends.each do |friend| %>
-      <p> <% @user = User.find(friend.friend_user) %>
-      <% @user.profiles.each do |profile| %>
-      <% if profile.avatar.attached? %>
-      <figure class="image m-1"><%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %></figure>
-      <% else %>
-      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
-      <%end %>
-      <% end %>
-      <%= @user.name + " " + @user.surname %> </p>
-      <% end %>
-      </div>
-    <% end %>
-</div>
-  <div class="column" style="background-color:pink">
-  POSTS
-  
-  <% @posts_to_use.each do |post| %>
-    <%= content_tag :div, id: dom_id(post) do %>
-      <div class="container p-5" id="post-container">
-        <div class="container post-card pt-4 pb-1 pl-4 pr-4">
-          <div class="container is-flex" id="post-details">
-            <%# <div id="avatar" class="p-5"></div> %>
-              <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
-            <div class="container">
-              <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
-              <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
-            </div>
+
+<div id="main-container">
+  <div class="columns p-2">
+    <div class="column is-half left-col is-flex is-flex-direction-column is-align-items-center" style="background-color:white">
+        <div id="button-container">
+          <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
+        </div>
+        <% @user.profiles.each do |profile| %><br>
+        <%# big image avatar/profile %>
+        <figure class="image" id="profile-avatar">
+          <% if profile.avatar.attached? %>
+            <%= image_tag profile.avatar, class: "image is-rounded" %>
+          <% else %>
+            <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
+          <% end %>
+        </figure>
+        <p id="profile-name"><strong><%= @user.name %></strong></p>
+        <div class="is-flex m-4" id="about-photo-box-c">
+        <%# about section %>
+          <div class="p-1 m-1" id="about" style="border:1px solid red">
+            <%= profile.about %>
           </div>
+          <div class="container m-1 is-flex photo-box"> 
+          <% @posts_to_use.each do |post| %>
+          <%# all images used in post or comments %>
+            <% if post.image.attached? && (post.user_id == @user.id)%>
+              <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
+            <% end %>
+              <% post.comments.each do |comment| %>
+                <% if comment.image.attached? && (comment.user_id == @user.id) %>
+                  <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                <% end %>
+              <%end %>
+            <%end %>
+          </div>
+        </div>
+
+        <div class="is-flex p-2" id="friend-box"> 
+        <% @user.friends.each do |friend| %>
+          <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
+          <% @user = User.find(friend.friend_user) %>
+            <% @user.profiles.each do |profile| %>
+              <% if profile.avatar.attached? %>
+                <figure class="image m-1">
+                  <%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %>
+                </figure>
+              <% else %>
+                <figure class="m-1">
+                  <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "32", :height => "32") %>
+                </figure>
+              <%end %>
+            <% end %>
+              <%= @user.name %> <%= @user.surname %> 
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="column is-half p-2" style="overflow:scroll">
+        <% @posts_to_use.each do |post| %>
+          <%= content_tag :div, id: dom_id(post) do %>
+        <div class="container p-5" id="post-container">
+          <div class="container post-card pt-4 pb-1 pl-4 pr-4">
+            <div class="container is-flex" id="post-details">
+              <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+              <p class="ml-2"></p>
+              <div class="container">
+                <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
+                <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
+              </div>
+            </div>
           <div class="message-and-photo p-5">
             <p class="mb-2 display-message"><%= post.message %></p>
             <% if post.image.attached? %>
@@ -85,7 +100,7 @@
         <%# each comment displayed  %>
         <div class="comments-section p-3">
           <% post.comments.each do |comment| %>
-            <div class="container individual-comment mb-3 p-2">
+          <div class="container individual-comment mb-3 p-2">
               <p class="ml-4">
                 <strong>
                   <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
@@ -95,7 +110,7 @@
                 <%= comment.body %>
               </p>
               <% if comment.image.attached? %>
-                <%= image_tag comment.image, class: "comment-image"%>
+                <figure class="p-4"><%= image_tag comment.image, class: "comment-image"%></figure>
               <% end %>
             </div>
             <% end %>
@@ -110,10 +125,11 @@
                 </div>
               <% end %>
             </div>
-        </div>
-     </div>   
-    <% end %>
-  <% end %>
-</div>
+          </div>
+        </div>   
+        <% end %>
+      <% end %>
+      </div>
+    </div> 
   </div>
 </div>

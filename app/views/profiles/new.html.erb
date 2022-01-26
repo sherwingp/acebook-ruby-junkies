@@ -3,21 +3,12 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
 
-<%# <script type="text/javascript">
-  window.addEventListener('beforeunload', function (e) {
-  // Cancel the event
-  e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-  // Chrome requires returnValue to be set
-  e.returnValue = 'Please create a profile';
-});
-</script> %>
-
-<h2><strong> User </strong></h2>
 <div class="container is-fluid">
   <div class="columns">
     <div class="column"></div>
 
     <div class="column create-post is-half" id='middle-column'>
+      <h2><strong>Create Profile</strong></h2>
       <div class="container is-fluid" id='form-container'>
         <%= form_for @profile, url: new_user_profile_url(current_user.id) do |form| %>
         <%= form.label :about, :class => 'message-img-labels' %>

@@ -8,11 +8,11 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find(current_user.id)
+    @profile = Profile.where(:user_id => current_user.id).first
   end
 
   def update
-    @profile = Profile.find(current_user.id)
+    @profile = Profile.where(:user_id => current_user.id).first
 
     if @profile.update(profile_params)
       redirect_to user_profile_path(profile.user_id)
@@ -22,16 +22,13 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-    else
-      @user = User.find(current_user.id)
-    end
+    @user = User.find(params[:user_id])
     @profile = @user.profiles if params[:id] != 'new'
-    @posts = Post.where(:user_id => current_user.id)
+
+    @posts = Post.where(:user_id => @user.id)
     @post_ids= []
     @posts.each do |post| @post_ids << post.id end
-    @comments = Comment.where(:user_id => current_user.id)
+    @comments = Comment.where(:user_id => @user.id)
     @comments.each do |comment| @post_ids << comment.post_id end
     @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number }))
   end
