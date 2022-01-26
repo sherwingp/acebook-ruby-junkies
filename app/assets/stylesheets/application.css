@@ -248,6 +248,22 @@ h2 {
   padding: 0.6em;
 }
 
+#logo {
+  display: inline-block;
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.homepage-btn:hover{
+  transition: all 0.5s ease-out;
+  transform: scale(1.1);
+}
+
 /* edit and delete buttons in posts index */
 #comment-btns {
   display: flex;
@@ -256,3 +272,4 @@ h2 {
 form .comment-form {
   margin-left: 15px;
 }
+
