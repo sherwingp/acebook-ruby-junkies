@@ -19,8 +19,13 @@ class PostsController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @post = @user.posts.create(post_params)
-    flash[:notice] = "Messaged posted!  "
-    redirect_to posts_url
+    if @post.save
+      flash[:notice] = "Messaged posted!"
+      redirect_to posts_url
+    else 
+      flash[:alert] = "Something went wrong, please try again!"
+      redirect_to posts_url
+    end
   end
 
   def edit
@@ -31,12 +36,19 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params) if current_user.id == @post.user_id
-    redirect_to posts_path(@post, anchor: dom_id(@post))
+    if @post.save
+      flash[:notice] = "Edit successful!"
+      redirect_to posts_path(@post, anchor: dom_id(@post))
+    else
+      flash[:alert] = "Edit unsuccessful, please try again!"
+      redirect_to posts_url
+    end
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy if current_user.id == @post.user_id
+    flash[:notice] = "Message successfully deleted!"
     redirect_to posts_path
   end
 

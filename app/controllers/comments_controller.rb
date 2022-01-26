@@ -8,10 +8,11 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-
+      flash[:notice] = "Comment posted!"
       redirect_to posts_path(@post, anchor: dom_id(@post))
     else
-      flash.now[:danger] = 'error'
+      flash[:alert] = 'Error posting comment!'
+      redirect_to posts_path
     end
   end
 
@@ -22,12 +23,19 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update(comment_params)
-    redirect_to posts_path(@comment, anchor: dom_id(@comment))
+    if @comment.save 
+      flash[:notice] = "Successful comment edit!"
+      redirect_to posts_path(@comment, anchor: dom_id(@comment))
+    else 
+      flash[:alert] = "Error editing comment!"
+      redirect_to posts_path
+    end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy if current_user.id == @comment.user_id
+    flash[:notice] = "Comment deleted!"
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end
 
