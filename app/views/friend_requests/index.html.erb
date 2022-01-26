@@ -1,0 +1,16 @@
+<h1>This is our friend request index page</h1>
+
+<div>
+  <h2>Incoming friend requests</h2>
+    <% @requesters.each do |requester| %>
+      <p> <%= requester.name %> <%= requester.surname %></p>
+      <p> TODO: Accept button</p>
+      <p> TODO: Reject button</p>
+    <% end %>
+  <h2>Outcoming friend requests</h2>
+    <% @requestees.each do |requestee| %>
+      <p> <%= requestee.name %> <%= requestee.surname %></p>
+      <p> TODO: Accept button</p>
+      <p> TODO: Reject button</p>
+    <% end %>
+</div>

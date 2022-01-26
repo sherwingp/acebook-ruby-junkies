@@ -60,25 +60,28 @@
               </div>
               <%# likes %>
               <% if current_user %>
-              <div class="container is-flex  likes-section">
-                <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                <% if pre_like %>
-                  <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-                <% else %>
-                  <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-                <% end %>
-                <% if current_user && current_user.id == post.user_id %>
-                 <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-              
-                <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
-                <% end %>
+              <div class="container is-flex is-justify-content-space-between likes-section">
+                <div>
+                  <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                  <% if pre_like %>
+                    <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <% else %>
+                    <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <% end %>
+                </div>
+                <div class="is-flex">
+                  <% if current_user && current_user.id == post.user_id %>
+                  <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+                
+                  <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
+                  <% end %>
+                </div>
               </div>
               <% end %>
               <%# each comment displayed  %>
               <div class="comments-section p-3">
                 <% post.comments.each do |comment| %>
-                  <div class="container individual-comment mb-3 p-2">
-
+                  <div class="container individual-comment mb-3 p-2" id="<%= dom_id(comment) %>">
                     <div>
                       <p class="ml-4">
                         <strong>
@@ -101,19 +104,23 @@
                         </div>
                       <% end %>
                     </div>
-                    <div class="container is-flex  likes-section">
-                      <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
-                      <% if pre_like %>
-                        <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-unlike-btn" %>
-                      <% else %>
-                        <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-like-btn" %>
-                      <% end %>
-                      <% if current_user && current_user.id == comment.user_id %>
-                        <div id="comment-btns">
-                          <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
-                          <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
-                        </div>
-                      <% end %>
+                    <div class="container is-flex is-justify-content-space-between">
+                      <div>
+                        <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
+                        <% if pre_like %>
+                          <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-unlike-btn" %>
+                        <% else %>
+                          <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-like-btn" %>
+                        <% end %>
+                      </div>
+                      <div class="is-flex">
+                        <% if current_user && current_user.id == comment.user_id %>
+                          <div id="comment-btns">
+                            <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link is-light like-btn"%>
+                            <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger is-light like-btn"%>
+                          </div>
+                        <% end %>
+                      </div>
                     </div>
 
                   </div>
