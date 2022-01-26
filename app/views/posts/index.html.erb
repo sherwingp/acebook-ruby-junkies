@@ -41,7 +41,7 @@
                   <% if post.image.attached? %>
                     <%= image_tag post.image, class: "post-image"%>
                   <% end %>
-                  <% if post.likes.count != 0 %>
+                  <% if post.likes.length != 0 %>
                     <div class="container is-flex likes-count">
                       <p>
                         <i onclick="showNames(<%=post.id%>)" class="fas fa-thumbs-up show-likes"></i> 
@@ -59,6 +59,7 @@
                 </div>
               </div>
               <%# likes %>
+              <% if current_user %>
               <div class="container is-flex  likes-section">
                 <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
                 <% if pre_like %>
@@ -66,28 +67,59 @@
                 <% else %>
                   <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
                 <% end %>
+                <% if current_user && current_user.id == post.user_id %>
+                 <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+              
+                <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
+                <% end %>
               </div>
+              <% end %>
               <%# each comment displayed  %>
               <div class="comments-section p-3">
                 <% post.comments.each do |comment| %>
                   <div class="container individual-comment mb-3 p-2">
-                    <p class="ml-4">
-                      <strong>
-                        <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
-                      </strong>
-                    </p>
-                    <p class="ml-4">
-                      <%= comment.body %>
-                    </p>
-                    <% if comment.image.attached? %>
-                      <%= image_tag comment.image, class: "comment-image"%>
-                    <% end %>
+                    <div>
+                      <p class="ml-4">
+                        <strong>
+                          <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+                        </strong>
+                      </p>
+                      <p class="ml-4">
+                        <%= comment.body %>
+                      </p>
+                      <% if comment.image.attached? %>
+                        <%= image_tag comment.image, class: "comment-image"%>
+                      <% end %>
+                    </div>
+                    <div>
+                      <% if comment.likes.length != 0 %>
+                        <div class="container is-flex likes-count">
+                          <p>
+                            <i class="fas fa-thumbs-up"></i> <strong><%= comment.likes.length %></strong>
+                          </p>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="container is-flex  likes-section">
+                      <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
+                      <% if pre_like %>
+                        <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-unlike-btn" %>
+                      <% else %>
+                        <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-like-btn" %>
+                      <% end %>
+                      <% if current_user && current_user.id == comment.user_id %>
+                        <div id="comment-btns">
+                          <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
+                          <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                   <% end %>
                   <%# comment form %>
                   <div class="container is-flex comments-form pt-3">
                     <%= form_with(model: [ post, post.comments.build ], local: true) do |form| %>
-                      <%= form.hidden_field :user_id, value: current_user.id %>  
+                      <%#= form.hidden_field :user_id, value: current_user.id %>
                       <%= form.text_area :body, :placeholder => "Comment here ...", :class => "text-area-homepage" %>
                       <div class="container is-flex is-justify-content-space-around">
                         <%= form.file_field :image, class: "form-control" %>
