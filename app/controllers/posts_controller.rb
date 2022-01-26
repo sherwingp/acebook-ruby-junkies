@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @post = @user.posts.create(post_params)
+    flash[:notice] = "Messaged posted!  "
     redirect_to posts_url
   end
 

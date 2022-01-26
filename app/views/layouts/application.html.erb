@@ -66,14 +66,30 @@
     <% end %>
     <%# flash notice %>
     <% if notice %>
-    <div class="mt-2 is-flex is-justify-content-center" style="padding-bottom:1rem">
-      <p class="alert alert-success"><strong><%= notice %></strong></p>
+    <div class="container p-3 mb-3">
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-half">
+        <div class="mt-2 is-flex is-justify-content-center notification is-success is-light" style="padding-bottom:1rem">
+          <p class="alert alert-success"><strong><%= notice %></strong></p>
+        </div>
+      </div>
+      <div class="column"></div>
+    </div>
     </div>
       <% end %>
       <% if alert %>
-    <div class="mt-2 is-flex is-justify-content-center" style="padding-bottom:1rem">
-      <p class="alert alert-danger"><strong><%= alert %></strong></p>
-    </div>
+      <div class="container p-3 mb-3">
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column is-half">
+          <div class="mt-2 is-flex is-justify-content-center notification is-danger is-light" style="padding-bottom:1rem">
+            <p class="alert alert-danger"><strong><%= alert %></strong></p>
+          </div>
+        </div>
+        <div class="column"></div>
+      </div>
+      </div>
     <% end %>
     <%= yield %>
   </body>
