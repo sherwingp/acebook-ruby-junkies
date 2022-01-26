@@ -81,7 +81,7 @@
               <%# each comment displayed  %>
               <div class="comments-section p-3">
                 <% post.comments.each do |comment| %>
-                  <div class="container individual-comment mb-3 p-2">
+                  <div class="container individual-comment mb-3 p-2" id="<%= dom_id(comment) %>">
                     <div>
                       <p class="ml-4">
                         <strong>
