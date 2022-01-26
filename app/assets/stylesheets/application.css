@@ -170,7 +170,7 @@ body {
   font-weight: 500;
   border: 1px solid #62ecec;
 }
-.like-btn, .post-btn {
+.like-btn, .post-btn, .comment-like-btn, .comment-unlike-btn {
   width: 7em;
   height: 2.3em;
 }
@@ -247,3 +247,51 @@ h2 {
   border-radius: 10px;
   padding: 0.6em;
 }
+
+.hidden{
+  opacity: 0;
+}
+
+.show-likes{
+  cursor: pointer;
+ 
+}
+
+.show-likes:hover{
+  color: blue;
+}
+
+.show-like{
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.show-like-ul{
+  text-align: left;
+}
+
+#logo {
+  display: inline-block;
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.homepage-btn:hover{
+  transition: all 0.5s ease-out;
+  transform: scale(1.1);
+}
+
+/* edit and delete buttons in posts index */
+#comment-btns {
+  display: flex;
+}
+
+form .comment-form {
+  margin-left: 15px;
+}
+

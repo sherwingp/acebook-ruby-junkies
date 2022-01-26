@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments
+    resources :comments do
+      resources :likes
+    end
   end
 
   resources :posts do
