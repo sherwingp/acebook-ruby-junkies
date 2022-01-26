@@ -4,6 +4,9 @@
 </head>
 <div class="container p-2" style="background-color:white;width:18rem">
 <p><strong> User Profiles: </strong></p>
+<% if @profiles == ["No people match this search!"] %>
+<h1> No users matched this search! </h1>
+<% else %>
 <% @profiles.each do |profile| %>
   <div class="is-flex m-4">
   <%= link_to user_profile_path(profile.user_id) do %>
@@ -16,4 +19,8 @@
   <% end %>
   </div>
 <% end %>
+<%end%>
+</div>
+
+
 </div>

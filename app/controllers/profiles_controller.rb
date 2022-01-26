@@ -5,6 +5,43 @@ class ProfilesController < ApplicationController
 
   def index
     @profiles = Profile.all
+    if params[:search_by_name] != "" && params[:search_by_name] != nil
+      split_name = params[:search_by_name].split(" ")
+      @users_searched = User.where(name: split_name[0], surname: split_name[1])
+      if @users_searched.empty?
+        if User.where(name: split_name[0]).empty? && User.where(surname: split_name[-1]).empty?
+        return @profiles = ["No people match this search!"]
+        else
+            @users_searched_first_name  = User.where(name: split_name[0])
+            @ids = []
+            @users_searched_first_name.each do |user|
+              @ids << user.id
+            end
+            @users_searched_last_name  = User.where(surname: split_name[-1])
+            @users_searched_last_name.each do |user|
+              @ids << user.id
+            end
+            @ids.uniq
+          return @profiles = Profile.where(user_id: @ids)
+        end
+      else
+        @ids = []
+            @users_searched.each do |user|
+              @ids << user.id
+            end
+            @users_searched_first_name  = User.where(name: split_name[0])
+            @ids = []
+            @users_searched_first_name.each do |user|
+              @ids << user.id
+            end
+            @users_searched_last_name  = User.where(surname: split_name[-1])
+            @users_searched_last_name.each do |user|
+              @ids << user.id
+            end
+            @ids.uniq
+        return @profiles = Profile.where(user_id: @ids)
+      end
+    end
   end
 
   def edit
@@ -46,7 +83,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:about, :avatar)
+    params.require(:profile).permit(:about, :avatar, :name, :surname, :search, :profile_id)
   end
 
   def check_for_existing_profile
