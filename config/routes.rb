@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   get '/users/profiles', to: 'profiles#index'
   post '/users/:user_id/profile/new', to: 'profiles#create'
+  patch '/users/:user_id/profile/edit', to: 'profiles#update'
 
 
   resources :users do

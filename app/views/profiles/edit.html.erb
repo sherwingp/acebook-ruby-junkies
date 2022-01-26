@@ -18,7 +18,7 @@
     <div class="column create-post is-half" id='middle-column'>
       <h2><strong>Edit Profile</strong></h2>
       <div class="container is-fluid" id='form-container'>
-        <%= form_for @profile, url: user_profile_url(current_user.id) do |form| %>
+        <%= form_for @profile, url: edit_user_profile_url(current_user.id) do |form| %>
         <%= form.label :about, :class => 'message-img-labels' %>
         <div id="text-field" class="field">
           <div><%= form.text_area :about, placeholder: "About", :class => "text-area" %></div>

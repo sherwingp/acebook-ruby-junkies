@@ -7,15 +7,47 @@
   width: 100%;
   border: 1px solid black;
 }
-
 // .left-col {
 //   height: 100vh;
 // }
-.photo-box {
-  max-height: 100px;
-  height: 100%;
+#button-container {
+  display: flex;
+  justify-content: flex-end;
+  max-width: fit-content;
 }
-.p-image {
-  background-color: aquamarine;
-  padding: 1rem;
+.photo-box {
+  max-height: 250px;
+  height: 95%;
+  border: 1px dashed black;
+  display: flex;
+  padding: 0.5rem;
+  background-color: rgb(78, 226, 236);
+  min-width: 180px;
+}
+.post-img, .comment-img {
+  width: 9rem;
+  height: 6rem;
+  object-fit: cover;
+}
+#profile-name {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+#about {
+  max-height: 320px;
+  height: 95%;
+  max-width: 250px;
+  min-width: 180px;
+  width: 100%;
+  font-style: italic;
+  background-color: rgb(78, 226, 236);
+}
+#friend-box {
+  max-width: 595px;
+  width: 100%;
+  background-color: rgb(78, 226, 236);
+}
+.friend-container {
+  width: 6rem;
+  height: 5rem;
 }
