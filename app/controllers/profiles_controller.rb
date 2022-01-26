@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.where(:user_id => current_user.id).first
 
     if @profile.update(profile_params)
-      redirect_to user_profile_path(profile.user_id)
+      redirect_to user_profile_path
     else
       render :edit, status: :unprocessable_entity
     end

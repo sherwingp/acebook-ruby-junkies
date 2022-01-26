@@ -6,9 +6,11 @@
 <div id="main-container">
   <div class="columns p-2">
     <div class="column is-half left-col is-flex is-flex-direction-column is-align-items-center" style="background-color:white">
+        <% if @profile.first.id == current_user.id %>
         <div id="button-container">
           <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
+        <% end %>
         <% @user.profiles.each do |profile| %><br>
         <%# big image avatar/profile %>
         <figure class="image" id="profile-avatar">
@@ -24,18 +26,22 @@
           <div class="p-1 m-1" id="about" style="border:1px solid red">
             <%= profile.about %>
           </div>
-          <div class="container m-1 is-flex photo-box"> 
-          <% @posts_to_use.each do |post| %>
-          <%# all images used in post or comments %>
-            <% if post.image.attached? && (post.user_id == @user.id)%>
-              <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
-            <% end %>
-              <% post.comments.each do |comment| %>
-                <% if comment.image.attached? && (comment.user_id == @user.id) %>
-                  <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+          <div class="container m-1 is-flex is-flex-direction-column photo-box">
+          <p> Photos: </p>
+          <%# photo wrapper %>
+            <div class="is-flex">
+              <% @posts_to_use.each do |post| %>
+              <%# all images used in post or comments %>
+                <% if post.image.attached? && (post.user_id == @user.id)%>
+                  <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
                 <% end %>
-              <%end %>
-            <%end %>
+                  <% post.comments.each do |comment| %>
+                    <% if comment.image.attached? && (comment.user_id == @user.id) %>
+                      <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                    <% end %>
+                  <%end %>
+                <%end %>
+              </div>
           </div>
         </div>
 
