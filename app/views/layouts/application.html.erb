@@ -4,7 +4,6 @@
     <title>GemJunkies</title>
     <%= csrf_meta_tags %>
 
-    <%# <%= stylesheet_link_tag    'posts', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "application", async: true %>
@@ -48,11 +47,11 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <%# <%= link_to TODO: user's profile page do %>
+          <%#= link_to TODO: user's profile page do %>
           <% if user_signed_in?%>
           <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
           <p class='ml-1'><%= current_user.name%></p>
-          <%# <% end %><% end %>
+          <% end %>
         </div>
         <div class="navbar-item">
           <div class="buttons">
