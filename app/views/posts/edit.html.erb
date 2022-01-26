@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+
+<div class="container is-fluid">
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column create-post is-half" id='middle-column'>
+      <div>
+         <% if @post.image.attached? %>
+            <%= image_tag @post.image, class: "post-image"%>
+          <% end %>
+      </div>
+      <div class="container is-fluid" id='form-container'>
+        <%= form_for @post, method: :put do |form| %>
+        <%= form.label :message, :class => 'message-img-labels' %>
+        <div id="text-field" class="field">
+          <div><%= form.text_area :message,  :class => "text-area" %></div>
+        </div>
+
+        <%= form.label :Image, :class => 'message-img-labels' %>
+        <div class="form-group field">
+          <div class="p-0"><%= form.file_field :image, :class => "form-control" %></div>
+          </div>
+          <div id="post-btn-container">
+          <%= form.submit "Post", :class => "button is-rounded is-link" %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
+</div>

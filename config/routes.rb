@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   devise_scope :user do
     authenticated :user do
@@ -13,16 +15,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root "posts#index"
 
+  get '/posts', to: 'posts#index'
 
-    get "/posts", to: "posts#index"
-  
   resources :posts do
-    resources :comments
+    resources :comments do
+      resources :likes
+    end
   end
 
   resources :posts do
     resources :likes
   end
-
-
 end

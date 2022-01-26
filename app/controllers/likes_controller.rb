@@ -1,16 +1,24 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :find_post
-  before_action :find_like, only: [:destroy]
   include ActionView::RecordIdentifier
 
   def create
-    @post = Post.find(params[:post_id])
-    @post.likes.create(user_id: current_user.id) unless liked?
+    find_comment if params.key?("comment_id")
+    if params.key?("comment_id")
+      @comment.likes << Like.new(user_id: current_user.id) unless liked?(@comment)
+    else
+      @post.likes << Like.new(user_id: current_user.id) unless liked?(@post)
+    end
     redirect_to posts_path(@post, anchor: dom_id(@post))
   end
 
   def destroy
-    if !(liked?)
+    find_comment if params.key?("comment_id")
+    params.key?("comment_id") ? @likeable = @comment : @likeable = @post
+    @like = find_like(@likeable)
+    if !(liked?(@likeable))
       flash[:notice] = "Cannot unlike"
     else
       @like.destroy
@@ -20,15 +28,19 @@ class LikesController < ApplicationController
 
   private
 
-  def liked?
-    Like.where(user_id: current_user.id, post_id: params[:post_id]).exists?
-  end
-
   def find_post
     @post = Post.find(params[:post_id])
   end
 
-  def find_like
-    @like = @post.likes.find(params[:id])
+  def find_comment
+    @comment = Comment.find(params[:comment_id])
+  end
+
+  def liked?(likeable)
+    likeable.likes.any? { |post| post.user_id == current_user.id }
+  end
+  
+  def find_like(likeable)
+    @like = likeable.likes.find(params[:id])
  end
 end

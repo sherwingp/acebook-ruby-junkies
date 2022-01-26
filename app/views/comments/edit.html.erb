@@ -1,0 +1,18 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+	<div class="container is-flex comments-form pt-3">
+		<%= form_for([@post, @comment],  method: :put, local: true) do |form| %>
+			<%= form.hidden_field :user_id, value: current_user.id %>  
+			<%= form.text_area :body, :class => "text-area-homepage" %>
+				<div class="container is-flex is-justify-content-space-around">
+						<%= form.file_field :image, class: "form-control" %>
+						<%= form.submit "Comment", class: "mt-4 mb-4 mr-1 button is-rounded is-small comment-btn" %>
+				</div>
+		<% end %>
+		</div>
+
