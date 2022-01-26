@@ -71,6 +71,7 @@
       <div class="column"></div>
       <div class="column is-half">
         <div class="mt-2 is-flex is-justify-content-center notification is-success is-light" style="padding-bottom:1rem">
+          <button class="delete"></button>
           <p class="alert alert-success"><strong><%= notice %></strong></p>
         </div>
       </div>
@@ -84,6 +85,7 @@
         <div class="column"></div>
         <div class="column is-half">
           <div class="mt-2 is-flex is-justify-content-center notification is-danger is-light" style="padding-bottom:1rem">
+            <button class="delete"></button>
             <p class="alert alert-danger"><strong><%= alert %></strong></p>
           </div>
         </div>
@@ -92,5 +94,17 @@
       </div>
     <% end %>
     <%= yield %>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+          const $notification = $delete.parentNode;
+
+          $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+          });
+        });
+      });
+      </script>
   </body>
 </html>
+
