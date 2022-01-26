@@ -115,24 +115,26 @@ RSpec.feature 'View Profile', type: :feature do
     click_button "Post"
     click_on 'Sign Out'
   
-    visit '/users/sign_up'
-    fill_in 'user[name]', with: 'Kitty'
-    fill_in 'user[surname]', with: 'TheCat'
-    fill_in 'user[email]', with: 'test@test.com'
-    fill_in 'user[password]', with: '123456'
-    fill_in 'user[password_confirmation]', with: '123456'
-    click_button 'Sign up'
-    expect(page).to have_content('Create Profile')
-    fill_in 'profile_about', with: 'Im a cat!'
+      visit "/users/sign_up"
+      fill_in "user[name]", with: "John"
+      fill_in "user[surname]", with: "Doe"
+      fill_in "user[email]", with: "test@test.com"
+      fill_in "user[password]", with: "123456"
+      fill_in "user[password_confirmation]", with: "123456"
+      click_button "Sign up"
+      expect(page).to have_content('Create Profile')
+    fill_in 'profile_about', with: 'Im John!'
     click_button 'Create Profile'
-
-    visit '/'
-    fill_in 'comment[body]', with: 'A comment!'
-    fill_in 'comment[body]', with: 'A comment!'
-    click_button 'Create Comment'
-    click_on 'Gem Junkies Default Avatar'
-    expect(page).to have_content('Hello, world!')
-    expect(page).to_have content('A comment!')
+      visit '/posts'
+      fill_in "comment[body]", with: "A comment!"
+      click_button "Comment"
+      visit '/posts'
+      expect(page).to have_content('A comment!')
+      
+      visit '/users/profiles'
+      expect(page).to have_content('User Profiles')
+      click_on 'John Doe'
+      expect(page).to have_content('A comment!')
   end
 
 
