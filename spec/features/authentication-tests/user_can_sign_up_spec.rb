@@ -13,6 +13,6 @@ RSpec.feature 'Signing up', type: :feature do
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Sign up'
 
-    expect(page).to have_content('GemJunkies Welcome! You have signed up successfully. John Sign Out')
+    expect(page).to have_content('Welcome! You have signed up successfully.')
   end
 end

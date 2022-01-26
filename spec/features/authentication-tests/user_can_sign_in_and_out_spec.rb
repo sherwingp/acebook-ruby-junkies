@@ -19,6 +19,6 @@ RSpec.feature 'Signing in and out', type: :feature do
     fill_in 'user[password]', with: '123456'
     click_button 'Log in'
 
-    expect(page).to have_content('GemJunkies Signed in successfully. John Sign Out')
+    expect(page).to have_content('Signed in successfully.')
   end
 end
