@@ -12,10 +12,13 @@ RSpec.feature 'Timeline', type: :feature do
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Sign up'
 
+    fill_in 'profile_about', with: 'Im a dog!'
+    click_button 'Create Profile'
+
     visit '/posts'
     # click_link "What's on your mind?"
     fill_in 'post[message]', with: 'Hello, world!'
-    click_button 'Create Post'
+    click_button 'Post'
     expect(page).to have_content('Hello, world!')
     # Database has username as name
     expect(page).to have_content('John Doe')
@@ -29,12 +32,15 @@ RSpec.feature 'Timeline', type: :feature do
     fill_in 'user[password]', with: '123456'
     fill_in 'user[password_confirmation]', with: '123456'
     click_button 'Sign up'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+    
 
     visit '/posts'
     fill_in 'post[message]', with: 'Hello, world!'
     attach_file('post[image]',
                 File.join(Rails.root, '/spec/feature_test_image1.jpeg'), visible: false)
-    click_button 'Create Post'
+    click_button 'Post'
     expect(page).to have_css("img[src*='/feature_test_image1.jpeg']")
   end
 end

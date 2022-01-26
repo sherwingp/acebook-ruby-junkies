@@ -16,7 +16,7 @@ RSpec.feature 'Post content', type: :feature do
     fill_in 'post[message]', with: 'Meow!'
     attach_file('post[image]',
                 File.join(Rails.root, '/spec/feature_test_image1.jpeg'), visible: false)
-    click_button 'Create Post'
+    click_button 'Post'
   end
 
   scenario 'it displays the post details' do
@@ -28,10 +28,10 @@ RSpec.feature 'Post content', type: :feature do
 
   scenario 'posts appear with the newest post first' do
     fill_in 'post[message]', with: 'First Post!'
-    click_button 'Create Post'
+    click_button 'Post'
 
     fill_in 'post[message]', with: 'Second Post!'
-    click_button 'Create Post'
+    click_button 'Post'
 
     # page.body.index('This').should < page.body.index('That')
     # puts (page.body.index("post_2") < page.body.index("post_1"))

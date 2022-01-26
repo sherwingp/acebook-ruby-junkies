@@ -94,5 +94,46 @@ RSpec.feature 'View Profile', type: :feature do
     click_on 'Kit TheDog'
     expect(page).to have_content('Im a dog!')
     expect(page).to have_content('Bark!')
-  end 
+  end
+
+  scenario 'Upon clicking, shows the details of their profile and posts including comments' do
+    visit '/users/sign_up'
+    fill_in 'user[name]', with: 'Kit'
+    fill_in 'user[surname]', with: 'TheDog'
+    fill_in 'user[email]', with: 'testing@test.com'
+    fill_in 'user[password]', with: '123456'
+    fill_in 'user[password_confirmation]', with: '123456'
+    click_button 'Sign up'
+    expect(page).to have_content('Create Profile')
+    fill_in 'profile_about', with: 'Im a dog!'
+    click_button 'Create Profile'
+    visit '/posts'
+
+    fill_in 'post[message]', with: 'Hello, world!'
+    click_on 'Post'
+    visit '/posts'
+    expect(page).to have_content('Hello, world!')
+    click_on 'Sign Out'
+  
+    visit '/users/sign_up'
+    fill_in 'user[name]', with: 'Kitty'
+    fill_in 'user[surname]', with: 'TheCat'
+    fill_in 'user[email]', with: 'test@test.com'
+    fill_in 'user[password]', with: '123456'
+    fill_in 'user[password_confirmation]', with: '123456'
+    click_button 'Sign up'
+    expect(page).to have_content('Create Profile')
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
+    visit '/'
+    fill_in 'comment[body]', with: 'A comment!'
+    fill_in 'comment[body]', with: 'A comment!'
+    click_button 'Create Comment'
+    click_on 'Gem Junkies Default Avatar'
+    expect(page).to have_content('Hello, world!')
+    expect(page).to_have content('A comment!')
+  end
+
+
 end
