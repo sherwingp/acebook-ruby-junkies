@@ -44,8 +44,16 @@
                   <% if post.likes.length != 0 %>
                     <div class="container is-flex likes-count">
                       <p>
-                        <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.length %></strong>
+                        <i onclick="showNames(<%=post.id%>)" class="fas fa-thumbs-up show-likes"></i> 
+                        <strong><%= post.likes.count %></strong>
                       </p>
+                    </div>
+                     <div class='show-like' id="show-like-<%= post.id %>" hidden>
+                         <ul class='show-like-ul'>
+                        <% post.likes.each do |like| %>
+                          <li> <small> <%= "#{User.find(like.user_id).name} #{User.find(like.user_id).surname}" %> </small>  </li>
+                        <% end %>
+                         </ul>
                     </div>
                   <% end %>
                 </div>
@@ -127,3 +135,11 @@
     <div class="column"></div>
   </div>
 </div>
+
+<script>
+
+let showNames = (id) =>{
+  document.querySelector(`#show-like-${id}`).toggleAttribute("hidden")
+}
+
+</script>

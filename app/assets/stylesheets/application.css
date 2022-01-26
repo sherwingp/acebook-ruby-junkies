@@ -248,6 +248,28 @@ h2 {
   padding: 0.6em;
 }
 
+.hidden{
+  opacity: 0;
+}
+
+.show-likes{
+  cursor: pointer;
+ 
+}
+
+.show-likes:hover{
+  color: blue;
+}
+
+.show-like{
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.show-like-ul{
+  text-align: left;
+}
+
 #logo {
   display: inline-block;
   animation: rotation 5s infinite linear;
