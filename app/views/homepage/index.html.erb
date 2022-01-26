@@ -2,15 +2,15 @@
      <%= stylesheet_link_tag    'application', media: 'all' %>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
      <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
   <body style="background-image: none">
     <div class="container is-fluid is-flex is-justify-content-center" id="homepage-container">
       <div class="buttons">
-      <button class="button is-primary is-light is-rounded"><%= link_to "Login", new_user_session_path %></button>
+      <button class="button is-primary is-light is-rounded homepage-btn"><%= link_to "Login", new_user_session_path %></button>
       
-      <button class="button is-primary is-light is-rounded ml-6"><%= link_to "Sign Up", new_user_registration_path %></button>
+      <button class="button is-primary is-light is-rounded ml-6 homepage-btn"><%= link_to "Sign Up", new_user_registration_path %></button>
       </div>
     </div>
 
