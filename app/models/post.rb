@@ -8,4 +8,5 @@ class Post < ApplicationRecord
   validates :message, presence: true, length: { minimum: 1 }
 
   has_many :likes, dependent: :destroy
+
 end

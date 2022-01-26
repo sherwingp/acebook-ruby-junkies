@@ -2,6 +2,10 @@
 
 class PostsController < ApplicationController
   def index
+    # This will force a redirect if the user has not created a profile - however this will break quite a lot of tests! Please add and then fix the tests by creating a profile after signing up 
+    # unless current_user.profiles.exists?
+    #   redirect_to '/'
+    # end
     @posts = Post.all.order('created_at DESC')
   end
 
