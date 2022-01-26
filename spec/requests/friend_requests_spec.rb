@@ -25,7 +25,16 @@ RSpec.describe "FriendRequests", type: :request do
     end
   end
 
-  
+  describe "PATCH /" do
+    it "accepts a friend request" do
+      post friend_requests_url, :params => {:friend_id => @user2.id}
+      sign_out @user1
+      sign_in @user2
+      @friend_request_id = @user1.friend_requests.first.id
+      patch "/friend_requests/#{@friend_request_id}"
+      expect(response).to have_http_status(204)
+    end
+  end
 
   describe "DELETE /" do
     it "can delete a friend request" do
