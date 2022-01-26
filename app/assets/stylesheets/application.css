@@ -263,3 +263,13 @@ h2 {
   transition: all 0.5s ease-out;
   transform: scale(1.1);
 }
+
+/* edit and delete buttons in posts index */
+#comment-btns {
+  display: flex;
+}
+
+form .comment-form {
+  margin-left: 15px;
+}
+
