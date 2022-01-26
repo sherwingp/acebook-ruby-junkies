@@ -127,5 +127,5 @@ ActiveRecord::Schema.define(version: 2022_01_25_155902) do
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "profiles", "users", column: "user_id"
+  add_foreign_key "profiles", "users"
 end
