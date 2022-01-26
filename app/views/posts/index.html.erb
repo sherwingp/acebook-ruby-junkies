@@ -41,10 +41,10 @@
                   <% if post.image.attached? %>
                     <%= image_tag post.image, class: "post-image"%>
                   <% end %>
-                  <% if post.likes.count != 0 %>
+                  <% if post.likes.length != 0 %>
                     <div class="container is-flex likes-count">
                       <p>
-                        <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.count %></strong>
+                        <i class="fas fa-thumbs-up"></i> <strong><%= post.likes.length %></strong>
                       </p>
                     </div>
                   <% end %>
@@ -70,23 +70,42 @@
               <div class="comments-section p-3">
                 <% post.comments.each do |comment| %>
                   <div class="container individual-comment mb-3 p-2">
-                    <p class="ml-4">
-                      <strong>
-                        <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
-                      </strong>
-                    </p>
-                    <p class="ml-4">
-                      <%= comment.body %>
-                    </p>
-                    <% if comment.image.attached? %>
-                      <%= image_tag comment.image, class: "comment-image"%>
-                    <% end %>
-                    <% if current_user && current_user.id == comment.user_id %>
-                      <div id="comment-btns">
-                        <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
-                        <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
-                      </div>
-                    <% end %>
+                    <div>
+                      <p class="ml-4">
+                        <strong>
+                          <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+                        </strong>
+                      </p>
+                      <p class="ml-4">
+                        <%= comment.body %>
+                      </p>
+                      <% if comment.image.attached? %>
+                        <%= image_tag comment.image, class: "comment-image"%>
+                      <% end %>
+                    </div>
+                    <div>
+                      <% if comment.likes.length != 0 %>
+                        <div class="container is-flex likes-count">
+                          <p>
+                            <i class="fas fa-thumbs-up"></i> <strong><%= comment.likes.length %></strong>
+                          </p>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="container is-flex  likes-section">
+                      <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
+                      <% if pre_like %>
+                        <%= button_to 'Unlike', post_comment_like_path(comment_id: comment.id, post_id: post.id, id: pre_like.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-unlike-btn" %>
+                      <% else %>
+                        <%= button_to 'Like', post_comment_likes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link comment-like-btn" %>
+                      <% end %>
+                      <% if current_user && current_user.id == comment.user_id %>
+                        <div id="comment-btns">
+                          <%= button_to "Edit", edit_post_comment_path(post, comment), method: 'get', class: "edit-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn"%>
+                          <%= button_to "Delete", post_comment_path(post, comment), method: 'delete', class: "dlt-comment-btn comment-form mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn"%>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                   <% end %>
                   <%# comment form %>
