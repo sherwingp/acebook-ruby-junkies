@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 
       redirect_to posts_path(@post, anchor: dom_id(@post))
     else
-      flash.now[:danger] = "error"
+      flash.now[:danger] = 'error'
     end
   end
 
@@ -34,15 +34,15 @@ class CommentsController < ApplicationController
 
   private
 
-    def set_post
-      @post = Post.find(params[:post_id])
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
 
-   def set_user
-      @user = User.find(current_user.id)
-   end
+  def set_user
+    @user = User.find(current_user.id)
+  end
 
-   def comment_params
-     params[:comment].permit(:body, :image)
-   end
+  def comment_params
+    params[:comment].permit(:body, :image)
+  end
 end

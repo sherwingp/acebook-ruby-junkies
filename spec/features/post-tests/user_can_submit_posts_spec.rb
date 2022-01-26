@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative "../../helpers/sign_up_helper_spec.rb"
 

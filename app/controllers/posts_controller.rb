@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
@@ -6,9 +8,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if params[:id] != "new"
-      @post = Post.find(params[:id])
-    end
+    @post = Post.find(params[:id]) if params[:id] != 'new'
   end
 
   def new

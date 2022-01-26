@@ -52,17 +52,15 @@ body {
 /* posts */
 /* TODO: move into separate css file */
 
+#new-post {
+  background-color: white;
+  padding: 0;
+}
 #post-section {
   background-color: #d0f4de;
   position: -webkit-sticky;
   position: sticky;
   top: 3.3rem;
-  margin-top: 1.2rem;
-}
-
-#new-post {
-  background-color: white;
-  padding: 0;
 }
 #post-link {
   background-color: rgb(213, 221, 228);
@@ -70,14 +68,6 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0.75rem 0.5rem 0 0.5rem;
-}
-
-#avatar {
-  background-image: url('GemJunkiesDefaultAvatar.png');
-  background-size: cover;
-  width: 3rem;
-  height: 3rem;
-  margin-right: 0.6rem;
 }
 
 #post-container {
