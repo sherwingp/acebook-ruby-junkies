@@ -4,8 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Like, type: :model do
   it('create a valid like') do
-    like = Like.create(user_id: 1, post_id: 1)
-    expect(like.user_id).to be 1
+    expect(subject).to be_instance_of(Like)
   end
 
   it('reject an invalid like') do
