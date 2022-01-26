@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @posts = Post.all.order('created_at DESC')
   end
@@ -15,24 +17,30 @@ class PostsController < ApplicationController
 
   def create
     @user = User.find(current_user.id)
-    # @post = Post.create(post_params)
     @post = @user.posts.create(post_params)
     redirect_to posts_url
   end
 
-  #   def show
-  #     @post = Post.find(params[:id])
-  #   end
+  def edit
+    @post = Post.find(params[:id])
+    redirect_to posts_path if current_user.id != @post.user_id
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.update(post_params) if current_user.id == @post.user_id
+    redirect_to posts_path
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy if current_user.id == @post.user_id
+    redirect_to posts_path
+  end
 
   private
 
   def post_params
-    # unless Rails.env.test?
-    #   path = post_params[:image].tempfile.path
-    #   ImageProcessing::MiniMagick.source(path)
-    #     .resize_to_limit(400, 400)
-    #     .call(destination: path)
-    # end
-    params.require(:post).permit(:message, :image)
+    params.require(:post).permit(:message,:image)
   end
 end

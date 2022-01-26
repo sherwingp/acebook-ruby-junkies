@@ -247,3 +247,12 @@ h2 {
   border-radius: 10px;
   padding: 0.6em;
 }
+
+/* edit and delete buttons in posts index */
+#comment-btns {
+  display: flex;
+}
+
+form .comment-form {
+  margin-left: 15px;
+}
