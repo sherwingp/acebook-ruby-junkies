@@ -6,6 +6,7 @@
   max-width: 300px;
   width: 100%;
   border: 1px solid black;
+  border-radius:20px;
 }
 .photo-box {
   border: 1px dashed black;
@@ -13,6 +14,7 @@
   padding: 0.5rem;
   background-color: rgb(78, 226, 236);
   min-width: 180px;
+  border-radius:20px;
 }
 .post-img, .comment-img {
   width: 9rem;
@@ -29,11 +31,13 @@
   width: 100%;
   font-style: italic;
   background-color: rgb(78, 226, 236);
+  border-radius:20px;
 }
 #friend-box {
   max-width: 595px;
   width: 100%;
   background-color: rgb(78, 226, 236);
+  border-radius:20px;
 }
 .friend-container {
   width: 6rem;

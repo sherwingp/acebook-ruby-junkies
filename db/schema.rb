@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_141424) do
     t.text "about"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_profiles_on_users_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,5 +108,5 @@ ActiveRecord::Schema.define(version: 2022_01_24_141424) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "profiles", "users", column: "users_id"
+  add_foreign_key "profiles", "users", column: "user_id"
 end

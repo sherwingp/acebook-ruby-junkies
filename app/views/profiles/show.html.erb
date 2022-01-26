@@ -5,7 +5,7 @@
 
 <div id="main-container">
   <div class="columns p-2 wrapper is-flex">
-    <div class="column is-half" style="background-color:white;overflow:scroll">
+    <div class="column is-half" style="background-color:white;overflow:scroll;border-radius:100px">
       <%# edit button %>
         <% if @user.profiles.first[:user_id] == current_user.id %>
         <div class="is-flex is-justify-content-flex-end">
@@ -22,7 +22,7 @@
               <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
             <% end %>
           </figure>
-          <p id="profile-name"><strong><%= @user.name %></strong></p>
+          <p id="profile-name"><strong><%= @user.name + " " + @user.surname %></strong></p>
           <div class="is-flex m-4" id="about-photo-box-c">
           <%# about section %>
             <div class="p-1 m-1 is-flex is-flex-direction-column is-align-items-center" id="about">
@@ -49,6 +49,7 @@
           </div>
 
           <div class="is-flex p-2" id="friend-box"> 
+          <h1> Friends </h1>
           <% @user.friends.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_user) %>
@@ -71,7 +72,7 @@
         </div>
       </div>
 
-      <div class="column is-half p-2" style="overflow:scroll">
+      <div class="column is-half p-2" style="overflow:scroll; border-radius:100px">
         <% @posts_to_use.each do |post| %>
           <%= content_tag :div, id: dom_id(post) do %>
         <div class="container p-5" id="post-container">
