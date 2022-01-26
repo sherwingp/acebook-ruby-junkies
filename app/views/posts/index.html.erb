@@ -60,18 +60,22 @@
               </div>
               <%# likes %>
               <% if current_user %>
-              <div class="container is-flex  likes-section">
-                <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                <% if pre_like %>
-                  <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-                <% else %>
-                  <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-                <% end %>
-                <% if current_user && current_user.id == post.user_id %>
-                 <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
-              
-                <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
-                <% end %>
+              <div class="container is-flex is-justify-content-space-between likes-section">
+                <div>
+                  <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                  <% if pre_like %>
+                    <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <% else %>
+                    <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <% end %>
+                </div>
+                <div class="is-flex">
+                  <% if current_user && current_user.id == post.user_id %>
+                  <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>
+                
+                  <%= button_to 'Delete', post_path(post), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
+                  <% end %>
+                </div>
               </div>
               <% end %>
               <%# each comment displayed  %>
