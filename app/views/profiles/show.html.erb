@@ -110,7 +110,7 @@
                 <%= comment.body %>
               </p>
               <% if comment.image.attached? %>
-                <%= image_tag comment.image, class: "comment-image"%>
+                <figure class="p-4"><%= image_tag comment.image, class: "comment-image"%></figure>
               <% end %>
             </div>
             <% end %>
