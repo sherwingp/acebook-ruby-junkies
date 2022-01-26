@@ -4,7 +4,6 @@
     <title>GemJunkies</title>
     <%= csrf_meta_tags %>
 
-    <%# <%= stylesheet_link_tag    'posts', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "application", async: true %>
@@ -48,11 +47,11 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <%# <%= link_to TODO: user's profile page do %>
+          <%#= link_to TODO: user's profile page do %>
           <% if user_signed_in?%>
           <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
           <p class='ml-1'><%= current_user.name%></p>
-          <%# <% end %><% end %>
+          <% end %>
         </div>
         <div class="navbar-item">
           <div class="buttons">
@@ -67,15 +66,45 @@
     <% end %>
     <%# flash notice %>
     <% if notice %>
-    <div class="mt-2 is-flex is-justify-content-center" style="padding-bottom:1rem">
-      <p class="alert alert-success"><strong><%= notice %></strong></p>
+    <div class="container p-3 mb-3">
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-half">
+        <div class="mt-2 is-flex is-justify-content-center notification is-success is-light" style="padding-bottom:1rem">
+          <button class="delete"></button>
+          <p class="alert alert-success"><strong><%= notice %></strong></p>
+        </div>
+      </div>
+      <div class="column"></div>
+    </div>
     </div>
       <% end %>
       <% if alert %>
-    <div class="mt-2 is-flex is-justify-content-center" style="padding-bottom:1rem">
-      <p class="alert alert-danger"><strong><%= alert %></strong></p>
-    </div>
+      <div class="container p-3 mb-3">
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column is-half">
+          <div class="mt-2 is-flex is-justify-content-center notification is-danger is-light" style="padding-bottom:1rem">
+            <button class="delete"></button>
+            <p class="alert alert-danger"><strong><%= alert %></strong></p>
+          </div>
+        </div>
+        <div class="column"></div>
+      </div>
+      </div>
     <% end %>
     <%= yield %>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+          const $notification = $delete.parentNode;
+
+          $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+          });
+        });
+      });
+      </script>
   </body>
 </html>
+
