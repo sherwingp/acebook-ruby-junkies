@@ -60,22 +60,22 @@ RSpec.feature 'View Profile', type: :feature do
   end
 
   scenario 'Upon clicking, shows the details of their profile and posts' do
-    visit '/users/sign_up'
-    fill_in 'user[name]', with: 'Kit'
-    fill_in 'user[surname]', with: 'TheDog'
-    fill_in 'user[email]', with: 'testing@test.com'
-    fill_in 'user[password]', with: '123456'
-    fill_in 'user[password_confirmation]', with: '123456'
-    click_button 'Sign up'
+    visit "/users/sign_up"
+		fill_in "user[name]", with: "Kit"
+		fill_in "user[surname]", with: "TheDog"
+    fill_in "user[email]", with: "testing@test.com"
+		fill_in "user[password]", with: "123456"
+		fill_in "user[password_confirmation]", with: "123456"
+    click_button "Sign up"
     expect(page).to have_content('Create Profile')
     fill_in 'profile_about', with: 'Im a dog!'
     click_button 'Create Profile'
-    visit '/posts'
-
-    fill_in 'post[message]', with: 'Hello, world!'
-    click_on 'Post'
-    visit '/posts'
-    expect(page).to have_content('Hello, world!')
+		
+    visit "/posts/new"
+    fill_in "post[message]", with: "Meow!"
+    attach_file('post[image]',
+                File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
+    click_button "Post"
     click_on 'Sign Out'
 
     visit '/users/sign_up'
@@ -93,26 +93,26 @@ RSpec.feature 'View Profile', type: :feature do
     expect(page).to have_content('User Profiles')
     click_on 'Kit TheDog'
     expect(page).to have_content('Im a dog!')
-    expect(page).to have_content('Bark!')
+    expect(page).to have_content('Meow!')
   end
 
   scenario 'Upon clicking, shows the details of their profile and posts including comments' do
-    visit '/users/sign_up'
-    fill_in 'user[name]', with: 'Kit'
-    fill_in 'user[surname]', with: 'TheDog'
-    fill_in 'user[email]', with: 'testing@test.com'
-    fill_in 'user[password]', with: '123456'
-    fill_in 'user[password_confirmation]', with: '123456'
-    click_button 'Sign up'
+    visit "/users/sign_up"
+		fill_in "user[name]", with: "Kit"
+		fill_in "user[surname]", with: "Thedog"
+    fill_in "user[email]", with: "testing@test.com"
+		fill_in "user[password]", with: "123456"
+		fill_in "user[password_confirmation]", with: "123456"
+    click_button "Sign up"
     expect(page).to have_content('Create Profile')
     fill_in 'profile_about', with: 'Im a dog!'
     click_button 'Create Profile'
-    visit '/posts'
-
-    fill_in 'post[message]', with: 'Hello, world!'
-    click_on 'Post'
-    visit '/posts'
-    expect(page).to have_content('Hello, world!')
+		
+    visit "/posts/new"
+    fill_in "post[message]", with: "Meow!"
+    attach_file('post[image]',
+                File.join(Rails.root, '/spec/feature_test_image1.jpeg'), :visible => false)
+    click_button "Post"
     click_on 'Sign Out'
   
     visit '/users/sign_up'
