@@ -7,5 +7,6 @@ class Post < ApplicationRecord
 
   validates :message, presence: true, if: -> { image.blank? }
 
-  has_many :likes, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
+
 end

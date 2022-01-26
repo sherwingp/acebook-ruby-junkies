@@ -6,4 +6,6 @@ class Comment < ApplicationRecord
   has_one_attached :image, dependent: :destroy, service: :local
 
   validates :body, presence: true, if: -> { image.blank? }
+
+  has_many :likes, as: :likeable, dependent: :destroy
 end

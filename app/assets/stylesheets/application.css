@@ -170,7 +170,7 @@ body {
   font-weight: 500;
   border: 1px solid #62ecec;
 }
-.like-btn, .post-btn {
+.like-btn, .post-btn, .comment-like-btn, .comment-unlike-btn {
   width: 7em;
   height: 2.3em;
 }
