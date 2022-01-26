@@ -16,6 +16,11 @@ class FriendRequestsController < ApplicationController
       render json: @friend_request.errors, status: :unprocessable_entity
     end
   end
+
+  def update
+    @friend_request.accept
+    head :no_content
+  end
   
   def destroy
     @friend_request.destroy

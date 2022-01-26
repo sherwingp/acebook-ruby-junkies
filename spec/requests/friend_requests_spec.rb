@@ -25,6 +25,8 @@ RSpec.describe "FriendRequests", type: :request do
     end
   end
 
+  
+
   describe "DELETE /" do
     it "can delete a friend request" do
       post friend_requests_url, :params => {:friend_id => @user2.id}
