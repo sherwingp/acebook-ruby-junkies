@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get '/posts', to: 'posts#index'
   
   resources :posts do
-    resources :comments
+    resources :comments do
+      resources :likes
+    end
   end
   
   resources :posts do

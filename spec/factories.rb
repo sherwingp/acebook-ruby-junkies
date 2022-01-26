@@ -38,4 +38,10 @@ FactoryBot.define do
     # if needed
     # is_active true
   end
+
+  factory :comment do
+    association :user, :post
+    body { 'test comment' }
+
+  end
 end
