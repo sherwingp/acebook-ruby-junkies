@@ -7,17 +7,7 @@
   width: 100%;
   border: 1px solid black;
 }
-// .left-col {
-//   height: 100vh;
-// }
-#button-container {
-  display: flex;
-  justify-content: flex-end;
-  max-width: fit-content;
-}
 .photo-box {
-  max-height: 250px;
-  height: 95%;
   border: 1px dashed black;
   display: flex;
   padding: 0.5rem;
@@ -34,8 +24,6 @@
   margin-bottom: 1rem;
 }
 #about {
-  max-height: 320px;
-  height: 95%;
   max-width: 250px;
   min-width: 180px;
   width: 100%;
@@ -50,4 +38,16 @@
 .friend-container {
   width: 6rem;
   height: 5rem;
+}
+.wrapper {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@media (max-width: 750px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 }
