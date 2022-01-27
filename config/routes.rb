@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
 
   resources :users do
+    resource :notifications
     resource :profile
   end
 
