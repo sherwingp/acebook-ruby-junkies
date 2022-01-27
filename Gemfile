@@ -35,6 +35,10 @@ gem 'jbuilder', '~> 2.5'
 # Devise for authentication
 gem 'devise'
 
+# OmniAuth for Facebook login
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
+
 # FactoryBot for tests
 gem 'factory_bot'
 
