@@ -49,6 +49,7 @@
               <i class="fas fa-users"></i>
             <% end %>
           </div>
+
           <%# <div class="navbar-item"> %>
             <%# <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
           <%# </div> %>
@@ -84,6 +85,15 @@
             <% end %>
           <% end %>
         </div>
+        
+          <div class="navbar-item">
+            <%= link_to user_notifications_path(current_user.id) do %>
+              <span class="fa-stack fa-3x" data-count=<%= @notification_count %>>
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+              </span>
+            <% end %>
+          </div>
         
         <div class="navbar-item">
         <% if (current_user.profiles.exists?)%>
