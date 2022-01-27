@@ -12,7 +12,7 @@ class FriendsController < ApplicationController
 
   def destroy
     current_user.friends.destroy(@friend)
-    head :no_content
+    redirect_to users_profiles_path
   end
 
   private

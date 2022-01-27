@@ -16,6 +16,41 @@
       <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", class: "image is-32x32 is-rounded") %>
     <% end %>
     <%= User.find(profile.user_id).name + " " + User.find(profile.user_id).surname %>
+
+    <% @profiles_friends = User.find(profile.user_id).friends %>
+      <% we_are_friends = false %>
+      <% @profiles_friends.each do |friend| %>
+        <% if friend.id == current_user.id %>
+        <% we_are_friends = true %>
+        <% end %>
+        <% end %>
+
+      <% @outgoing = current_user.friend_requests%>
+      <% friend_request_sent = false %>
+      <% @outgoing.each do |request| %>
+        <% if request.friend_id == profile.user_id %>
+        <% friend_request_sent = true %>
+        <% end %>
+        <% end %>
+
+        <% friend_request_pending = FriendRequest.where(friend: current_user.id, user: profile.user_id) %>
+
+        <% if !(friend_request_pending.blank?) && current_user.id != profile.user_id %>
+          <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
+
+        <% elsif (we_are_friends != true && friend_request_sent != true && profile.user_id != current_user.id) %>
+        <div class="is-flex is-justify-content-flex-end">
+        <%= form_for FriendRequest.new, url: friend_requests_path(:friend_id => profile.user_id, :user_id => current_user.id) do |form| %>
+          <%= form.submit "Add Friend", :class => "button is-rounded is-link" %></div>
+          <% end %>
+
+        <%elsif friend_request_sent == true  %>
+        <h1> Friend request already sent! </h1>
+
+        <% elsif we_are_friends == true %>
+        <h1> Friends </h1>
+        <% end %>
+
   <% end %>
   </div>
 <% end %>

@@ -7,17 +7,17 @@ class ProfilesController < ApplicationController
     @profiles = Profile.all
     if params[:search_by_name] != "" && params[:search_by_name] != nil
       split_name = params[:search_by_name].split(" ")
-      @users_searched = User.where(name: split_name[0], surname: split_name[1])
+      @users_searched = User.where('lower(name) = ?', split_name[0].downcase) && User.where('lower(surname) = ?', split_name[-1].downcase)
       if @users_searched.empty?
-        if User.where(name: split_name[0]).empty? && User.where(surname: split_name[-1]).empty?
+        if User.where('lower(name) = ?', split_name[0].downcase).empty? && User.where('lower(surname) = ?', split_name[-1].downcase).empty?
         return @profiles = ["No people match this search!"]
         else
-            @users_searched_first_name  = User.where(name: split_name[0])
+            @users_searched_first_name  = User.where('lower(name) = ?', split_name[0].downcase)
             @ids = []
             @users_searched_first_name.each do |user|
               @ids << user.id
             end
-            @users_searched_last_name  = User.where(surname: split_name[-1])
+            @users_searched_last_name  = User.where('lower(surname) = ?', split_name[-1].downcase)
             @users_searched_last_name.each do |user|
               @ids << user.id
             end
@@ -29,12 +29,12 @@ class ProfilesController < ApplicationController
             @users_searched.each do |user|
               @ids << user.id
             end
-            @users_searched_first_name  = User.where(name: split_name[0])
+            @users_searched_first_name  = User.where('lower(name) = ?', split_name[0].downcase)
             @ids = []
             @users_searched_first_name.each do |user|
               @ids << user.id
             end
-            @users_searched_last_name  = User.where(surname: split_name[-1])
+            @users_searched_last_name  = User.where('lower(surname) = ?', split_name[-1].downcase)
             @users_searched_last_name.each do |user|
               @ids << user.id
             end
@@ -68,6 +68,24 @@ class ProfilesController < ApplicationController
     @comments = Comment.where(:user_id => @user.id)
     @comments.each do |comment| @post_ids << comment.post_id end
     @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number }))
+
+    @profiles_friends = User.find(@user.profiles.first[:user_id]).friends
+    @we_are_friends = false 
+    @profiles_friends.each do |friend|
+      if friend.id == current_user.id
+      @we_are_friends = true
+      end
+    end
+
+    @outgoing = current_user.friend_requests
+    @friend_request_sent = false
+    @outgoing.each do |request|
+      if request.friend_id == @user.profiles.first[:user_id]
+      @friend_request_sent = true
+      end
+    end
+
+    @friend_request_pending = FriendRequest.where(friend: current_user.id, user: @user.profiles.first[:user_id])
   end
 
   def new
