@@ -22,7 +22,12 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update(comment_params)
+    if current_user.id == @comment.user_id
+      if comment_params[:image]
+        Cloudinary::Uploader.destroy(@comment.image.key) if @comment.image.key
+      end
+      @comment.update(comment_params)
+    end
     if @comment.save 
       flash[:notice] = "Successful comment edit!"
       redirect_to posts_path(@comment, anchor: dom_id(@comment))
@@ -34,11 +39,13 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy if current_user.id == @comment.user_id
-    flash[:notice] = "Comment deleted!"
-    redirect_to posts_path(@post, anchor: dom_id(@post))
+    if current_user.id == @comment.user_id
+      Cloudinary::Uploader.destroy(@comment.image.key) if @comment.image.key
+      @comment.destroy
+      flash[:notice] = "Comment deleted!"
+      redirect_to posts_path(@post, anchor: dom_id(@post))
+    end
   end
-
 
   private
 

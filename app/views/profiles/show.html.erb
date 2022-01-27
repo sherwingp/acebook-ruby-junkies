@@ -1,6 +1,8 @@
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "application", async: true %>
 </head>
 
 <div id="main-container">
@@ -11,7 +13,27 @@
         <div class="is-flex is-justify-content-flex-end">
           <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
+
+        <% elsif !(@friend_request_pending.blank?) %>
+          <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
+
+        <% elsif (@we_are_friends != true && @friend_request_sent != true) %>
+        <div class="is-flex is-justify-content-flex-end">
+        <%= form_for FriendRequest.new, url: friend_requests_path(:friend_id => @user.profiles.first[:user_id], :user_id => current_user.id) do |form| %>
+          <%= form.submit "Add Friend", :class => "button is-rounded is-link" %></div>
           <% end %>
+
+        <%elsif @friend_request_sent == true  %>
+        <h1> Friend request already sent! </h1>
+
+        <% elsif @we_are_friends == true %>
+        <h1> Friends </h1>
+        <% @friendship = Friendship.where(user_id: @user.profiles.first[:user_id], friend_id: current_user.id).first %>
+          <%= form_for @friendship, url: friends_destroy_path(:id => @user.profiles.first[:user_id]), method: 'post' do |form| %>
+            <%= form.submit "Unfriend", :class => "button is-rounded is-link" %>
+          <% end %>
+        <% end %>
+      
         <div class="is-flex is-flex-direction-column is-align-items-center">
           <% @user.profiles.each do |profile| %><br>
           <%# big image avatar/profile %>
@@ -48,11 +70,12 @@
             </div>
           </div>
 
-          <div class="is-flex p-2" id="friend-box"> 
-          <p><strong>Friends:</strong></p>
-          <% @user.friends.each do |friend| %>
+          <div class="is-flex is-flex-direction-column is-align-items-center p-2" id="friend-box"> 
+          <p><strong>Friends: <%= @user.friends.count %></strong></p>
+          <div class="is-flex">
+          <% @user.friendships.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
-            <% @user = User.find(friend.friend_user) %>
+            <% @user = User.find(friend.friend_id) %>
               <% @user.profiles.each do |profile| %>
                 <% if profile.avatar.attached? %>
                   <figure class="image m-1">
@@ -60,15 +83,16 @@
                   </figure>
                 <% else %>
                   <figure class="m-1">
-                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "32", :height => "32") %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
                   </figure>
                 <%end %>
               <% end %>
-                <%= @user.name %> <%= @user.surname %> 
+                <div class="is-flex"><%= @user.name %> <%= @user.surname %> </div>
             </div>
             <% end %>
           </div>
           <% end %>
+          </div>
         </div>
       </div>
 

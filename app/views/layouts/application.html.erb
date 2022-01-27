@@ -49,9 +49,7 @@
               <i class="fas fa-users"></i>
             <% end %>
           </div>
-          <%# <div class="navbar-item"> %>
-            <%# <%= link_to "View All Profiles", users_profiles_path, class: "button is-link is-small is-rounded" %>
-          <%# </div> %>
+
        <% end %>
         </div>
 
@@ -60,23 +58,36 @@
         <%= form_tag "/users/profiles", method: "GET" do %>
           <%= label_tag :search_by_name %>
           <%= text_field_tag :search_by_name, params[:search_by_name] %>
-          <%= submit_tag "Search" %>
-          <%end %>
+          <%= button_tag do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+          <% end %>
         </div>
         <%end %>
 
+        <% if (current_user.profiles.exists?)%>
+        <div class="navbar-item">
+        <%= link_to friend_requests_path do %>
+          <i class="fas fa-user-friends"></i>
+        <% end %>
+        </div>
+        <%end %>
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <%# <%= link_to TODO: user's profile page do %>
+          
           <% if user_signed_in? && (current_user.profiles.exists?) %>
             <%= link_to user_profile_path(current_user.id) do %>
               <% current_user.profiles.each do |profile| %>
               <div class="is-flex">
                   <% if profile.avatar.attached? %>
-                <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
+                    <% if Rails.env.production? %>
+                      <figure class="image"><%= cl_image_tag profile.avatar.key, :class => "image is-rounded" %></figure>
+                    <% else %>
+                      <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
+                    <% end %>
                   <% else %>
-                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
                   <% end %>
               <% end %>
                 <p class='ml-1'><%= current_user.name%></p>
@@ -84,6 +95,15 @@
             <% end %>
           <% end %>
         </div>
+        
+          <div class="navbar-item">
+            <%= link_to user_notifications_path(current_user.id) do %>
+              <span class="fa-stack fa-1x" data-count=<%= @notification_count %>>
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+              </span>
+            <% end %>
+          </div>
         
         <div class="navbar-item">
         <% if (current_user.profiles.exists?)%>
@@ -97,7 +117,7 @@
       </div>
     </nav>
     <% end %>
-    <%# flash notice %>
+
     <% if notice %>
     <div class="container p-3 mb-3">
     <div class="columns">

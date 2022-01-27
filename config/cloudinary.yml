@@ -1,0 +1,13 @@
+# development:
+#   cloud_name: "doamvqfiq"
+#   api_key: <%= ENV['CL_KEY'] %>
+#   api_secret: <%= ENV['CL_SECRET'] %>
+#   secure: true
+#   cdn_subdomain: true
+
+production:
+  cloud_name: "doamvqfiq"
+  api_key: <%= ENV['CL_KEY'] %>
+  api_secret: <%= ENV['CL_SECRET'] %>
+  secure: true
+  cdn_subdomain: true

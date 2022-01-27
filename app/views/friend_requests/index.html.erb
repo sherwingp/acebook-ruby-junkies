@@ -1,16 +1,29 @@
-<h1>This is our friend request index page</h1>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
 
-<div>
-  <h2>Incoming friend requests</h2>
-    <% @requesters.each do |requester| %>
-      <p> <%= requester.name %> <%= requester.surname %></p>
-      <p> TODO: Accept button</p>
-      <p> TODO: Reject button</p>
+<div class="container p-2" style="background-color:white;width:18rem">
+  <div class="mb-3">
+    <h1>Friend requests</h1>
+    <% @incoming.each do |requester| %>
+      <p> <%= (User.find(requester.user_id)).name %> <%= (User.find(requester.user_id)).surname %></p>
+      <div>
+        <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
+          <%= form.submit "Accept Request", :class => "button is-rounded is-link" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
+          <%= form.submit "Reject Request", :class => "button is-rounded is-link" %>
+        <% end %>
+      </div>
     <% end %>
-  <h2>Outcoming friend requests</h2>
+  </div>
+  <div class="mb-3">
+    <h2>Pending requests</h2>
     <% @requestees.each do |requestee| %>
       <p> <%= requestee.name %> <%= requestee.surname %></p>
-      <p> TODO: Accept button</p>
-      <p> TODO: Reject button</p>
     <% end %>
+  </div>
 </div>

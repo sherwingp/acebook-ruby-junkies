@@ -22,5 +22,9 @@
 
 .byebug_history
 
+storage
+.env
+
+
 # Ignore coverage files
 coverage/*
