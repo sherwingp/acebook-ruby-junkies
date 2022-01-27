@@ -47,9 +47,12 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy if current_user.id == @post.user_id
-    flash[:notice] = "Message successfully deleted!"
-    redirect_to posts_path
+    if current_user.id == @post.user_id
+      Cloudinary::Uploader.destroy(@post.image.key)
+      @post.destroy
+      flash[:notice] = "Message successfully deleted!"
+      redirect_to posts_path
+    end
   end
 
   private
