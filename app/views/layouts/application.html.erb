@@ -60,8 +60,10 @@
         <%= form_tag "/users/profiles", method: "GET" do %>
           <%= label_tag :search_by_name %>
           <%= text_field_tag :search_by_name, params[:search_by_name] %>
-          <%= submit_tag "Search" %>
-          <%end %>
+          <%= button_tag do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+          <% end %>
         </div>
         <%end %>
 
