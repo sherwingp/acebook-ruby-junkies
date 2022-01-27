@@ -2,15 +2,19 @@
 
 <div>
   <h2>Incoming friend requests</h2>
-    <% @requesters.each do |requester| %>
-      <p> <%= requester.name %> <%= requester.surname %></p>
+    <% @incoming.each do |requester| %>
+      <p> <%= (User.find(requester.user_id)).name %> <%= (User.find(requester.user_id)).surname %></p>
       <p> TODO: Accept button</p>
+      <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
+        <%= form.submit "Accept Request", :class => "button is-rounded is-link" %></div>
+        <% end %>
       <p> TODO: Reject button</p>
+      <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
+        <%= form.submit "Reject Request", :class => "button is-rounded is-link" %></div>
+        <% end %>
     <% end %>
   <h2>Outcoming friend requests</h2>
     <% @requestees.each do |requestee| %>
       <p> <%= requestee.name %> <%= requestee.surname %></p>
-      <p> TODO: Accept button</p>
-      <p> TODO: Reject button</p>
     <% end %>
 </div>
