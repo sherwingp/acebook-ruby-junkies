@@ -49,10 +49,10 @@
           </div>
 
           <div class="is-flex p-2" id="friend-box"> 
-          <h1> Friends </h1>
-          <% @user.friendships.each do |friend| %>
+          <p><strong>Friends:</strong></p>
+          <% @user.friends.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
-            <% @user = User.find(friend.friend_id) %>
+            <% @user = User.find(friend.friend_user) %>
               <% @user.profiles.each do |profile| %>
                 <% if profile.avatar.attached? %>
                   <figure class="image m-1">
@@ -78,7 +78,19 @@
         <div class="container p-5" id="post-container">
           <div class="container post-card pt-4 pb-1 pl-4 pr-4">
             <div class="container is-flex" id="post-details">
-              <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+
+
+              <div>
+                <% if @profile.first.avatar.attached? %>
+                  <figure class="image">
+                <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                  </figure>
+                <% else %>
+                  <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                <% end %>
+              </div>
+
+
               <p class="ml-2"></p>
               <div class="container">
                 <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>

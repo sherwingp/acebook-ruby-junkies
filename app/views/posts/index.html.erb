@@ -11,7 +11,17 @@
         <div class="container is-flex p-4 mb-3" id="post-section">
           <div id="post-link" class="container is-flex is-align-items-center">
             <div class="is-flex is-align-items-center" id="top-text-area-container">
+
+            <% current_user.profiles.each do |profile| %>
+              <div>
+                  <% if profile.avatar.attached? %>
+                <figure class="image"><%= image_tag profile.avatar, :class => "image is-48x48 is-rounded avatar" %></figure>
+                  <% else %>
                 <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                  <% end %>
+              </div>
+            <% end %>
+
                 <p class="ml-2"></p>
               <%= form_with(model: [ @post, Post.new ], local: true) do |form| %>
               <%= form.text_area :message, placeholder: "What's on your mind?", :class => "text-area-homepage mt-2 top-text-area" %>
@@ -29,8 +39,18 @@
             <div class="container p-5" id="post-container">
               <div class="container post-card pt-4 pb-1 pl-4 pr-4">
                 <div class="container is-flex" id="post-details">
-                  <%# <div id="avatar" class="p-5"></div> %>
-                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %><p class="ml-2"></p>
+                
+                  <div>
+                      <% if @profile.avatar.attached? %>
+                    <figure class="image">
+                    <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                    </figure>
+                      <% else %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                      <% end %>
+                  </div>
+
+                    <p class="ml-2"></p>
                   <div class="container">
                     <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
                     <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
@@ -82,15 +102,30 @@
               <div class="comments-section p-3">
                 <% post.comments.each do |comment| %>
                   <div class="container individual-comment mb-3 p-2" id="<%= dom_id(comment) %>">
-                    <div>
-                      <p class="ml-4">
+
+                    <div class="is-flex" style="background-color:yellow">
+
+                    <div style="background-color:violet">
+                        <% if @profile.avatar.attached? %>
+                      <figure class="image">
+                      <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-24x24 avatar" %>
+                      </figure>
+                        <% else %>
+                      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                        <% end %>
+
+                      <p class="ml-2"></p>
+                      <div class="container" style="background-color:pink">
                         <strong>
-                          <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
+                          <%= (User.find(comment.user_id)).name %> <%= (User.find(comment.user_id)).surname %>
                         </strong>
-                      </p>
-                      <p class="ml-4">
+                      </div>
+                    </div>
+                    
+                      <div class="ml-4">
                         <%= comment.body %>
-                      </p>
+                      </div>
+
                       <% if comment.image.attached? %>
                         <%= image_tag comment.image, class: "comment-image"%>
                       <% end %>
@@ -104,6 +139,7 @@
                         </div>
                       <% end %>
                     </div>
+
                     <div class="container is-flex is-justify-content-space-between">
                       <div>
                         <% pre_like = comment.likes.find { |like| like.user_id == current_user.id} %>
