@@ -106,14 +106,15 @@
           </div>
         
         <div class="navbar-item">
-        <% if (current_user.profiles.exists?)%>
+          <% if (current_user.profiles.exists?)%>
           <div class="buttons">
             <div class="button is-rounded is-primary is-outlined is-small" id="logout-btn">
             <strong><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></strong>
-        <% end %>
+          <% end %>
             </div>
           </div>
         </div>
+
       </div>
     </nav>
     <% end %>
@@ -146,6 +147,7 @@
       </div>
       </div>
     <% end %>
+
     <%= yield %>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
