@@ -48,6 +48,6 @@ RSpec.feature "Friend Request", type: :feature do
   scenario "approved friend requests are removed from pending friend requests list" do
     visit('/friend_requests')
     click_on 'Accept Request'
-    expect(page).not_to have_content('Kit TheDog')
+    expect(page).to have_content('No requests left to review')
   end
 end
