@@ -42,6 +42,5 @@ FactoryBot.define do
   factory :comment do
     association :user, :post
     body { 'test comment' }
-
   end
 end
