@@ -24,10 +24,16 @@
         <% end %>
         <% end %>
 
+      <% friend_request_pending = FriendRequest.where(friend: current_user, user: @user.profiles.first[:user_id]) %>
+
+
         <% if @user.profiles.first[:user_id] == current_user.id %>
         <div class="is-flex is-justify-content-flex-end">
           <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
+
+        <% elsif friend_request_pending != nil %>
+          <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
 
         <% elsif (we_are_friends != true && friend_request_sent != true) %>
         <div class="is-flex is-justify-content-flex-end">
@@ -83,7 +89,7 @@
           </div>
 
           <div class="is-flex p-2" id="friend-box"> 
-          <h1> Friends <%= @user.friends.count %></h1>
+          <h1>Friends <%= @user.friends.count %></h1>
           <% @user.friendships.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_id) %>
