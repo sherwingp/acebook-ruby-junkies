@@ -21,7 +21,7 @@ RSpec.describe "FriendRequests", type: :request do
   describe "POST /" do
     it "creates a new friend request" do
       post friend_requests_url, :params => {:friend_id => @user2.id}
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(302)
     end
   end
 
@@ -32,7 +32,7 @@ RSpec.describe "FriendRequests", type: :request do
       sign_in @user2
       @friend_request_id = @user1.friend_requests.first.id
       patch "/friend_requests/#{@friend_request_id}"
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(302)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe "FriendRequests", type: :request do
       post friend_requests_url, :params => {:friend_id => @user2.id}
       @friend_request_id = @user1.friend_requests.first.id
       delete "/friend_requests/#{@friend_request_id}"
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(302)
     end
   end
 end

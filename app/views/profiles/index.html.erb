@@ -35,7 +35,7 @@
 
         <% friend_request_pending = FriendRequest.where(friend: current_user.id, user: profile.user_id) %>
 
-        <% if friend_request_pending != nil && current_user.id != profile.user_id %>
+        <% if !(friend_request_pending.blank?) && current_user.id != profile.user_id %>
           <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
 
         <% elsif (we_are_friends != true && friend_request_sent != true && profile.user_id != current_user.id) %>

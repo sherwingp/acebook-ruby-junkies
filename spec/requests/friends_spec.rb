@@ -19,8 +19,8 @@ RSpec.describe "Friends", type: :request do
     it "returns http success" do
       @friend_request.accept
       friend_id = @friend_request.friend_id
-      get friends_destroy_url, :params => {:id => friend_id}
-      expect(response).to have_http_status(:success)
+      post friends_destroy_url, :params => {:id => friend_id}
+      expect(response).to have_http_status(302)
     end
   end
 end
