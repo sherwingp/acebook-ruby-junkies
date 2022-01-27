@@ -23,7 +23,9 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if current_user.id == @comment.user_id
-      Cloudinary::Uploader.destroy(@comment.image.key) if @comment.image.key
+      if comment_params[:image]
+        Cloudinary::Uploader.destroy(@comment.image.key) if @comment.image.key
+      end
       @comment.update(comment_params)
     end
     if @comment.save 

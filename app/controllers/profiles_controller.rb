@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
 
   def update
     @profile = Profile.where(:user_id => current_user.id).first
-
+    Cloudinary::Uploader.destroy(@profile.avatar.key) if @profile.avatar.key
     if @profile.update(profile_params)
       redirect_to user_profile_path
     else
