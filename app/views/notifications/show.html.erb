@@ -1,0 +1,11 @@
+
+<h1>Notifications</h1>
+
+<% @notifications.each do |notification| %>
+  <div class="p-4">
+    <%= link_to notification.to_notification.message, notification.to_notification.url %>
+      <%= button_to 'Remove notification', user_notifications_path(id: notification.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
+  </div>
+<% end %>
+  <%= button_to 'Remove all notifications', destroy_all_user_notifications_path, method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
+

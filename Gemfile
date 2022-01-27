@@ -35,6 +35,10 @@ gem 'jbuilder', '~> 2.5'
 # Devise for authentication
 gem 'devise'
 
+# OmniAuth for Facebook login
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
+
 # FactoryBot for tests
 gem 'factory_bot'
 
@@ -49,6 +53,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rspec-rails', '~> 4.0'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -60,8 +65,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+
 gem "carrierwave", "~> 2.2"
 
 gem "cloudinary", "~> 1.21"
 
 gem "dotenv-rails", "~> 2.7"
+
+# Notifications
+gem "noticed", "~> 1.5"

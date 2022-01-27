@@ -3,6 +3,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Public URLs for testing Facebook integration
+  config.hosts << '.ngrok.io'
+  
   # Set default url for mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
