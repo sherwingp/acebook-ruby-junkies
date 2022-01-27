@@ -23,12 +23,12 @@ class FriendRequestsController < ApplicationController
 
   def update
     @friend_request.accept
-    head :no_content
+    redirect_to friend_requests_path
   end
   
   def destroy
     @friend_request.destroy
-    head :no_content
+    redirect_to friend_requests_path
   end
 
   private
