@@ -11,6 +11,8 @@ RSpec.feature "Post content", type: :feature do
 		fill_in "user[password]", with: "123456"
 		fill_in "user[password_confirmation]", with: "123456"
     click_button "Sign up"
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
 		
     visit "/posts/new"
     fill_in "post[message]", with: "Meow!"
