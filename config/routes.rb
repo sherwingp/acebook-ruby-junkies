@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   get 'friends/index'
   get 'friends/destroy'
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   
   devise_scope :user do
     authenticated :user do
