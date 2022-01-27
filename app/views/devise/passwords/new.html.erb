@@ -4,32 +4,31 @@
 </head>
 
 <div class="container">
-<h1 class="has-text-centered is-size-3 mb-6">Forgot your password?</h1>
+<h1 class="has-text-centered is-size-3 mt-6 mb-6">Forgot your password?</h1>
   <div class="columns is-mobile is-centered">
     
-      <div class="column is-half" id=''>
-        
+      <div class="column is-half" style="border-radius:15px;background-color:white">
 
             <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
               <%= render "devise/shared/error_messages", resource: resource %>
 
-              <div class="field">
+              <div class="field p-4">
                 <%= f.label :email, class: "label has-text-centered" %>
                 <div class="control">
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
                 </div>
               </div>
 
-              <div class="field">
-                <div class="control has-text-centered">
+             
+              <div class="control has-text-centered">
                   <%= f.submit "Send", class: "button is-link" %>
-                </div>
               </div>
             <% end %>
 
-            <%= render "devise/shared/links" %>
+            <div class="control has-text-centered mt-2">
+              <%= link_to "Back to Login", new_user_session_path %>
+            </div>
+            <%# <%= render "devise/shared/links" %>
         </div>
-      
-    
   </div>
 </div>
