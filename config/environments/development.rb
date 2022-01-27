@@ -11,6 +11,11 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # cloudinary configuration
+  config.active_storage.service = :cloudinary
+
+  # config.active_storage.service = :local
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -57,5 +62,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.active_storage.service = :local
 end

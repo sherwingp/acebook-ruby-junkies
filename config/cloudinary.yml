@@ -1,0 +1,13 @@
+development:
+  cloud_name: "doamvqfiq"
+  api_key: "227913724594995"
+  api_secret: "ES29skQV7B9UNF-VXGId1zWfYhU"
+  secure: true
+  cdn_subdomain: true
+
+production:
+  cloud_name: "doamvqfiq"
+  api_key: "227913724594995"
+  api_secret: "ES29skQV7B9UNF-VXGId1zWfYhU"
+  secure: true
+  cdn_subdomain: true
