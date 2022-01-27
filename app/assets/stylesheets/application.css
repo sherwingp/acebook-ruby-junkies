@@ -189,7 +189,7 @@ h2 {
 }
 .field {
   background-color: #62ecec;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 /* sign-up */
@@ -293,4 +293,11 @@ h2 {
 
 form .comment-form {
   margin-left: 15px;
+}
+
+/* login signup  */
+
+.fa-facebook {
+ font-size: 1.5rem;
+ padding-right: 0.5rem;
 }
