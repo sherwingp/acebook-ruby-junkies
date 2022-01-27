@@ -50,9 +50,9 @@
 
           <div class="is-flex p-2" id="friend-box"> 
           <h1> Friends </h1>
-          <% @user.friends.each do |friend| %>
+          <% @user.friendships.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
-            <% @user = User.find(friend.friend_user) %>
+            <% @user = User.find(friend.friend_id) %>
               <% @user.profiles.each do |profile| %>
                 <% if profile.avatar.attached? %>
                   <figure class="image m-1">
