@@ -65,6 +65,13 @@
         </div>
         <%end %>
 
+        <% if (current_user.profiles.exists?)%>
+        <div class="navbar-item">
+        <%= link_to friend_requests_path do %>
+          <i class="fas fa-user-friends"></i>
+        <% end %>
+        </div>
+        <%end %>
 
       <div class="navbar-end">
         <div class="navbar-item">

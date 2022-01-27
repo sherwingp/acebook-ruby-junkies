@@ -8,12 +8,14 @@ class FriendRequestsController < ApplicationController
     @requestees = @outgoing.map { |request| User.find(request.friend_id) }
   end
 
+
+
   def create
     friend = User.find(params[:friend_id])
     @friend_request = current_user.friend_requests.new(friend: friend)
 
     if @friend_request.save
-      render :show, status: :created, location: @friend_request
+      redirect_to '/users/profiles'
     else
       render json: @friend_request.errors, status: :unprocessable_entity
     end
