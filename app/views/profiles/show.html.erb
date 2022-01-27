@@ -37,7 +37,11 @@
           <%# big image avatar/profile %>
           <figure class="image" id="profile-avatar">
             <% if profile.avatar.attached? %>
-              <%= image_tag profile.avatar, class: "image is-rounded" %>
+              <% if Rails.env.production? %>
+                <%= cl_image_tag profile.avatar.key, class: "image is-rounded" %>
+              <% else %>
+                <%= image_tag profile.avatar, class: "image is-rounded" %>
+              <% end %>
             <% else %>
               <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
             <% end %>
@@ -56,15 +60,24 @@
                 <% @posts_to_use.each do |post| %>
                 <%# all images used in post or comments %>
                   <% if post.image.attached? && (post.user_id == @user.id)%>
-                    <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
+                    <% if Rails.env.production? %>
+                      <figure class="p-1"><%= cl_image_tag post.image.key, class: "post-img"%></figure>
+                    <% else %>
+                      <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
+                    <% end %>
                   <% end %>
+
                     <% post.comments.each do |comment| %>
                       <% if comment.image.attached? && (comment.user_id == @user.id) %>
-                        <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                        <% if Rails.env.production? %>
+                          <figure class="p-1"><%= cl_image_tag comment.image.key, class: "comment-img"%></figure>
+                        <% else %>
+                          <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                        <% end %>
                       <% end %>
                     <%end %>
-                  <%end %>
-                </div>
+                <%end %>
+              </div>
             </div>
           </div>
 
