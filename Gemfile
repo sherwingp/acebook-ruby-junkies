@@ -63,3 +63,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem "carrierwave", "~> 2.2"
 
 gem "cloudinary", "~> 1.21"
+
+gem "dotenv-rails", "~> 2.7"
