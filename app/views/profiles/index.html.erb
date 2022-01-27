@@ -11,7 +11,11 @@
   <div class="is-flex m-4">
   <%= link_to user_profile_path(profile.user_id) do %>
     <% if profile.avatar.attached? %>
-      <figure class="image m-1"><%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %></figure>
+      <% if Rails.env.production? %>
+        <figure class="image m-1"><%= cl_image_tag profile.avatar.key, class: "image is-32x32 is-rounded" %></figure>
+      <% else %>
+        <figure class="image m-1"><%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %></figure>
+      <% end %>
     <% else %>
       <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", class: "image is-32x32 is-rounded") %>
     <% end %>

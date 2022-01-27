@@ -17,7 +17,7 @@
               <%= form.text_area :message, placeholder: "What's on your mind?", :class => "text-area-homepage mt-2 top-text-area" %>
             </div>
             <div class="container is-flex is-justify-content-space-around pr-1 pl-1">
-              <%= form.file_field :image, class: "form-control" %>
+              <%= form.file_field :image, direct_upload: true, class: "form-control" %>
               <%= form.submit "Post", class: "mt-4 mb-4 mr-1 button is-rounded is-small is-link post-btn" %>
             </div>
             <% end %>
@@ -39,7 +39,11 @@
                 <div class="message-and-photo p-5">
                   <p class="mb-2 display-message"><%= post.message %></p>
                   <% if post.image.attached? %>
-                    <%= image_tag post.image, class: "post-image"%>
+                   <% if Rails.env.production? %>
+                      <%= cl_image_tag post.image.key, class: "comment-image"%>
+                  <% else %>
+                      <%= image_tag post.image, class: "comment-image"%>
+                  <% end %>
                   <% end %>
                   <% if post.likes.length != 0 %>
                     <div class="container is-flex likes-count">
@@ -92,7 +96,11 @@
                         <%= comment.body %>
                       </p>
                       <% if comment.image.attached? %>
-                        <%= image_tag comment.image, class: "comment-image"%>
+                          <% if Rails.env.production? %>
+                            <%= cl_image_tag comment.image.key, class: "comment-image"%>
+                          <% else %>
+                            <%= image_tag comment.image, class: "comment-image"%>
+                          <% end %>
                       <% end %>
                     </div>
                     <div>
