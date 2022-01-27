@@ -35,7 +35,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params) if current_user.id == @post.user_id
+    if current_user.id == @post.user_id 
+      Cloudinary::Uploader.destroy(@post.image.key) if @post.image.key
+      @post.update(post_params) 
+    end
     if @post.save
       flash[:notice] = "Edit successful!"
       redirect_to posts_path(@post, anchor: dom_id(@post))
@@ -48,7 +51,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     if current_user.id == @post.user_id
-      Cloudinary::Uploader.destroy(@post.image.key)
+      Cloudinary::Uploader.destroy(@post.image.key) if @post.image.key
       @post.destroy
       flash[:notice] = "Message successfully deleted!"
       redirect_to posts_path
