@@ -40,7 +40,7 @@ RSpec.feature "Friend Request", type: :feature do
   scenario "a user can see the number of friends on their profile" do
     visit '/users/profiles'
     click_on 'name'
-    expect(page).to have_content('Friends 1')
+    expect(page).to have_content('Friends: 1')
   end
 
   scenario "a user cannot send a friend request to someone they are already friends with" do

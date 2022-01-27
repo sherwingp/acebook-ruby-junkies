@@ -1,6 +1,8 @@
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "application", async: true %>
 </head>
 
 <div id="main-container">
@@ -68,8 +70,9 @@
             </div>
           </div>
 
-          <div class="is-flex p-2" id="friend-box"> 
-          <h1>Friends <%= @user.friends.count %></h1>
+          <div class="is-flex is-flex-direction-column is-align-items-center p-2" id="friend-box"> 
+          <p><strong>Friends: <%= @user.friends.count %></strong></p>
+          <div class="is-flex">
           <% @user.friendships.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_id) %>
@@ -80,15 +83,16 @@
                   </figure>
                 <% else %>
                   <figure class="m-1">
-                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "32", :height => "32") %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
                   </figure>
                 <%end %>
               <% end %>
-                <%= @user.name %> <%= @user.surname %> 
+                <div class="is-flex"><%= @user.name %> <%= @user.surname %> </div>
             </div>
             <% end %>
           </div>
           <% end %>
+          </div>
         </div>
       </div>
 
@@ -98,7 +102,18 @@
         <div class="container p-5" id="post-container">
           <div class="container post-card pt-4 pb-1 pl-4 pr-4">
             <div class="container is-flex" id="post-details">
-              <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+
+
+              <div>
+                <% if @profile.first.avatar.attached? %>
+                  <figure class="image">
+                <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                  </figure>
+                <% else %>
+                  <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                <% end %>
+              </div>
+
               <p class="ml-2"></p>
               <div class="container">
                 <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
@@ -132,19 +147,42 @@
         <div class="comments-section p-3">
           <% post.comments.each do |comment| %>
           <div class="container individual-comment mb-3 p-2">
-              <p class="ml-4">
-                <strong>
-                  <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
-                </strong>
-              </p>
-              <p class="ml-4">
+            
+            <div class="is-flex is-flex-direction-column pb-2">
+                <div class="is-flex">
+                  <% if @profile.first.avatar.attached? %>
+                  <figure class="image">
+                    <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                  </figure>
+                  <% else %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                  <% end %>
+                  <p class="ml-2"></p>
+                    <strong>
+                      <%= (User.find(comment.user_id)).name %> <%= (User.find(comment.user_id)).surname %>
+                    </strong>
+                </div>
+              <div class="ml-4 p-2">
                 <%= comment.body %>
-              </p>
+              </div>
               <% if comment.image.attached? %>
                 <figure class="p-4"><%= image_tag comment.image, class: "comment-image"%></figure>
               <% end %>
             </div>
+
+            <div>
+                <% if comment.likes.length != 0 %>
+              <div class="container is-flex likes-count">
+              <p>
+                <i class="fas fa-thumbs-up"></i> 
+                <strong><%= comment.likes.length %></strong>
+              </p>
+              </div>
+                <% end %>
+            </div>
+          </div>
             <% end %>
+
             <%# comment form %>
             <div class="container is-flex comments-form pt-3">
               <%= form_with(model: [ post, post.comments.build ], local: true) do |form| %>

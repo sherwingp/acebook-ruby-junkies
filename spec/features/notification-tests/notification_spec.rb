@@ -14,6 +14,10 @@ RSpec.feature "Notifications", type: :feature do
 
   scenario "a user sees a notification after getting a comment on their post" do
     # User 1 comments on user 2's post
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"
@@ -27,6 +31,10 @@ RSpec.feature "Notifications", type: :feature do
 
   scenario "users don't see notifications from self comments on self posts" do
     # User 1 comments on user 2's post
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"
@@ -38,6 +46,10 @@ RSpec.feature "Notifications", type: :feature do
 
   scenario "user can remove one notification" do
     # User 1 comments on user 2's post
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"
@@ -52,6 +64,10 @@ RSpec.feature "Notifications", type: :feature do
 
   scenario "user can remove all notifications" do
     # User 1 comments on user 2's post
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"

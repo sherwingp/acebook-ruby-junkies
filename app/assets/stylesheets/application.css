@@ -75,6 +75,10 @@ body {
   border-bottom: 2px solid #62ecec;
 }
 
+.avatar {
+  object-fit: cover;
+}
+
 #user-name {
   font-size: 95%;
   font-weight: 450;

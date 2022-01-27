@@ -6,6 +6,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order('created_at DESC')
+    @user = User.find(current_user.id)
+    @profile = @user.profiles.first
   end
 
   def show

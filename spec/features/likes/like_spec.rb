@@ -10,16 +10,29 @@ RSpec.feature "Likes", type: :feature do
   end
 
   scenario "a user can like a post" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     click_on 'Like'
     expect(has_css?('i.fa-thumbs-up', count: 1)).to eq true
   end
 
   scenario "multiple users can like a post" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     click_on 'Like'
     user2 = FactoryBot.create(:user)
     login_as(user2, :scope => :user)
+
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     click_on 'Like'
 
@@ -28,6 +41,10 @@ RSpec.feature "Likes", type: :feature do
   end
 
   scenario "a user can unlike a post" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     click_on 'Like'
 
@@ -36,6 +53,10 @@ RSpec.feature "Likes", type: :feature do
   end
 
   scenario "a user can like a comment" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"
@@ -44,6 +65,10 @@ RSpec.feature "Likes", type: :feature do
   end
 
   scenario "a user can unlike a comment" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
     visit '/posts'
     fill_in "comment[body]", with: "A comment!"
     click_button "Comment"
