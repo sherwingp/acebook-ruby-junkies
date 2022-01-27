@@ -321,3 +321,17 @@ form .comment-form {
  font-size: 1.5rem;
  padding-right: 0.5rem;
 }
+
+/* friend_requests index */
+.friends-header {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+}
+
+.no-requests {
+  padding-left: 15%;
+  padding-right: 15%;
+  text-align: center;
+}
