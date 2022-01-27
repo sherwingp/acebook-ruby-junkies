@@ -29,6 +29,11 @@ Rails.application.routes.draw do
 
 
   resources :users do
+    resource :notifications do
+      collection do
+        delete :destroy_all
+      end
+    end
     resource :profile
   end
 
