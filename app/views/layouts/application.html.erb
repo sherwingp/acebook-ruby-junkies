@@ -50,6 +50,14 @@
             <% end %>
           </div>
 
+          <% if (current_user.profiles.exists?) %>
+            <div class="navbar-item">
+              <%= link_to friend_requests_path do %>
+                <i class="fas fa-user-friends"></i>
+              <% end %>
+            </div>
+          <% end %>
+
        <% end %>
         </div>
 
@@ -62,14 +70,6 @@
             <i class="fas fa-search"></i>
           <% end %>
           <% end %>
-        </div>
-        <%end %>
-
-        <% if (current_user.profiles.exists?)%>
-        <div class="navbar-item">
-        <%= link_to friend_requests_path do %>
-          <i class="fas fa-user-friends"></i>
-        <% end %>
         </div>
         <%end %>
 

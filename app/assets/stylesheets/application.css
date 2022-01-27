@@ -27,7 +27,7 @@ body {
   background-color: #FBCBF0;
 }
 
-.fa-plus, .fa-home, .fa-users {
+.fa-plus, .fa-home, .fa-users, .fa-user-friends {
   color: rgb(102, 102, 102);
   font-size: 115%;
 }
