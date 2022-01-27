@@ -92,7 +92,7 @@
                         <%= comment.body %>
                       </p>
                       <% if comment.image.attached? %>
-                        <%= image_tag comment.image, class: "comment-image"%>
+                        <%= cl_image_tag comment.image.key, class: "comment-image"%>
                       <% end %>
                     </div>
                     <div>
