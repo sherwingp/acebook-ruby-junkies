@@ -12,9 +12,9 @@ Rails.application.configure do
   config.cache_classes = false
 
   # cloudinary configuration
-  config.active_storage.service = :cloudinary
+  # config.active_storage.service = :cloudinary
 
-  # config.active_storage.service = :local
+  config.active_storage.service = :local
 
   # Do not eager load code on boot.
   config.eager_load = false
