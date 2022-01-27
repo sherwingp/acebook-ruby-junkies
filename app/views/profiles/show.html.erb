@@ -11,7 +11,14 @@
         <div class="is-flex is-justify-content-flex-end">
           <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
+
+        <% else %>
+        <div class="is-flex is-justify-content-flex-end">
+        <%= form_for FriendRequest.new, url: friend_requests_path(:friend_id => @user.profiles.first[:user_id], :user_id => current_user.id) do |form| %>
+          <%= form.submit "Add Friend", :class => "button is-rounded is-link" %></div>
           <% end %>
+          
+        <% end %>
         <div class="is-flex is-flex-direction-column is-align-items-center">
           <% @user.profiles.each do |profile| %><br>
           <%# big image avatar/profile %>
