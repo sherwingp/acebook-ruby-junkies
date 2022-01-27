@@ -83,7 +83,7 @@
           </div>
 
           <div class="is-flex p-2" id="friend-box"> 
-          <h1> Friends </h1>
+          <h1> Friends <%= @user.friends.count %></h1>
           <% @user.friendships.each do |friend| %>
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_id) %>
