@@ -335,3 +335,8 @@ form .comment-form {
   padding-right: 15%;
   text-align: center;
 }
+
+.friend-container {
+  background-color: #62ecec;
+  border-radius: 10px;
+}

@@ -77,17 +77,21 @@
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_id) %>
               <% @user.profiles.each do |profile| %>
-                <% if profile.avatar.attached? %>
-                  <figure class="image m-1">
-                    <%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %>
-                  </figure>
-                <% else %>
-                  <figure class="m-1">
-                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
-                  </figure>
-                <%end %>
+                <%= link_to user_profile_path(@user.id) do %>
+                  <% if profile.avatar.attached? %>
+                    <figure class="image m-1">
+                      <%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %>
+                    </figure>
+                  <% else %>
+                    <figure class="m-1">
+                      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                    </figure>
+                  <%end %>
+                <% end %>
               <% end %>
+              <%= link_to user_profile_path(@user.id) do %>
                 <div class="is-flex"><%= @user.name %> <%= @user.surname %> </div>
+              <% end %>
             </div>
             <% end %>
           </div>

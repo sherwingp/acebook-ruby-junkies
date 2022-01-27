@@ -41,18 +41,22 @@
                 <div class="container is-flex" id="post-details">
                 
                   <div>
-                      <% if @profile.avatar.attached? %>
+                  <%= link_to user_profile_path(User.find(post.user_id).id) do %>
+                    <% if @profile.avatar.attached? %>
                     <figure class="image">
                     <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
                     </figure>
                       <% else %>
                     <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
                       <% end %>
+                  <% end %>
                   </div>
 
                     <p class="ml-2"></p>
                   <div class="container">
-                    <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
+                    <%= link_to user_profile_path(User.find(post.user_id).id) do %>
+                      <p id="user-name"><%= User.find(post.user_id).name %> <%= User.find(post.user_id).surname %></p>
+                    <% end %>
                     <p id="created-at"><%= DateTime.parse(post.created_at.to_s).strftime('%a %d %b %Y %H:%M') %></p>
                   </div>
                 </div>
@@ -75,7 +79,9 @@
                      <div class='show-like' id="show-like-<%= post.id %>" hidden>
                          <ul class='show-like-ul'>
                         <% post.likes.each do |like| %>
-                          <li> <small> <%= "#{User.find(like.user_id).name} #{User.find(like.user_id).surname}" %> </small>  </li>
+                          <%= link_to user_profile_path(User.find(like.user_id).id) do %>
+                            <li> <small> <%= "#{User.find(like.user_id).name} #{User.find(like.user_id).surname}" %> </small>  </li>
+                          <% end %>
                         <% end %>
                          </ul>
                     </div>
@@ -111,16 +117,20 @@
 
                     <div class="is-flex is-flex-direction-column pb-2">
                     <div class="is-flex">
+                      <%= link_to user_profile_path(User.find(comment.user_id).id) do %>
                         <% if @profile.avatar.attached? %>
-                      <figure class="image">
-                      <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
-                      </figure>
+                          <figure class="image">
+                          <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                          </figure>
                         <% else %>
-                      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                          <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
                         <% end %>
+                      <% end %>
                       <p class="ml-2"></p>
                         <strong>
-                          <%= (User.find(comment.user_id)).name %> <%= (User.find(comment.user_id)).surname %>
+                          <%= link_to user_profile_path(User.find(comment.user_id).id) do %>
+                            <%= (User.find(comment.user_id)).name %> <%= (User.find(comment.user_id)).surname %>
+                          <% end %>
                         </strong>
                     </div>
                       <div class="ml-4 p-2">

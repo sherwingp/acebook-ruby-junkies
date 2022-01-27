@@ -7,7 +7,7 @@
   <div class="columns">
     <div class="column"></div>
     <div class="column is-one-third p-5" style="background-color:white">
-      <div class="pb-5">
+      <div class="pb-5" style="text-align: center;">
         <div class="friends-header" style="background-color:grey">
           <p>Friend requests</p>
         </div>
@@ -18,21 +18,28 @@
           </div>
         <% else %>
           <% @incoming.each do |requester| %>
-            <p> <%= (User.find(requester.user_id)).name %> <%= (User.find(requester.user_id)).surname %></p>
-            <div>
-              <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
-                <%= form.submit "Accept Request", :class => "button is-rounded is-link" %>
+            <div class="p-3">
+              <%= link_to user_profile_path(User.find(requester.user_id).id) do %>
+                <% @user = User.find(requester.user_id) %>
+                <p><%= @user.name %> <%= @user.surname %></p>
               <% end %>
-            </div>
-            <div>
-              <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
-                <%= form.submit "Reject Request", :class => "button is-rounded is-link" %>
-              <% end %>
+              <div class="columns">
+                <div class="column">
+                  <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
+                    <%= form.submit "Accept Request", :class => "button is-rounded is-small is-link m-2" %>
+                  <% end %>
+                </div>
+                <div class="column">
+                  <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
+                    <%= form.submit "Reject Request", :class => "button is-rounded is-small is-link m-2" %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           <% end %>
         <% end %>
       </div>
-      <div class="mb-3">
+      <div style="text-align: center;">
         <div class="friends-header" style="background-color:grey">
           <p>Pending requests</p>
         </div>
@@ -43,7 +50,10 @@
           </div>
         <% else %>
           <% @requestees.each do |requestee| %>
-            <p><%= requestee.name %> <%= requestee.surname %></p>
+            <%= link_to user_profile_path(User.find(requestee.user_id).id) do %>
+              <% @user = User.find(requestee.user_id) %>
+              <p><%= @user.name %> <%= @user.surname %></p>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -53,7 +63,7 @@
       <div class="friends-header" style="background-color:grey">
         <p>Friends: <%= current_user.friends.count %></p>
       </div>
-      <div class="is-flex is-flex-direction-column is-align-items-center p-2" id="friend-box"> 
+      <div class="is-flex is-flex-direction-column is-align-items-center p-2"> 
         <div class="is-flex">
           <% current_user.friendships.each do |friend| %>
             <%= link_to user_profile_path(friend.id) do %>
