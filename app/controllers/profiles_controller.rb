@@ -68,6 +68,24 @@ class ProfilesController < ApplicationController
     @comments = Comment.where(:user_id => @user.id)
     @comments.each do |comment| @post_ids << comment.post_id end
     @posts_to_use = Post.find((@post_ids.uniq.sort_by { |number| -number }))
+
+    @profiles_friends = User.find(@user.profiles.first[:user_id]).friends
+    @we_are_friends = false 
+    @profiles_friends.each do |friend|
+      if friend.id == current_user.id
+      @we_are_friends = true
+      end
+    end
+
+    @outgoing = current_user.friend_requests
+    @friend_request_sent = false
+    @outgoing.each do |request|
+      if request.friend_id == @user.profiles.first[:user_id]
+      @friend_request_sent = true
+      end
+    end
+
+    @friend_request_pending = FriendRequest.where(friend: current_user.id, user: @user.profiles.first[:user_id])
   end
 
   def new

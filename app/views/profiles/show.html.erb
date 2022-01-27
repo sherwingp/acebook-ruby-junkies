@@ -7,43 +7,24 @@
   <div class="columns p-2 wrapper is-flex">
     <div class="column is-half" style="background-color:white;overflow:scroll;border-radius:100px">
       <%# edit button %>
-
-      <% @profiles_friends = User.find(@user.profiles.first[:user_id]).friends %>
-      <% we_are_friends = false %>
-      <% @profiles_friends.each do |friend| %>
-        <% if friend.id == current_user.id %>
-        <% we_are_friends = true %>
-        <% end %>
-        <% end %>
-
-      <% @outgoing = current_user.friend_requests%>
-      <% friend_request_sent = false %>
-      <% @outgoing.each do |request| %>
-        <% if request.friend_id == @user.profiles.first[:user_id] %>
-        <% friend_request_sent = true %>
-        <% end %>
-        <% end %>
-
-      <% friend_request_pending = FriendRequest.where(friend: current_user.id, user: @user.profiles.first[:user_id]) %>
-
         <% if @user.profiles.first[:user_id] == current_user.id %>
         <div class="is-flex is-justify-content-flex-end">
           <%= link_to "Edit Profile", edit_user_profile_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
 
-        <% elsif !(friend_request_pending.blank?) %>
+        <% elsif !(@friend_request_pending.blank?) %>
           <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
 
-        <% elsif (we_are_friends != true && friend_request_sent != true) %>
+        <% elsif (@we_are_friends != true && @friend_request_sent != true) %>
         <div class="is-flex is-justify-content-flex-end">
         <%= form_for FriendRequest.new, url: friend_requests_path(:friend_id => @user.profiles.first[:user_id], :user_id => current_user.id) do |form| %>
           <%= form.submit "Add Friend", :class => "button is-rounded is-link" %></div>
           <% end %>
 
-        <%elsif friend_request_sent == true  %>
+        <%elsif @friend_request_sent == true  %>
         <h1> Friend request already sent! </h1>
 
-        <% elsif we_are_friends == true %>
+        <% elsif @we_are_friends == true %>
         <h1> Friends </h1>
         <% @friendship = Friendship.where(user_id: @user.profiles.first[:user_id], friend_id: current_user.id).first %>
           <%= form_for @friendship, url: friends_destroy_path(:id => @user.profiles.first[:user_id]), method: 'post' do |form| %>
