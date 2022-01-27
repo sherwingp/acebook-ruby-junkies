@@ -189,7 +189,7 @@ h2 {
 }
 .field {
   background-color: #62ecec;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 /* sign-up */
@@ -295,6 +295,7 @@ form .comment-form {
   margin-left: 15px;
 }
 
+/* Notification button */
 .fa-stack[data-count]:after{
   position:absolute;
   right:0%;
@@ -309,4 +310,10 @@ form .comment-form {
   text-align:center;
   min-width:2em;
   font-weight:bold;
+
+/* login signup  */
+
+.fa-facebook {
+ font-size: 1.5rem;
+ padding-right: 0.5rem;
 }
