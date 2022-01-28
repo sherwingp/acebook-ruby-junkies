@@ -1,4 +1,6 @@
-# <img src="./public/RubyJunkiesLogo.png" width="30" height="30"> GemJunkies (Facebook Clone)
+# GemJunkies (Facebook Clone)
+
+<h1 align="center"><img src="./public/RubyJunkiesLogo.png" width="40" height="40"></h1>
 
 ## Quickstart
 
