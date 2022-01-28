@@ -1,4 +1,4 @@
-# GemJunkies (Facebook Clone) <img src="./public/RubyJunkiesLogo.png" width="50" height="50">
+# <img src="./public/RubyJunkiesLogo.png" width="30" height="30"> GemJunkies (Facebook Clone)
 
 ## Quickstart
 
