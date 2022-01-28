@@ -15,25 +15,25 @@
         </div>
 
         <% elsif !(@friend_request_pending.blank?) %>
-        <div class="is-flex is-justify-content-flex-end">
+        <div class="is-flex is-justify-content-center">
           <%= link_to "Pending Request", friend_requests_path, class: "button is-link is-small is-rounded mt-4" %>
         </div>
 
         <% elsif (@we_are_friends != true && @friend_request_sent != true) %>
-        <div class="is-flex is-justify-content-flex-end">
+        <div class="is-flex is-justify-content-center">
         <%= form_for FriendRequest.new, url: friend_requests_path(:friend_id => @user.profiles.first[:user_id], :user_id => current_user.id) do |form| %>
           <%= form.submit "Add Friend", :class => "button is-rounded is-link is-small mt-4" %>
           <% end %>
         </div>
 
         <% elsif @friend_request_sent == true  %>
-        <div class="is-flex is-justify-content-flex-end">
+        <div class="is-flex is-justify-content-center">
           <h1 class="mt-4"> Friend request already sent! </h1>
         </div>
 
         <% elsif @we_are_friends == true %>
-          <div class="is-flex is-justify-content-flex-end">
-            <h1 class="mt-4 mr-2" style="font-size: 110%;"> Friends </h1>
+          <div class="is-flex is-justify-content-center">
+            <h1 class="mt-4 mr-4" style="font-size: 110%;"> Friends </h1>
         <% @friendship = Friendship.where(user_id: @user.profiles.first[:user_id], friend_id: current_user.id).first %>
           <%= form_for @friendship, url: friends_destroy_path(:id => @user.profiles.first[:user_id]), method: 'post' do |form| %>
             <%= form.submit "Unfriend", :class => "button is-rounded is-link is-small mt-4" %>
