@@ -94,6 +94,16 @@
                     <%= button_to 'Like', post_likes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
                   <% end %>
                 </div>
+
+                <div class="is-flex">
+                <% pre_gem_like = post.gemlikes.find { |gemlike| gemlike.user_id == current_user.id} %>
+                <% if pre_gem_like %>
+                  <%= button_to 'UnGemlike', post_gemlike_path(post, pre_gem_like), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                <% else %>
+                  <%= button_to 'GemLike', post_gemlikes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                <% end %>
+              </div>
+
                 <div class="is-flex">
                   <% if current_user && current_user.id == post.user_id %>
                   <%= button_to 'Edit', edit_post_url(post), method: :get, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-link like-btn" %>

@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
   validates :body, presence: true, if: -> { image.blank? }
 
   has_many :likes, as: :likeable, dependent: :destroy
+  has_many :gemlikes, as: :gemlikeable, dependent: :destroy
 
   after_create_commit :notify_recipient
   
