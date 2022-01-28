@@ -7,10 +7,6 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     authenticated :user do
-      # p "We're in the right place"
-      # @user = User.find(current_user.id)
-      # @user.profile.create(about:'A new profile - please update this soon!')
-      # root 'post#index', as: :authenticated_root
       root 'profiles#new', as: :authenticated_root
     end
     
@@ -40,12 +36,15 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments do
       resources :likes
+      resources :gemlikes
     end
   end
   
   resources :posts do
     resources :likes
+    resources :gemlikes
   end
+
   
   resources :friend_requests
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_123647) do
+ActiveRecord::Schema.define(version: 2022_01_28_000617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,9 @@ ActiveRecord::Schema.define(version: 2022_01_27_123647) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "likeable_type"
     t.bigint "likeable_id"
+    t.string "gemlikeable_type"
+    t.bigint "gemlikeable_id"
+    t.index ["gemlikeable_type", "gemlikeable_id"], name: "index_comments_on_gemlikeable"
     t.index ["likeable_type", "likeable_id"], name: "index_comments_on_likeable"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -82,6 +85,16 @@ ActiveRecord::Schema.define(version: 2022_01_27_123647) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "gemlikes", force: :cascade do |t|
+    t.bigint "gemlikeable_id"
+    t.string "gemlikeable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["gemlikeable_type", "gemlikeable_id"], name: "index_gemlikes_on_gemlikeable_type_and_gemlikeable_id"
+    t.index ["user_id"], name: "index_gemlikes_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "likeable_id"
     t.string "likeable_type"
@@ -111,6 +124,9 @@ ActiveRecord::Schema.define(version: 2022_01_27_123647) do
     t.bigint "user_id", null: false
     t.string "likeable_type"
     t.bigint "likeable_id"
+    t.string "gemlikeable_type"
+    t.bigint "gemlikeable_id"
+    t.index ["gemlikeable_type", "gemlikeable_id"], name: "index_posts_on_gemlikeable"
     t.index ["likeable_type", "likeable_id"], name: "index_posts_on_likeable"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -148,6 +164,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_123647) do
   add_foreign_key "friends", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "gemlikes", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"

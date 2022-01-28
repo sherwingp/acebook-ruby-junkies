@@ -76,4 +76,14 @@ RSpec.feature "Likes", type: :feature do
     click_on(class: 'comment-unlike-btn')
     expect(has_css?('i.fa-thumbs-up', count: 0)).to eq true
   end
+
+  scenario "a user can like a post" do
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
+
+    visit '/posts'
+    click_on 'Like'
+    expect(has_css?('i.fa-thumbs-up', count: 1)).to eq true
+  end
 end

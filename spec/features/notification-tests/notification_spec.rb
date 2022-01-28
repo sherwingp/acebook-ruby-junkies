@@ -25,6 +25,9 @@ RSpec.feature "Notifications", type: :feature do
 
     # User 2 sees a notification
     login_as(@user2, :scope => :user)
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
     visit "/users/#{@user2.id}/notifications"
     expect(page).to have_content("You have a new comment")
   end
@@ -57,6 +60,9 @@ RSpec.feature "Notifications", type: :feature do
 
     # User 2 removes notification
     login_as(@user2, :scope => :user)
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
     visit "/users/#{@user2.id}/notifications"
     click_button('Remove all notifications')
     expect(page).to_not have_content("You have a new comment")
@@ -77,6 +83,9 @@ RSpec.feature "Notifications", type: :feature do
 
     # User 2 removes notification
     login_as(@user2, :scope => :user)
+    visit '/'
+    fill_in 'profile_about', with: 'Im a cat!'
+    click_button 'Create Profile'
     visit "/users/#{@user2.id}/notifications"
     click_button('Remove all notifications')
     expect(page).to_not have_content("You have a new comment")

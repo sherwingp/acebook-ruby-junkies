@@ -2,11 +2,17 @@ class FriendsController < ApplicationController
   before_action :set_friend, only: :destroy
 
   def index
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @friends = current_user.friends
     @friends_all = Friend.all
   end
 
   def show
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @friend = Friend.find(params[:id]) if params[:id] != 'new'
   end
 

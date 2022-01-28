@@ -14,7 +14,7 @@ RSpec.describe "FriendRequests", type: :request do
   describe "GET /" do
     it "opens the friend request page" do
       get friend_requests_url 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(302)
     end
   end
 

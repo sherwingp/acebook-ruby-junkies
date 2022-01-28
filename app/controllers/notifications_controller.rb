@@ -2,6 +2,9 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @notifications = current_user.notifications
   end
 

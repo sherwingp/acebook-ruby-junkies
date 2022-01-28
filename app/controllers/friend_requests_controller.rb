@@ -2,6 +2,9 @@ class FriendRequestsController < ApplicationController
   before_action :set_friend_request, except: [:index, :create]
 
   def index
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @incoming = FriendRequest.where(friend: current_user)
     @requesters = @incoming.map { |request| User.find(request.user_id) }
     @outgoing = current_user.friend_requests

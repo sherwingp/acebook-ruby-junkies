@@ -32,6 +32,11 @@ body {
   font-size: 115%;
 }
 
+.fa-gem {
+  color: rgb(0,0,200
+  )
+}
+
 .fa-plus:hover, .fa-home:hover, .fa-users:hover {
   color: #99F4F4;
   font-size: 110%;
