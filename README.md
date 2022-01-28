@@ -164,7 +164,7 @@ I would like the site to look nice!
 
 ## Some Diagrams From Our Process:
 
-![database diagram](.app/assets/images/acebook-database.png)
+![database diagram](acebook-database.png)
 
 ## MIRO:
 
