@@ -50,8 +50,8 @@
           </div>
         <% else %>
           <% @requestees.each do |requestee| %>
-            <%= link_to user_profile_path(User.find(requestee.user_id).id) do %>
-              <% @user = User.find(requestee.user_id) %>
+            <%= link_to user_profile_path(User.find(requestee.id).id) do %>
+              <% @user = User.find(requestee.id) %>
               <p><%= @user.name %> <%= @user.surname %></p>
             <% end %>
           <% end %>
