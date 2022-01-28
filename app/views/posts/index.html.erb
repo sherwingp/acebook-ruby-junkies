@@ -45,7 +45,7 @@
                 <div class="container is-flex" id="post-details">
                 
                   <div>
-                      <% if User.find(post.user_id).profiles.first.avatar.attached? %>
+                      <% if User.find(post.user_id).profiles.first && User.find(post.user_id).profiles.first.avatar.attached? %>
                         <figure class="image">
                           <% if Rails.env.production? %>
                             <%= cl_image_tag User.find(post.user_id).profiles.first.avatar.key, :class => "image is-rounded is-32x32 avatar" %>
