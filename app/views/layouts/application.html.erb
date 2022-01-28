@@ -83,9 +83,9 @@
               <div class="is-flex">
                   <% if profile.avatar.attached? %>
                     <% if Rails.env.production? %>
-                      <figure class="image"><%= cl_image_tag profile.avatar.key, :class => "image is-rounded" %></figure>
+                      <figure class="image"><%= cl_image_tag profile.avatar.key, :class => "image is-rounded",  :width => "28", :height => "28" %></figure>
                     <% else %>
-                      <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded" %></figure>
+                      <figure class="image"><%= image_tag profile.avatar, :class => "image is-rounded", :width => "28", :height => "28" %></figure>
                     <% end %>
                   <% else %>
                     <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "28", :height => "28") %>
