@@ -12,7 +12,8 @@ RSpec.feature 'Create Profile', type: :feature do
     expect(page).to have_content('Create Profile')
     fill_in 'profile_about', with: 'Im a cat!'
     click_button 'Create Profile'
-    expect(page).to have_content("Kitty TheCat About: Im a cat! Photos: Friends")
+    expect(page).to have_content("Kitty TheCat")
+    expect(page).to have_content("About: Im a cat!")
   end
 
   scenario 'Nav bar vanishes when no profile exists as to force profile creation' do
@@ -40,7 +41,8 @@ RSpec.feature 'Create Profile', type: :feature do
     click_button 'Create Profile'
     visit '/'
     click_on 'Gem Junkies Default Avatar'
-    expect(page).to have_content("Kitty TheCat About: Im a cat! Photos: Friends")
+    expect(page).to have_content("Kitty TheCat")
+    expect(page).to have_content("About: Im a cat!")
   end 
 
   scenario 'Cannot go back to profile creation page once profile created' do
