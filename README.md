@@ -1,7 +1,5 @@
 # GemJunkies (Facebook Clone)
 
-![Ruby Junkies Logo](./public/RubyJunkiesLogo.png =20x20)
-
 ## Quickstart
 
 First, clone this repository. Then:
