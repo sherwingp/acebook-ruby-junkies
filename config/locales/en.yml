@@ -34,3 +34,5 @@ en:
   notifications:
     comment_notification:
       message: "You have a new comment on post '%{post}' from %{commenter}."
+    friend_request_notification:
+      message: "You have a new friend request from %{requester}."

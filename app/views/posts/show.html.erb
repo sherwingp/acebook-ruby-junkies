@@ -1,40 +1,30 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
 
-<h2><strong> Post </strong></h2>
-<p><%= @post.message %></p>
+<div class="container is-flex is-justify-content-center mt-3">
+  <div class="column is-flex is-flex-direction-column is-align-items-center p-2 mt-3 is-four-fifths" style="background-color:white;border-radius:25px">
+    <div class="container is-flex is-fluid is-justify-content-center mb-3" style="font-size:1.5em;background-color:rgb(213, 221, 228);border-radius:10px"><strong>📝 Post: </strong></div>
+      <p><%= @post.message %></p>
+    <div class="container is-flex is-fluid is-justify-content-center mb-3 mt-4" style="font-size:1.5em;background-color:rgb(213, 221, 228);border-radius:10px"><strong>🗒 Comments: </strong></div>
+    <% @post.comments.each do |comment| %>
+    <p><strong>
+        <%= (User.find(comment.user_id)).name %> <%= (User.find(comment.user_id)).surname %>
+    </strong></p>
 
-<h2><strong> Comments</strong></h2>
-<% @post.comments.each do |comment| %>
-  <p>
-    <strong>
-    <%= (User.find(comment.user_id)).name + " " + (User.find(comment.user_id)).surname %>
-    </strong>
-    </p>
+      <p><%= comment.body %></p>
+      <figure class="img-attached">
+        <% if comment.image.attached? %>
+          <%= image_tag comment.image, :class => "image" %>
+        <% end %>
+      </figure>
+    <% end %>
+      
 
-  <p>
-    <%= comment.body %>
-  </p>
-  <% if comment.image.attached? %>
-              <%= image_tag comment.image%>
-          <% end %>
-<% end %>
-
-<h2>Add a comment:</h2>
-  <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-  <p>
-    <%= form.hidden_field :user_id, value: current_user.id %>  
-  </p>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-  <%= form.label :image %>
-  <%= form.file_field :image, class: "form-control" %>
+    <div class="container is-flex is-fluid is-justify-content-center mb-3 mt-4" style="font-size:1.5em;background-color:rgb(213, 221, 228);border-radius:10px"><strong>👍🏼 Likes: </strong></div>
+    <%= @post.message %>:
+    <strong><%= @post.likes.count %></strong> 
   </div>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
-
-<%= @post.message %>
-<%= @post.likes.count %>
+</div>
 

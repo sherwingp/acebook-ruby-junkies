@@ -1,11 +1,21 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
 
-<h1>Notifications</h1>
-
-<% @notifications.each do |notification| %>
-  <div class="p-4">
-    <%= link_to notification.to_notification.message, notification.to_notification.url %>
-      <%= button_to 'Remove notification', user_notifications_path(id: notification.id), method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
-  </div>
-<% end %>
-  <%= button_to 'Remove all notifications', destroy_all_user_notifications_path, method: :delete, class: "mt-2 mb-2 mr-5 button is-rounded is-small is-danger like-btn" %>
-
+<div class="container is-flex is-justify-content-center">
+    <div class="column is-flex is-flex-direction-column is-align-items-center p-4 mt-4 is-four-fifths" style="background-color:white;border-radius:25px">
+      <h2 style="font-size: 2.6em;margin-bottom:1.4rem">Notifications: </h2>
+      <% @notifications.each do |notification| %>
+        <div class="container is-flex is-fluid is-flex-direction-column is-align-items-center p-3 mb-4" style="border:1px solid rgb(213, 221, 228);border-radius:20px">
+          <div class="container is-fluid is-flex is-justify-content-flex-start">
+            <strong><%= link_to notification.to_notification.message, notification.to_notification.url, :class => "text-link" %></strong>
+          </div>
+          <div class="container is-fluid is-flex is-justify-content-flex-end">
+            <%= button_to 'Remove notification', user_notifications_path(id: notification.id), method: :delete, class: "button is-rounded mt-3 is-small is-danger" %>
+          </div>
+        </div>
+      <% end %>
+        <%= button_to 'Remove all notifications', destroy_all_user_notifications_path, method: :delete, class: "button mt-5 is-rounded is-small is-danger" %>
+    </div>
+</div>

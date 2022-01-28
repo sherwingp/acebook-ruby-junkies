@@ -24,4 +24,15 @@ class FriendRequest < ApplicationRecord
   def not_pending
     errors.add(:friend, 'already requested friendship') if friend.pending_friends.include?(user)
   end
+
+  after_create_commit :notify_recipient
+  
+  private
+  
+  def notify_recipient
+    recipient = User.find(friend.id)
+    sender = User.find(user_id)
+    requester = "#{sender.name} #{sender.surname}"
+    FriendRequestNotification.with(message: self, sender: sender, requester: requester).deliver_later(recipient) unless recipient == sender
+  end
 end
