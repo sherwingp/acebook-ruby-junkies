@@ -46,7 +46,11 @@
           <%# big image avatar/profile %>
           <figure class="image" id="profile-avatar">
             <% if profile.avatar.attached? %>
-              <%= image_tag profile.avatar, class: "image is-rounded" %>
+              <% if Rails.env.production? %>
+                <%= cl_image_tag profile.avatar.key, class: "image is-rounded" %>
+              <% else %>
+                <%= image_tag profile.avatar, class: "image is-rounded" %>
+              <% end %>
             <% else %>
               <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar") %>
             <% end %>
@@ -65,15 +69,24 @@
                 <% @posts_to_use.each do |post| %>
                 <%# all images used in post or comments %>
                   <% if post.image.attached? && (post.user_id == @user.id)%>
-                    <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
+                    <% if Rails.env.production? %>
+                      <figure class="p-1"><%= cl_image_tag post.image.key, class: "post-img"%></figure>
+                    <% else %>
+                      <figure class="p-1"><%= image_tag post.image, class: "post-img"%></figure>
+                    <% end %>
                   <% end %>
+
                     <% post.comments.each do |comment| %>
                       <% if comment.image.attached? && (comment.user_id == @user.id) %>
-                        <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                        <% if Rails.env.production? %>
+                          <figure class="p-1"><%= cl_image_tag comment.image.key, class: "comment-img"%></figure>
+                        <% else %>
+                          <figure class="p-1"><%= image_tag comment.image, class: "comment-img"%></figure>
+                        <% end %>
                       <% end %>
                     <%end %>
-                  <%end %>
-                </div>
+                <%end %>
+              </div>
             </div>
           </div>
 
@@ -84,17 +97,21 @@
             <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
             <% @user = User.find(friend.friend_id) %>
               <% @user.profiles.each do |profile| %>
-                <%= link_to user_profile_path(@user.id) do %>
-                  <% if profile.avatar.attached? %>
-                    <figure class="image m-1">
+              <%= link_to user_profile_path(@user.id) do %>
+                <% if profile.avatar.attached? %>
+                  <figure class="image m-1">
+                    <% if Rails.env.production? %>
+                      <%= cl_image_tag profile.avatar.key, class: "image is-32x32 is-rounded" %>
+                    <% else %>
                       <%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %>
-                    </figure>
-                  <% else %>
-                    <figure class="m-1">
-                      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
-                    </figure>
-                  <%end %>
-                <% end %>
+                    <% end %>
+                  </figure>
+                <% else %>
+                  <figure class="m-1">
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                  </figure>
+                <%end %>
+              <% end %>
               <% end %>
               <%= link_to user_profile_path(@user.id) do %>
                 <div class="is-flex"><%= @user.name %> <%= @user.surname %> </div>
@@ -134,7 +151,11 @@
           <div class="message-and-photo p-5">
             <p class="mb-2 display-message"><%= post.message %></p>
             <% if post.image.attached? %>
-              <%= image_tag post.image, class: "post-image"%>
+              <% if Rails.env.production? %>
+                <%= cl_image_tag post.image.key, class: "post-image"%>
+              <% else %>
+                <%= image_tag post.image, class: "post-image"%>
+              <% end %>
             <% end %>
             <% if post.likes.count != 0 %>
               <div class="container is-flex likes-count">
@@ -177,7 +198,11 @@
                 <%= comment.body %>
               </div>
               <% if comment.image.attached? %>
-                <figure class="p-4"><%= image_tag comment.image, class: "comment-image"%></figure>
+                <% if Rails.env.production? %>
+                  <figure class="p-4"><%= cl_image_tag comment.image.key, class: "comment-image"%></figure>
+                <% else %>
+                  <figure class="p-4"><%= image_tag comment.image, class: "comment-image"%></figure>
+                <% end %>
               <% end %>
             </div>
 

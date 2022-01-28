@@ -48,4 +48,7 @@ Rails.application.routes.draw do
   end
   
   resources :friend_requests
+  
+  resources :messages
+  resources :conversations
 end

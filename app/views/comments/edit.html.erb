@@ -5,6 +5,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
+
 	<div class="container is-flex comments-form pt-3">
 		<%= form_for([@post, @comment],  method: :put, local: true) do |form| %>
 			<%= form.hidden_field :user_id, value: current_user.id %>  
