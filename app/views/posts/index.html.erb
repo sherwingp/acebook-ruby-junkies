@@ -15,9 +15,13 @@
             <% current_user.profiles.each do |profile| %>
               <div>
                   <% if profile.avatar.attached? %>
-                <figure class="image"><%= image_tag profile.avatar, :class => "image is-48x48 is-rounded avatar" %></figure>
+                    <% if Rails.env.production? %>
+                      <figure class="image"><%= cl_image_tag profile.avatar.key, :class => "image is-48x48 is-rounded avatar" %></figure>
+                    <% else %>
+                      <figure class="image"><%= image_tag profile.avatar, :class => "image is-48x48 is-rounded avatar" %></figure>
+                    <% end %>
                   <% else %>
-                <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
                   <% end %>
               </div>
             <% end %>
@@ -41,13 +45,17 @@
                 <div class="container is-flex" id="post-details">
                 
                   <div>
-                  <%= link_to user_profile_path(User.find(post.user_id).id) do %>
-                    <% if @profile.avatar.attached? %>
-                    <figure class="image">
-                    <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
-                    </figure>
+                     <%= link_to user_profile_path(User.find(post.user_id).id) do %>
+                      <% if User.find(post.user_id).profiles.first && User.find(post.user_id).profiles.first.avatar.attached? %>
+                        <figure class="image">
+                          <% if Rails.env.production? %>
+                            <%= cl_image_tag User.find(post.user_id).profiles.first.avatar.key, :class => "image is-rounded is-32x32 avatar" %>
+                          <% else %>
+                            <%= image_tag User.find(post.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                          <% end %>
+                        </figure>
                       <% else %>
-                    <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
+                        <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "40", :height => "40") %>
                       <% end %>
                   <% end %>
                   </div>
@@ -116,11 +124,18 @@
                   <div class="container individual-comment mb-3 p-2" id="<%= dom_id(comment) %>">
 
                     <div class="is-flex is-flex-direction-column pb-2">
-                    <div class="is-flex">
+                    <div class="is-flex">                      
+                    <% if @profile.avatar.attached? %>
+                      <figure class="image">
+                      <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
                       <%= link_to user_profile_path(User.find(comment.user_id).id) do %>
-                        <% if @profile.avatar.attached? %>
+                        <% if User.find(comment.user_id).profiles.first.avatar.attached? %>
                           <figure class="image">
-                          <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                            <% if Rails.env.production? %>
+                              <%= cl_image_tag User.find(comment.user_id).profiles.first.avatar.key, :class => "image is-rounded is-32x32 avatar" %>
+                            <% else %>
+                              <%= image_tag User.find(comment.user_id).profiles.first.avatar, :class => "image is-rounded is-32x32 avatar" %>
+                            <% end %>
                           </figure>
                         <% else %>
                           <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
