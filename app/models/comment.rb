@@ -9,6 +9,9 @@ class Comment < ApplicationRecord
 
   has_many :likes, as: :likeable, dependent: :destroy
 
+  has_many :notifications, as: :recipient, dependent: :destroy
+  has_noticed_notifications param_name: :parent, destroy: true, model_name: "Notification"
+
   after_create_commit :notify_recipient
   
   private
@@ -17,6 +20,6 @@ class Comment < ApplicationRecord
     recipient = User.find(post.user_id)
     sender = User.find(user_id)
     commenter = "#{sender.name} #{sender.surname}"
-    CommentNotification.with(message: self, post: post, commenter: commenter).deliver_later(recipient) unless recipient == sender
+    CommentNotification.with(parent: self, post: post, commenter: commenter).deliver_later(recipient) unless recipient == sender
   end
 end

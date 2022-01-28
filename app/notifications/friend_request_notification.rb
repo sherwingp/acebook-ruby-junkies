@@ -30,6 +30,6 @@ class FriendRequestNotification < Noticed::Base
   end
   #
   def url
-    users_profiles_path
+    friend_requests_path
   end
 end
