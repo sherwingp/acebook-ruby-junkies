@@ -1,4 +1,4 @@
-# GemJunkies (Facebook Clone)
+# GemJunkies (Facebook Clone)  <img src="./public/RubyJunkiesLogo.png" width="30" height="30">
 
 ## Quickstart
 
@@ -164,12 +164,15 @@ I would like the site to look nice!
 
 ## Some Diagrams From Our Process:
 
-## MIRO:
+### MIRO:
 
+![database diagram](./public/acebook-database.png)
+![MVC diagram](./public/MVC.png)
+![model controller diagram](./public/model-controller.png)
+![learning reflections diagram](./public/learning-reflections.png)
 
-
-## FIGMA:
-
+### FIGMA:
+![UX plan diagram](./public/UX-plan.png)
 
 ## Contributing
 
