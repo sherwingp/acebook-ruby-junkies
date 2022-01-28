@@ -49,6 +49,7 @@
           <%# about section %>
           <div class="p-1 m-1 is-flex is-flex-direction-column is-align-items-center" id="about">
             <p><strong>Total Gems Received:</strong></p>
+
             <% @post = Post.where(user_id: profile.user_id) %>
             <% @comment = Comment.where(user_id: profile.user_id) %>
             <% gem_count = 0 %>
@@ -58,7 +59,10 @@
             <% @comment.each do |comment| %>
               <% gem_count += comment.gemlikes.count %>
               <% end %>
-              <%= gem_count %>
+              <p>
+                  <i class="fas fa-gem" ></i>
+                  <strong> <%= gem_count %> </strong>
+                </p>
             </div>
             <div class="p-1 m-1 is-flex is-flex-direction-column is-align-items-center" id="about">
             <p><strong>About:</strong></p>
@@ -145,6 +149,15 @@
                 </p>
               </div>
             <% end %>
+
+            <% if post.gemlikes.find { |gemlike| gemlike.user_id == current_user.id} %>
+              <div class="container is-flex likes-count">
+                <p>
+                  <i class="fas fa-gem" ></i>
+                </p>
+              </div>
+            <% end %>
+
           </div>
         </div>
         <%# likes %>
@@ -159,9 +172,9 @@
           <div class="is-flex">
                 <% pre_gem_like = post.gemlikes.find { |gemlike| gemlike.user_id == current_user.id} %>
                 <% if pre_gem_like %>
-                  <%= button_to 'UnGemlike', post_gemlike_path(post, pre_gem_like), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <%= button_to 'Remove Gem', post_gemlike_path(post, pre_gem_like), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
                 <% else %>
-                  <%= button_to 'GemLike', post_gemlikes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
+                  <%= button_to 'Give Gem!', post_gemlikes_path(post), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link like-btn" %>
                 <% end %>
               </div>
 
@@ -203,6 +216,15 @@
                 <strong><%= comment.likes.length %></strong>
               </p>
               </div>
+
+              <% if comment.gemlikes.find { |gemlike| gemlike.user_id == current_user.id} %>
+              <div class="container is-flex likes-count">
+                <p>
+                  <i class="fas fa-gem" ></i>
+                </p>
+              </div>
+            <% end %>
+
                 <% end %>
                 <div class="container is-flex is-justify-content-space-between">
                       <div>
@@ -216,9 +238,9 @@
                       <div>
                         <% pre_gem_like = comment.gemlikes.find { |gemlike| gemlike.user_id == current_user.id} %>
                         <% if pre_gem_like %>
-                          <%= button_to 'Ungemlike', post_comment_gemlike_path(comment_id: comment.id, post_id: post.id, id: pre_gem_like.id), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-unlike-btn" %>
+                          <%= button_to 'Remove Gem', post_comment_gemlike_path(comment_id: comment.id, post_id: post.id, id: pre_gem_like.id), method: :delete, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-unlike-btn" %>
                         <% else %>
-                          <%= button_to 'Gemlike', post_comment_gemlikes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-like-btn" %>
+                          <%= button_to 'Give Gem!', post_comment_gemlikes_path(comment_id: comment.id, post_id: post.id), method: :post, class: "mt-2 mb-2 mr-5 ml-5 button is-rounded is-small is-link is-light comment-like-btn" %>
                         <% end %>
                       </div>
                       <div class="is-flex">
