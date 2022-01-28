@@ -5,12 +5,18 @@ class PostsController < ApplicationController
   include ActionView::RecordIdentifier
 
   def index
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @posts = Post.all.order('created_at DESC')
     @user = User.find(current_user.id)
     @profile = @user.profiles.first
   end
 
   def show
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @post = Post.find(params[:id]) if params[:id] != 'new'
   end
 

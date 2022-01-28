@@ -4,6 +4,9 @@ class ProfilesController < ApplicationController
   before_action :check_for_existing_profile, only: [:new, :create]
 
   def index
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @profiles = Profile.all
     if params[:search_by_name] != "" && params[:search_by_name] != nil
       split_name = params[:search_by_name].split(" ")
@@ -61,6 +64,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    unless current_user.profiles.exists?
+      redirect_to '/'
+    end
     @user = User.find(params[:user_id])
     @profile = @user.profiles if params[:id] != 'new'
 
