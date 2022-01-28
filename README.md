@@ -1,6 +1,6 @@
 # GemJunkies (Facebook Clone)
 
-![Ruby Junkies Logo](./public/RubyJunkiesLogo.png | width=20)
+![Ruby Junkies Logo](./public/RubyJunkiesLogo.png =20x20)
 
 ## Quickstart
 
