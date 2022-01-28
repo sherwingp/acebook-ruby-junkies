@@ -38,6 +38,14 @@
   border-radius: 50px;
 } */
 
+body {
+  background-image: url(asset_path('GemJunkiesPostPageV2.png'));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
 .img-attached {
   max-width: 200px;
   width: 100%;
