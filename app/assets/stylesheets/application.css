@@ -15,14 +15,6 @@
  */
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
-body {
-  background-image: url('GemJunkiesPostPageV2.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-}
-
 .navbar {
   background-color: #FBCBF0;
 }
