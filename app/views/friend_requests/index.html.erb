@@ -63,11 +63,11 @@
       <div class="friends-header" style="background-color:grey">
         <p>Friends: <%= current_user.friends.count %></p>
       </div>
-      <div class="is-flex is-flex-direction-column is-align-items-center p-2"> 
+      <div class="friends-container is-flex is-flex-direction-column is-align-items-center p-2"> 
         <div class="is-flex">
           <% current_user.friendships.each do |friend| %>
             <%= link_to user_profile_path(User.find(friend.friend_id)) do %>
-              <div class="friend-container is-flex is-flex-direction-column is-align-items-center"> 
+              <div class="is-flex is-flex-direction-column is-align-items-center m-3"> 
                 <% @user = User.find(friend.friend_id) %>
                 <% @user.profiles.each do |profile| %>
                   <% if profile.avatar.attached? %>
