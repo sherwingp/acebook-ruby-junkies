@@ -164,15 +164,15 @@ I would like the site to look nice!
 
 ## Some Diagrams From Our Process:
 
+### MIRO:
+
 ![database diagram](./public/acebook-database.png)
+![MVC diagram](./public/MVC.png)
+![model controller diagram](./public/model-controller.png)
+![learning reflections diagram](./public/learning-reflections.png)
 
-
-## MIRO:
-
-
-
-## FIGMA:
-
+### FIGMA:
+![UX plan diagram](./public/UX-plan.png)
 
 ## Contributing
 
