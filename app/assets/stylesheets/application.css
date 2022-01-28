@@ -27,7 +27,7 @@ body {
   background-color: #FBCBF0;
 }
 
-.fa-plus, .fa-home, .fa-users {
+.fa-plus, .fa-home, .fa-users, .fa-user-friends {
   color: rgb(102, 102, 102);
   font-size: 115%;
 }
@@ -320,4 +320,23 @@ form .comment-form {
 .fa-facebook {
  font-size: 1.5rem;
  padding-right: 0.5rem;
+}
+
+/* friend_requests index */
+.friends-header {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+}
+
+.no-requests {
+  padding-left: 15%;
+  padding-right: 15%;
+  text-align: center;
+}
+
+.friends-container {
+  background-color: #62ecec;
+  border-radius: 0px 0px 10px 10px;
 }

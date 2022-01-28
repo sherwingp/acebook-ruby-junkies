@@ -3,27 +3,90 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
 
-<div class="container p-2" style="background-color:white;width:18rem">
-  <div class="mb-3">
-    <h1>Friend requests</h1>
-    <% @incoming.each do |requester| %>
-      <p> <%= (User.find(requester.user_id)).name %> <%= (User.find(requester.user_id)).surname %></p>
-      <div>
-        <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
-          <%= form.submit "Accept Request", :class => "button is-rounded is-link" %>
+<div class="container-fluid">
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-one-third p-5" style="background-color:white; border-radius: 0px 0px 15px 15px;">
+      <div class="pb-5" style="text-align: center;">
+        <div class="friends-header" style="background-color:grey">
+          <p>Friend requests</p>
+        </div>
+        <% if @incoming.blank? %>
+          <div class="no-requests">
+            <%= image_tag("GemFriends.png", :alt => "Gem Junkies Friends") %>
+            <p>No requests left to review</p>
+          </div>
+        <% else %>
+          <% @incoming.each do |requester| %>
+            <div class="p-3">
+              <%= link_to user_profile_path(User.find(requester.user_id).id) do %>
+                <% @user = User.find(requester.user_id) %>
+                <p><%= @user.name %> <%= @user.surname %></p>
+              <% end %>
+              <div class="columns">
+                <div class="column">
+                  <%= form_for requester, url: "/friend_requests/#{requester.id}" do |form| %>
+                    <%= form.submit "Accept Request", :class => "button is-rounded is-small is-link m-2" %>
+                  <% end %>
+                </div>
+                <div class="column">
+                  <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
+                    <%= form.submit "Reject Request", :class => "button is-rounded is-small is-link m-2" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
-      <div>
-        <%= form_for requester, url: "/friend_requests/#{requester.id}", method: 'delete' do |form| %>
-          <%= form.submit "Reject Request", :class => "button is-rounded is-link" %>
+      <div style="text-align: center;">
+        <div class="friends-header" style="background-color:grey">
+          <p>Pending requests</p>
+        </div>
+        <% if @requestees.blank? %>
+          <div class="no-requests">
+            <%= image_tag("GemFriends.png", :alt => "Gem Junkies Friends") %>
+            <p>All your requests have been responded to</p>
+          </div>
+        <% else %>
+          <% @requestees.each do |requestee| %>
+            <%= link_to user_profile_path(User.find(requestee.user_id).id) do %>
+              <% @user = User.find(requestee.user_id) %>
+              <p><%= @user.name %> <%= @user.surname %></p>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="mb-3">
-    <h2>Pending requests</h2>
-    <% @requestees.each do |requestee| %>
-      <p> <%= requestee.name %> <%= requestee.surname %></p>
-    <% end %>
+    </div>
+    <div class="column"></div>
+    <div class="column is-one-third p-5" style="background-color:white; border-radius: 0px 0px 15px 15px;">
+      <div class="friends-header" style="background-color:grey">
+        <p>Friends: <%= current_user.friends.count %></p>
+      </div>
+      <div class="friends-container is-flex is-flex-direction-column is-align-items-center p-2"> 
+        <div class="is-flex">
+          <% current_user.friendships.each do |friend| %>
+            <%= link_to user_profile_path(User.find(friend.friend_id)) do %>
+              <div class="is-flex is-flex-direction-column is-align-items-center m-3"> 
+                <% @user = User.find(friend.friend_id) %>
+                <% @user.profiles.each do |profile| %>
+                  <% if profile.avatar.attached? %>
+                    <figure class="image m-1">
+                      <%= image_tag profile.avatar, class: "image is-32x32 is-rounded" %>
+                    </figure>
+                  <% else %>
+                    <figure class="m-1">
+                      <%= image_tag("GemJunkiesDefaultAvatar.png", :alt => "Gem Junkies Default Avatar", :width => "30", :height => "30") %>
+                    </figure>
+                  <% end %>
+                <% end %>
+                <div class="is-flex"><%= @user.name %> <%= @user.surname %> </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="column"></div>
   </div>
 </div>
