@@ -47,6 +47,19 @@
           <p id="profile-name"><strong><%= @user.name + " " + @user.surname %></strong></p>
           <div class="is-flex m-4" id="about-photo-box-c">
           <%# about section %>
+          <div class="p-1 m-1 is-flex is-flex-direction-column is-align-items-center" id="about">
+            <p><strong>Total Gems Received:</strong></p>
+            <% @post = Post.where(user_id: profile.user_id) %>
+            <% @comment = Comment.where(user_id: profile.user_id) %>
+            <% gem_count = 0 %>
+            <% @post.each do |post| %>
+            <% gem_count += post.gemlikes.count %>
+            <% end %>
+            <% @comment.each do |comment| %>
+              <% gem_count += comment.gemlikes.count %>
+              <% end %>
+              <%= gem_count %>
+            </div>
             <div class="p-1 m-1 is-flex is-flex-direction-column is-align-items-center" id="about">
             <p><strong>About:</strong></p>
               <%= profile.about %>
