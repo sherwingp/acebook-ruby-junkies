@@ -1,0 +1,2 @@
+class GemlikesController < ApplicationController
+end
