@@ -164,7 +164,8 @@ I would like the site to look nice!
 
 ## Some Diagrams From Our Process:
 
-![database diagram](acebook-database.png)
+![database diagram](./public/acebook-database.png)
+
 
 ## MIRO:
 
