@@ -1,4 +1,5 @@
 # GemJunkies (Facebook Clone)  <img src="./public/RubyJunkiesLogo.png" width="30" height="30">
+![gemjk](https://user-images.githubusercontent.com/67482908/156903149-783e8234-ebd3-4950-bca6-32a60facec23.JPG)
 
 ## Quickstart
 
